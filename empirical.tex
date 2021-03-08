@@ -44,13 +44,40 @@ Note that “not attacked” depends on which set of arguments we look into; we 
 
 NB in some examples, some arguments are left unattacked (for example, the gvt is not expected to answer every counter-argument). Also, in preference-based argumentation, arguments can be “unattacked subjectively”: specific preferences of an individual may invalidate an argument and leave only another argument as decisive.
 
+Although some authors seem to acknowledge in passing that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that this would lead to consider only questions that do not relate to computer science but rather to natural language, for example; or these questions may seem to be hopelessly complex and beyond reach of the current state of knowledge in natural language processing. We provide here (partial) answers to these two points.
+
 \section{The usual perspective (in FAT?) about attacks}
-Usually considered known a priori: logical representation; or simply given
+Usually considered known a priori: logical representation; or simply given.
+
+Also: preference based approaches. But this still considers an attack relation, and the preference is supplementary data on top of the attack relation. (TODO: check Besnard \& Hunter - Elements of Argumentation, Chapter 6: Considering the Audience.)
 
 \section{Reasons not to consider it known}
-What counts is sometimes (at least in part) what the receiver understands, not what logic says; there may be implicit information not encoded in the logic representation; we may not have expertise to encode the arguments logically; encoding may be suspected to be non neutral wrt the debated issue
+We saw that most formal approaches in argumentation consider that the attack relation is known. We here point out reasons to lift this assumption, thus, not consider that the attack relation can unambiguously be deduced by a logical representation of the arguments; or can be known by trivial inspection of the arguments as in some of the classical textbook examples.
+
+%Undoubtedly, some situations let one determine easily the attack relation, by simple appeal to an obvious consensus. In the classical textbook example of Alice saying that “it will rain tomorrow because the weather forecast on the BBC said so” and Bob replying that “it will not rain tomorrow because the weather forecast on Channel 4 said so”, the situation is clear, and a simple appeal to consensus permits to solve any doubt to the contrary: give these arguments to any two persons, and they will agree that these arguments attack each other. Such trivial situations, although being possibly adequate for illustrative purposes of technical definitions, are however hardly representative of the complexity of the debates that an argumentation framework must be able to tackle. It seems reasonable to demand of argumentation theory to help us think about debates involving subtle, complicated arguments. For example, a framework could claim to be able to help a medical doctor take a decision about which treatment to prescribe.
+
+A first and important reason to not consider the attack relation known a priori is that considering it known a priori seems to require to assume that the attack relation is objective, thus in particular, that whether an argument attacks another one does not depend on who is listening, or on a choice of interpretation. The objectivity assumption permits to declare that an argument “truly” attacks another one, even though some given person may fail to realize it or may even believe the contrary. 
+
+This assumption however seems difficult to justify in some cases. 
+Real-life debates feature omissions and implicit statements. It may be fundamentally undetermined (and not simply unknown) which statements exactly have been omitted so as to connect an argument to what the debater has said previously. The debater himself may be hard pressed to explain it, if asked: we human being may not always form fully precise statements mentally before uttering them, or if we do, we do not necessarily have access to the precise version of the statements. A mathematician might “feel” that a proposition is true long before knowing how to prove it. A person may intuitively “see” how one argument supports or attacks another one without being able to fill in all the gaps and make it a precise reasoning. Or there may be multiple reasonings that allow to fill in the gaps, and the debater may erroneously think that they are just different ways of expressing the same idea; whereas it could be that one phrasing features a mistake in reasoning whereas another one does not. It is the norm with philosophers debating of complex ideas to consider multiple versions of their opponent’s claim, trying to interpret them “kindly”, that is, filling what they see as gaps in their opponent’s reasoning in ways that make their opponent’s view point as solid as possible (cite Denett). It seems hard to justify that one of these versions in particular would objectively be the right version. And if there are indeed multiple interpretations of a statement that correspond to multiple precise arguments, it seems unlikely that they all would lead to the same attack relation when considered within a set of related arguments. Therefore, in some interesting cases, the attack relation is not objectively determined.
+
+Another important reason to not consider the attack relation known a priori relates to the understanding of the attack relation itself. 
+Even when arguably “what the debater means objectively” is well defined, one may, in some applications, be interested in what some given listener understands from the debate, rather than by what the debater means. 
+This is an important distinction in our context because the attack relation representing what the listener understands may differ from the one representing what the debater means.
+The listener may not know the meaning of some words used by the debaters, or she may understand them differently than what the debaters have in mind. 
+The listener may not have the deductive power to understand what could otherwise be considered a trivial implication of the argument. 
+The listener may lack some required knowledge.
+
+Translating natural language arguments into a logic language does not constitute a solution to these problems, as the problems exist, unchanged, at the level of translation. When there are multiple ways of interpreting some implicit information present in an argument (as intended by the debater, or as understood by the listener), the modeler must choose one when translating it in a formal, precise language, with the risk of introducing an arbitrary choice or losing neutrality.
+
+A practical argument is that encoding the arguments logically require important expertise, which may be unavailable or cost too much.
+
+\commentOC{To discuss: which points require examples? How complex (toy examples VS realistic examples)? Consider an example of a logic encoding with different conclusions?}
 
 \section{what if not known a priori?}
+We just argued that it may be relevant or convenient to not assume we know the attack relation. In this section we provide some ideas of subject of studies that do not require this assumption, that pertains to computer science, and does not require advanced natural language processing capabilities.
+
+(To be continued.)
 We consider that what counts is what the receiver of the argument says and we propose to study several aspects related to this perspective: how to find decisive arguments in this sense; is this consensual; what are appropriate methods, statistical or others; what are the protocols that must be used to gather arguments; how can we test that every arguments that are possibly relevant have been considered?
 
 \section{a sketch of a possible approach}
