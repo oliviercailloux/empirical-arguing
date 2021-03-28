@@ -113,6 +113,35 @@ We should decide whether to include some of these points in the text or adding s
 	\item review existing experimental work in FAT? Other related works? Philosophical approaches (Rawls, Habermas)?
 \end{itemize}
 
+\section{PAFs}
+Here we talk about Preference-based Argumentation Frameworks.
+
+Considering the book Rahwan, Simari - Argumentation in Artificial Intelligence (2009), Chapter 15: Argumentation for Decision Making, Amgoud.
+
+We assume there is only one alternative on which to decide: $\dy$ or $\dn$ (e.g., surgery or do nothing). This simplifies the formal exposition without removing the crucial points of the propositions.
+
+A decision system is $A_e^{\dy}, A_e^{\dn}, A_p^{\dy}, A_p^{\dn}, {≥_e}, {≥_p}, R_e, R_m$. \footnote{I assume that ${≥_m} = A_e × A_p$. Her section 2.2 suggests ${≥_m} = A_e × A_p$, Example 15.5 suggests ${≥_m} \subseteq A_e × A_p$; I assume the mistake is in the example. Also, $Def_m = R_m$ and $Def_e = R_e \cap (\overline{>_e})^{-1}$. $(\overline{>_e})^{-1}$ contains the pairs $(a, b)$ such that $a$ is strictly preferred to $b$ or they are indifferent or incomparable. $Def = (R_e \cap (\overline{>_e})^{-1}) \cup R_m = R.$}
+
+${≥_e} \subseteq A_e × A_e$, ${≥_p} \subseteq A_p × A_p$, both reflexive and transitive, the preferences.
+
+$R_e \subseteq A_e × A_e$, $R_m \subseteq A_e × A_p$, the “objective” attacks. 
+
+From $R = (R_e \setminus {<_e}) \cup R_m$, we obtain the extensions (an extension is a set of arguments). The stable and the preferred semantics are considered. Then the skeptically accepted arguments are $\cap E_i$ and the credulously accepted ones are $\cup E_i \setminus \cap E_i$.
+\footnote{More from Amgoud: skept pref subseteq skept stable if not empty.}
+
+$E$-acceptable = $E$-defended = all args that $E$ defends = those whose attackers are all attacked by $E$ = $\set{a \suchthat R^{-1}(a)\subseteq R(E)}$.
+
+Conflict-free: contains no arguments that attack each other.
+\footnote{More from Baroni and Giacomin: Admissible $E$: conflict-free and all included are $E$-defended; Complete $E$: $E$ admissible and includes every $E$-defended; Preferred: maximal admissible set, equivalently, maximal complete extensions. Stable: conflict-free and $E$ attacks all excluded args. Implies complete.}
+
+Complete $E$: $E$ conflict-free and $E$ = $E$-defended.
+
+Stable: conflict-free and $E$ attacks all excluded args. Implies maximally complete.
+
+Preferred: maximal complete. Stable implies preferred. 
+
+The semantics considered is: the stable ones if some exist; the preferred ones otherwise. Can we simplify this definition?
+
 %\bibliography{bibl}
 
 \end{document}
