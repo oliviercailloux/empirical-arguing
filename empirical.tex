@@ -15,7 +15,7 @@
 	%Reduces verbosity about the underful vboxes.
 		\vbadness=1300
 
-\title{Study argument decisiveness empirically}
+\title{Study argument attacks empirically}
 \author{Olivier Cailloux}
 \affil{Université Paris-Dauphine, PSL Research University, CNRS, LAMSADE, 75016 PARIS, FRANCE\\
 	\href{mailto:olivier.cailloux@dauphine.fr}{olivier.cailloux@dauphine.fr}
@@ -38,18 +38,16 @@
 
 \section{Introduction}
 \label{sec:intro}
-The characteristic of the argumentation theory \cite{Dung95} is to rely on objections between arguments to compute most acceptable standpoints, in the form of the so-called ``extensions''. In this sense, 
-it is clear that arguments that are not attacked are of prominent importance for society, since they correspond to messages that received no objection and can therefore serve as a basis for compromise building \cite{MoulinBT2018}. Nevertheless, practical studies showed that rejected arguments are not necessarily to be interpreted as non-receivable, but rather as rough ideas that need to be refined \cite{EJDP2018, Bourguet2013} and can serve as initial pillars of great importance for the construction of the argumentation system. Talk about obtaining judgements of individuals, …
+Formal argumentation theory \cite{Dung95} relies on “attacks” between arguments to compute most acceptable standpoints, in the form of the so-called “extensions”. These attacks are typically formalized as a binary relation considered as representing the directed contradiction or incompatibility status of pairs of arguments. They are, in the vast majority of the articles in formal argumentation theory, the attacks are considered known, given to the analyst as a starting point of the study. 
 
-Correspondingly, arguments that are not attacked are of prominent importance in many (otherwise different) formal approaches about argumentation. 
+In this sense, it is clear that arguments that are not attacked are of prominent importance for society, since they correspond to messages that received no objection and can therefore serve as a basis for compromise building \cite{MoulinBT2018}.\commentOC{I think we can remove this?} 
 
-Note that “not attacked” depends on which set of arguments we look into; we consider for this discussion that the set of arguments encompasses every arguments that are possibly relevant to the topic at hand (and will come back to this). In this context, we call decisive the non-attacked arguments. 
+In this position paper, we want to argue in favor of extending the scope of formal argumentation theory by relaxing this assumption. In particular, we argue that attacks should not necessarily be considered as representing as objective status of contradiction, as given for example by inspection of logical representation of arguments. We will give methodological and practical reasons to consider it of great importance to consider the attack relation as representing the subjective state of mind of an individual; and to study methods of obtaining information about this relation empirically.
 
-NB in some examples, some arguments are left unattacked (for example, the gvt is not expected to answer every counter-argument). Also, in preference-based argumentation, arguments can be “unattacked subjectively”: specific preferences of an individual may invalidate an argument and leave only another argument as decisive.
-
-Although some authors seem to acknowledge in passing that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that this would lead to consider only questions that do not relate to computer science but rather to natural language, for example; or these questions may seem to be hopelessly complex and beyond reach of the current state of knowledge in natural language processing. We provide here (partial) answers to these two points.
+Although some authors seem to acknowledge in passing that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that these questions would reveal hopelessly complex and that would be of interest only to the specific field of natural language processing. We provide here (partial) answers to these two points: we give reasons for doubting this assumpion; and we draw paths to study attack relations considered subjective that do not relate to natural language processing.
 
 \section{The usual perspective (in FAT?) about attacks}
+\commentOC{Perhaps we should present here formally PAFs, VAFs…?}
 Usually considered known a priori: logical representation; or simply given.
 
 Also: preference based approaches. But this still considers an attack relation, and the preference is supplementary data on top of the attack relation. (TODO: check Besnard \& Hunter - Elements of Argumentation, Chapter 6: Considering the Audience.)
@@ -96,6 +94,8 @@ A practical argument is that encoding the arguments logically require important 
 
 \commentOC{To discuss: which points require examples? How complex (toy examples VS realistic examples)? Consider an example of a logic encoding with different conclusions?}
 
+Nevertheless, practical studies showed that rejected arguments are not necessarily to be interpreted as non-receivable, but rather as rough ideas that need to be refined \cite{EJDP2018, Bourguet2013} and can serve as initial pillars of great importance for the construction of the argumentation system. Talk about obtaining judgements of individuals, …
+
 \section{what if not known a priori?}
 We just argued that it may be relevant or convenient to not assume we know the attack relation. In this section we provide some ideas of subject of studies that do not require this assumption, that pertains to computer science, and does not require advanced natural language processing capabilities.
 
@@ -114,6 +114,7 @@ We should decide whether to include some of these points in the text or adding s
 \end{itemize}
 
 \section{PAFs}
+\label{sec:pafs}
 Here we talk about Preference-based Argumentation Frameworks.
 
 Considering the book Rahwan, Simari - Argumentation in Artificial Intelligence (2009), Chapter 15: Argumentation for Decision Making, Amgoud.
