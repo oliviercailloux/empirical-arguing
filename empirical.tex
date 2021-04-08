@@ -95,7 +95,13 @@ Stable: conflict-free and $E$ attacks all excluded args. Implies maximally compl
 
 Preferred: maximal complete. Stable implies preferred. 
 
-The semantics considered is: the stable ones if some exist; the preferred ones otherwise. Can we simplify this definition?
+The semantics considered is: the stable ones if some exist; the preferred ones otherwise. Define $S$ as the skeptically accepted arguments in the resulting semantics, thus, $\cap E_i$ with the $E_i$ sets being the stable ones, or, if there is none, the preferred ones.
+
+Given a set $A \subseteq \allargs$, say that $D \subseteq \allargs$ is a set defending $A$ if $D$ attacks all the arguments that attack some element of $A$ (thus $R^{-1}(A) \subseteq R(D)$). Say that $a$ is necessarily defended iff there exists a finite sequence of sets $A^i$, starting with $A^0 = \set{a}$, such that each set defends the previous one, and that ends with a set that is unattacked in $R$ (thus $R^{-1}(A^i) = \emptyset$ for some $i$).
+
+\begin{conjecture}
+	$S$ is the set of necessarily defended arguments.
+\end{conjecture}
 
 \section{Reasons not to consider it known}
 We saw that most formal approaches in argumentation consider that the attack relation is (are) known. 
