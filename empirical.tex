@@ -47,7 +47,8 @@ In this position paper, we want to argue in favor of extending the scope of form
 Although some authors seem to acknowledge in passing that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that these questions would reveal hopelessly complex and that would be of interest only to the specific field of natural language processing. We provide here (partial) answers to these two points: we give reasons for doubting this assumpion; and we draw paths to study attack relations considered subjective that do not relate to natural language processing.
 
 \section{The usual perspective (in FAT?) about attacks}
-\commentOC{Perhaps we should present here formally PAFs, VAFs…?}
+TODO present the usual logic approach
+
 Usually considered known a priori: logical representation; or simply given.
 
 Also: preference based approaches. But this still considers an attack relation, and the preference is supplementary data on top of the attack relation. (TODO: check Besnard \& Hunter - Elements of Argumentation, Chapter 6: Considering the Audience.)
@@ -61,6 +62,37 @@ The most usual attitude is what we call the \emph{a priori} attitude: the attack
 Another attitude consists in considering the attack relations as empirical. Under that view, the attacks are revealed by something else than the arguments themselves and a priori knowledge, such as the reactions of individuals to the arguments, as we will propose.
 
 Mention the study of \cite{ICCS2018} on comparisons of attacks?
+
+\subsection{PAFs}
+\label{sec:pafs}
+Here we talk about Preference-based Argumentation Frameworks.
+
+Considering the book Rahwan, Simari - Argumentation in Artificial Intelligence (2009), Chapter 15: Argumentation for Decision Making, Amgoud.
+
+We assume there is only one alternative on which to decide: $\dy$ or $\dn$ (e.g., surgery or do nothing). This simplifies the formal exposition without removing the crucial points of the propositions.
+
+A decision system is $A_e, A_p^{\dy}, A_p^{\dn}, {≥_e}, {≥_p}, R_e, R_m$. \footnote{I assume that ${≥_m} = A_e × A_p$. Her section 2.2 suggests ${≥_m} = A_e × A_p$, Example 15.5 suggests ${≥_m} \subseteq A_e × A_p$; I assume the mistake is in the example. Also, $Def_m = R_m$ and $Def_e = R_e \cap (\overline{>_e})^{-1}$. $(\overline{>_e})^{-1}$ contains the pairs $(a, b)$ such that $a$ is strictly preferred to $b$ or they are indifferent or incomparable. $Def = (R_e \cap (\overline{>_e})^{-1}) \cup R_m = R.$}
+Define $A_p = A_p^ {\dy} \cup A_p^{\dn}$. 
+
+${≥_e} \subseteq A_e × A_e$, ${≥_p} \subseteq A_p × A_p$, both reflexive and transitive, the preferences.
+
+$R_e \subseteq A_e × A_e$, $R_m \subseteq A_e × A_p$, the “objective” attacks. 
+
+From $R = (R_e \setminus {<_e}) \cup R_m$, we obtain the extensions (an extension is a set of arguments). The stable and the preferred semantics are considered. Then the skeptically accepted arguments are $\cap E_i$ and the credulously accepted ones are $\cup E_i \setminus \cap E_i$.
+\footnote{More from Amgoud: skept pref subseteq skept stable if not empty.}
+
+$E$-acceptable = $E$-defended = all args that $E$ defends = those whose attackers are all attacked by $E$ = $\set{a \suchthat R^{-1}(a)\subseteq R(E)}$.
+
+Conflict-free: contains no arguments that attack each other.
+\footnote{More from Baroni and Giacomin: Admissible $E$: conflict-free and all included are $E$-defended; Complete $E$: $E$ admissible and includes every $E$-defended; Preferred: maximal admissible set, equivalently, maximal complete extensions. Stable: conflict-free and $E$ attacks all excluded args. Implies complete.}
+
+Complete $E$: $E$ conflict-free and $E$ = $E$-defended.
+
+Stable: conflict-free and $E$ attacks all excluded args. Implies maximally complete.
+
+Preferred: maximal complete. Stable implies preferred. 
+
+The semantics considered is: the stable ones if some exist; the preferred ones otherwise. Can we simplify this definition?
 
 \section{Reasons not to consider it known}
 We saw that most formal approaches in argumentation consider that the attack relation is (are) known. 
@@ -121,36 +153,6 @@ We should decide whether to include some of these points in the text or adding s
 	\item link to explainable AI (should focus on decisive arguments), exploitation of weaknesses of will or sub-conscious behavioral patterns (youtube autoplay; nudge; anchoring) VS reflective arguments (advocacy), and the like? Link to deliberative democracy?
 	\item review existing experimental work in FAT? Other related works? Philosophical approaches (Rawls, Habermas)?
 \end{itemize}
-
-\section{PAFs}
-\label{sec:pafs}
-Here we talk about Preference-based Argumentation Frameworks.
-
-Considering the book Rahwan, Simari - Argumentation in Artificial Intelligence (2009), Chapter 15: Argumentation for Decision Making, Amgoud.
-
-We assume there is only one alternative on which to decide: $\dy$ or $\dn$ (e.g., surgery or do nothing). This simplifies the formal exposition without removing the crucial points of the propositions.
-
-A decision system is $A_e^{\dy}, A_e^{\dn}, A_p^{\dy}, A_p^{\dn}, {≥_e}, {≥_p}, R_e, R_m$. \footnote{I assume that ${≥_m} = A_e × A_p$. Her section 2.2 suggests ${≥_m} = A_e × A_p$, Example 15.5 suggests ${≥_m} \subseteq A_e × A_p$; I assume the mistake is in the example. Also, $Def_m = R_m$ and $Def_e = R_e \cap (\overline{>_e})^{-1}$. $(\overline{>_e})^{-1}$ contains the pairs $(a, b)$ such that $a$ is strictly preferred to $b$ or they are indifferent or incomparable. $Def = (R_e \cap (\overline{>_e})^{-1}) \cup R_m = R.$}
-
-${≥_e} \subseteq A_e × A_e$, ${≥_p} \subseteq A_p × A_p$, both reflexive and transitive, the preferences.
-
-$R_e \subseteq A_e × A_e$, $R_m \subseteq A_e × A_p$, the “objective” attacks. 
-
-From $R = (R_e \setminus {<_e}) \cup R_m$, we obtain the extensions (an extension is a set of arguments). The stable and the preferred semantics are considered. Then the skeptically accepted arguments are $\cap E_i$ and the credulously accepted ones are $\cup E_i \setminus \cap E_i$.
-\footnote{More from Amgoud: skept pref subseteq skept stable if not empty.}
-
-$E$-acceptable = $E$-defended = all args that $E$ defends = those whose attackers are all attacked by $E$ = $\set{a \suchthat R^{-1}(a)\subseteq R(E)}$.
-
-Conflict-free: contains no arguments that attack each other.
-\footnote{More from Baroni and Giacomin: Admissible $E$: conflict-free and all included are $E$-defended; Complete $E$: $E$ admissible and includes every $E$-defended; Preferred: maximal admissible set, equivalently, maximal complete extensions. Stable: conflict-free and $E$ attacks all excluded args. Implies complete.}
-
-Complete $E$: $E$ conflict-free and $E$ = $E$-defended.
-
-Stable: conflict-free and $E$ attacks all excluded args. Implies maximally complete.
-
-Preferred: maximal complete. Stable implies preferred. 
-
-The semantics considered is: the stable ones if some exist; the preferred ones otherwise. Can we simplify this definition?
 
 %\bibliography{bibl}
 
