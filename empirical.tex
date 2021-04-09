@@ -74,8 +74,10 @@ Considering the book Rahwan, Simari - Argumentation in Artificial Intelligence (
 
 We assume there is only one alternative on which to decide: $\dy$ or $\dn$ (e.g., surgery or do nothing). This simplifies the formal exposition without removing the crucial points of the propositions.
 
-A decision system is $A_e, A_p^{\dy}, A_p^{\dn}, {≥_e}, {≥_p}, R_e, R_m$. \footnote{I assume that ${≥_m} = A_e × A_p$. Her section 2.2 suggests ${≥_m} = A_e × A_p$, Example 15.5 suggests ${≥_m} \subseteq A_e × A_p$; I assume the mistake is in the example. Also, $Def_m = R_m$ and $Def_e = R_e \cap (\overline{>_e})^{-1}$. $(\overline{>_e})^{-1}$ contains the pairs $(a, b)$ such that $a$ is strictly preferred to $b$ or they are indifferent or incomparable. $Def = (R_e \cap (\overline{>_e})^{-1}) \cup R_m = R.$}
-Define $A_p = A_p^ {\dy} \cup A_p^{\dn}$. 
+A decision system is $A_e, A_p^{\dy}, A_p^{\dn}, {≥_e}, {≥_p}, R_e, R_m$. 
+\footnote{I assume that ${≥_m} = A_e × A_p$. Her section 2.2 suggests ${≥_m} = A_e × A_p$, Example 15.5 suggests ${≥_m} \subseteq A_e × A_p$; I assume the mistake is in the example. Also, $Def_m = R_m$ and $Def_e = R_e \cap (\overline{>_e})^{-1}$. $(\overline{>_e})^{-1}$ contains the pairs $(a, b)$ such that $a$ is strictly preferred to $b$ or they are indifferent or incomparable. $Def = (R_e \cap (\overline{>_e})^{-1}) \cup R_m = R.$}
+Define $A_p = A_p^ {\dy} \cup A_p^{\dn}$.
+Define $\allargs = A_e \cup A_p$ as the set of all arguments.
 
 ${≥_e} \subseteq A_e × A_e$, ${≥_p} \subseteq A_p × A_p$, both reflexive and transitive, the preferences.
 
@@ -97,12 +99,15 @@ Preferred: maximal complete. Stable implies preferred.
 
 The semantics considered is: the stable ones if some exist; the preferred ones otherwise. Define $S$ as the skeptically accepted arguments in the resulting semantics, thus, $\cap E_i$ with the $E_i$ sets being the stable ones, or, if there is none, the preferred ones.
 
-Given a set $A \subseteq \allargs$, say that $D \subseteq \allargs$ is a set defending $A$ if $D$ attacks all the arguments that attack some element of $A$ (thus $R^{-1}(A) \subseteq R(D)$). Say that $a$ is necessarily defended iff there exists a finite sequence of sets $A^i$, starting with $A^0 = \set{a}$, such that each set defends the previous one, and that ends with a set that is unattacked in $R$ (thus $R^{-1}(A^i) = \emptyset$ for some $i$).
+Given a set $A \subseteq \allargs$, say that $A$ is possibly failing iff $\exists B \subseteq \allargs$ with $B$ admissible and attacking every member of $A$ ($A \subseteq R(B)$).
+Inversely, $A$ is necessarily resistant iff it is not possibly failing.
 
 \begin{conjecture}
-        $S$ is the set of necessarily defended arguments.
+	$S$ contains $a$ iff $\forall b R a, \exists C$ necessarily resistant and with every members attacking $b$ ($C \subseteq R^{-1}(b)$).
 \end{conjecture}
-\commentPB{Non, voir $\set{(a1,d), (a2,a1), (a2,a3), (a3,a1), (a3,a4), (a4,a5), (a5,a2)}$. d est accepté sceptiquement (en stable et preferred) même si on ne peut pas trouver une séquence d'ensemble qui se défendent tels que le dernier ensemble n'est pas attaqué (à cause du cycle).}
+\begin{conjecture}
+	$S$ contains $a$ iff $\set{a}$ is necessarily resistant iff no admissible set attack it.
+\end{conjecture}
 
 \section{Reasons not to consider it known}
 We saw that most formal approaches in argumentation consider that the attack relation is (are) known. 
