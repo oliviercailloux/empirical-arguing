@@ -1,5 +1,5 @@
 \RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[version=3.21, pagesize, twoside=off, bibliography=totoc, DIV=calc, fontsize=12pt, a4paper]{scrartcl}
+\documentclass[version=3.21, pagesize, twoside=off, bibliography=totoc, DIV=calc, fontsize=12pt, a4paper, french, english]{scrartcl}
 \input{preamble/packages}
 \input{preamble/redac}
 \input{preamble/math_basics}
@@ -100,8 +100,9 @@ The semantics considered is: the stable ones if some exist; the preferred ones o
 Given a set $A \subseteq \allargs$, say that $D \subseteq \allargs$ is a set defending $A$ if $D$ attacks all the arguments that attack some element of $A$ (thus $R^{-1}(A) \subseteq R(D)$). Say that $a$ is necessarily defended iff there exists a finite sequence of sets $A^i$, starting with $A^0 = \set{a}$, such that each set defends the previous one, and that ends with a set that is unattacked in $R$ (thus $R^{-1}(A^i) = \emptyset$ for some $i$).
 
 \begin{conjecture}
-	$S$ is the set of necessarily defended arguments.
+        $S$ is the set of necessarily defended arguments.
 \end{conjecture}
+\commentPB{Non, voir $\set{(a1,d), (a2,a1), (a2,a3), (a3,a1), (a3,a4), (a4,a5), (a5,a2)}$. d est accepté sceptiquement (en stable et preferred) même si on ne peut pas trouver une séquence d'ensemble qui se défendent tels que le dernier ensemble n'est pas attaqué (à cause du cycle).}
 
 \section{Reasons not to consider it known}
 We saw that most formal approaches in argumentation consider that the attack relation is (are) known. 
