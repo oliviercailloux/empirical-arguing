@@ -49,23 +49,17 @@ In this position paper, we want to argue in favor of extending the scope of form
 
 Although some authors seem to acknowledge in passing that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that these questions would reveal hopelessly complex and that would be of interest only to the specific field of natural language processing. We provide here (partial) answers to these two points: we give reasons for doubting this assumpion; and we draw paths to study attack relations considered subjective that do not relate to natural language processing.
 
-\section{The usual perspective (in FAT?) about attacks}
-TODO present the usual logic approach
-
-Usually considered known a priori: logical representation; or simply given.
-
-Also: preference based approaches. But this still considers an attack relation, and the preference is supplementary data on top of the attack relation. (TODO: check Besnard \& Hunter - Elements of Argumentation, Chapter 6: Considering the Audience.)
-
-By attack relations, in plural, we mean the binary relations that are used to represent an argument “attacking” another one. There can be multiple such relations to distinguish the sort of attack: one that attempts to invalidate directly the conclusion, one that attempts to invalidate the reasoning, …
+Preference based approaches still considers an attack relation, and the preference is supplementary data on top of the attack relation. (TODO: check Besnard \& Hunter - Elements of Argumentation, Chapter 6: Considering the Audience.)
 
 We want to distinguish two attitudes towards the attack relations. 
 
-The most usual attitude is what we call the \emph{a priori} attitude: the attack relations are considered known. They are deducible using a systematic procedure from the arguments. This covers the case where the arguments are considered given under a logic form and this is used to deduce the attack relations; the case where the input itself is considered to be the attack relation; and the case where the input is considered a set of arguments in natural language (NL), and the attack relations are deduced from these NL arguments. (One can think of text form, video, …)
+The most usual attitude is what we call the \emph{a priori} attitude, reviewed in this section: the attack relations are considered known. They are deducible using a systematic procedure from the arguments. This covers the case where the arguments are considered given under a logic form and this is used to deduce the attack relations; the case where the input itself is considered to be the attack relation; and the case where the input is considered a set of arguments in natural language (NL), and the attack relations are deduced from these NL arguments. (One can think of text form, video, …)
 
 Another attitude consists in considering the attack relations as empirical. Under that view, the attacks are revealed by something else than the arguments themselves and a priori knowledge, such as the reactions of individuals to the arguments, as we will propose.
 
 Mention the study of \cite{ICCS2018} on comparisons of attacks?
 
+\section{The usual perspective (in FAT?) about attacks}
 \subsection{PAFs}
 \label{sec:pafs}
 Here we talk about Preference-based Argumentation Frameworks.
@@ -108,6 +102,16 @@ Inversely, $A$ is necessarily resistant iff it is not possibly failing.
 \begin{conjecture}
 	$S$ contains $a$ iff $\set{a}$ is necessarily resistant iff no admissible set attack it.
 \end{conjecture}
+
+\subsection{Logic}
+$\Delta$ a finite set of formulae is predicate logic with a deduction operator. Given $\Phi \subseteq \Delta$, let $\land(\Phi)$ denote the conjunction of the formulæ in $\Phi$.
+
+An argument is a pair $(\Phi, \alpha)$ such that $\phi \nvdash \alpha$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
+
+As the authors note, arguments are supposedly formalized making explicit every claim left implicit. They give the example “The baby
+no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning.
+
+An argument $(\Psi, \beta)$ defeats $(\Phi, \alpha)$ iff $\beta ⊢ ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
 
 \section{Reasons not to consider it known}
 We saw that most formal approaches in argumentation consider that the attack relation is (are) known. 
