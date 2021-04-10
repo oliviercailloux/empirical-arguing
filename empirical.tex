@@ -59,6 +59,8 @@ Another attitude consists in considering the attack relations as empirical. Unde
 
 Mention the study of \cite{ICCS2018} on comparisons of attacks?
 
+Besnard \& Hunter (Chapter 3, p. 38 to 39): “Note that we do not assume any metalevel information about formulae. In particular, we do not assume some preference ordering or ‘‘certainty ordering’’ over formulae. This is in contrast to numerous proposals for argumentation that do assume some form of ordering over formulae. Such orderings can be useful to resolve conflicts by, for example, selecting formulae from a more reliable source. However, this, in a sense, pushes the problem of dealing with conflicting information to one of finding and using orderings over formulae, and as such raises further questions such as the following: Where does the knowledge about reliability of the sources come from? How can it be assessed? How can it be validated?”
+
 \section{The usual perspective (in FAT?) about attacks}
 \subsection{PAFs}
 \label{sec:pafs}
@@ -111,7 +113,20 @@ An argument is a pair $(\Phi, \alpha)$ such that $\phi \nvdash \alpha$ and such 
 As the authors note, arguments are supposedly formalized making explicit every claim left implicit. They give the example “The baby
 no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning.
 
-An argument $(\Psi, \beta)$ defeats $(\Phi, \alpha)$ iff $\beta ⊢ ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
+An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
+Some defeaters are also undercutters. An argument $(\Psi, \beta)$ \emph{undercuts} $(\Phi, \alpha)$ iff $\beta = ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
+An undercut is maximally conservative when $\Phi' = \Phi$ in the above definition.
+Some defeaters are rebuttals. An argument $(\Psi, \beta)$ \emph{rebuts} $(\Phi, \alpha)$ iff $\beta ↔ ¬\alpha$ is a tautology.
+
+Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Argument: $\alpha = (\set{p ↔ ¬q, p}, ¬q)$. Undercut: $\beta = (\set{r, r → ¬p}, ¬p)$. Rebuttal: $(\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
+
+As the authors prove, in that framework, a defeater always admits an undercut, and even a maximally conservative undercut. In the example, $\beta$ has an undercut $(\set{p, r → ¬p}, ¬r)$ and a maximally conservative undercut $(\set{p, r → ¬p}, ¬[r \land (r → ¬p)])$.
+
+\section{From text to logic arguments}
+Should we devote a section to discuss proposals to “translate” NL to logic?
+
+From Besnard \& Hunter - Elements of Argumentation, Chapter 1. “Numerous textbooks have explained how individual arguments, as found in the real world, can be represented and analyzed by classical logic. The focus of these books is on what constitutes a valid logical argument. A paragon of such a textbook by Fisher [Fis88] includes many examples of arguments originally presented in philosophy and in politics using free text, together with a comprehensive explanation of how they can be translated into propositional logic. However, these textbooks tend to circumvent the more difficult issues of inconsistency, conflict, and counterarguments.
+To address these more difficult issues, an excellent starting point for considering monological argumentation is Toulmin’s book [Tou58], with developments of Toulmin’s approach having been reviewed by van Eemeren et al. [vGK87]. Toulmin’s work is regarded as a precursor to much of the formal developments in argumentation systems found in the artificial intelligence field. For reviews of formalisms for argumentation systems in artificial intelligence, see [PV02, CML00].”
 
 \section{Reasons not to consider it known}
 We saw that most formal approaches in argumentation consider that the attack relation is (are) known. 
