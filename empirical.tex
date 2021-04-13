@@ -104,6 +104,8 @@ The semantics considered is: the stable ones if some exist; the preferred ones o
 Given a set $A \subseteq \allargs$, say that $A$ is possibly failing iff $\exists B \subseteq \allargs$ with $B$ admissible and attacking every member of $A$ ($A \subseteq R(B)$).
 Inversely, $A$ is necessarily resistant iff it is not possibly failing.
 
+Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. Here, 5 invalidates 3, which “suffices” to “resolve” the cycle as $(3, 2)$ “does not count” any more. Thus, 2 defends $d$ and $d$ is skeptically accepted. Also, consider: $(5, 4), (4, 3), (3, 2), (2, 4), (3, 1), (4, 1), (1, d)$. Without 5, $d$ is not sceptically accepted because 1 may be considered to resist thanks to the undecided status of the cycle, but with 5, $d$ becomes sceptically accepted as 1 is defeated.
+˘
 \subsection{Logic}
 $\Delta$ a finite set of formulae is predicate logic with a deduction operator. Given $\Phi \subseteq \Delta$, let $\land(\Phi)$ denote the conjunction of the formulæ in $\Phi$.
 
@@ -121,7 +123,7 @@ Example (given by the authors). Variables: $p$ for being a member of the Parliam
 
 As the authors prove, in that framework, a defeater always admits an undercut, and even a maximally conservative undercut. In the example, $\beta$ has an undercut $(\set{p, r → ¬p}, ¬r)$ and a maximally conservative undercut $(\set{p, r → ¬p}, ¬[r \land (r → ¬p)])$.
 
-\section{From text to logic arguments}
+\subsection{From text to logic arguments}
 Should we devote a section to discuss proposals to “translate” NL to logic?
 
 From Besnard \& Hunter - Elements of Argumentation, Chapter 1. “Numerous textbooks have explained how individual arguments, as found in the real world, can be represented and analyzed by classical logic. The focus of these books is on what constitutes a valid logical argument. A paragon of such a textbook by Fisher [Fis88] includes many examples of arguments originally presented in philosophy and in politics using free text, together with a comprehensive explanation of how they can be translated into propositional logic. However, these textbooks tend to circumvent the more difficult issues of inconsistency, conflict, and counterarguments.
