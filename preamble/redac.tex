@@ -1,9 +1,10 @@
 %Requires package xcolor.
-%\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
 \NewDocumentCommand{\commentOC}{m}{\textcolor{blue}{\small$\big[$OC: #1$\big]$}}
 %Requires package babel and option [french]. According to babel doc, need two braces around \selectlanguage to make the changes really local.
 \NewDocumentCommand{\commentOCf}{m}{\textcolor{blue}{{\small\selectlanguage{french}$\big[$OC : #1$\big]$}}}
 \NewDocumentCommand{\commentPB}{m}{\textcolor{red}{{\small\selectlanguage{french}$\big[$PB : #1$\big]$}}}
+\NewDocumentCommand{\commentRT}{m}{\textcolor{ao(english)}{{\small\selectlanguage{french}$\big[$RT : #1$\big]$}}}
 
 \bibliographystyle{abbrvnat}
 \NewDocumentCommand{\possessivecite}{mO{}}{\citeauthor{#1}’s \citeyearpar[#2]{#1}}
