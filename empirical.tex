@@ -68,6 +68,23 @@ Besnard \& Hunter (Chapter 3, p. 38 to 39): “Note that we do not assume any me
 In Chapter 4, they argue for an enlarged view. Selectivity is important. Impractical to represent every argument; some arguments are similar and can be summarized; readers do not want or can’t read many arguments and want a summary. They give multiple examples of situations where it is important to take into account the audience attitude towards the presented arguments.
 
 \section{The usual perspective (in FAT?) about attacks}
+\subsection{Logic}
+$\Delta$ a finite set of formulae is predicate logic with a deduction operator. Given $\Phi \subseteq \Delta$, let $\land(\Phi)$ denote the conjunction of the formulæ in $\Phi$.
+
+An argument is a pair $(\Phi, \alpha)$ such that $\phi \nvdash \alpha$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
+
+As the authors note, arguments are supposedly formalized making explicit every claim left implicit. They give the example “The baby
+no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning.
+
+An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
+Some defeaters are also undercutters. An argument $(\Psi, \beta)$ \emph{undercuts} $(\Phi, \alpha)$ iff $\beta = ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
+An undercut is maximally conservative when $\Phi' = \Phi$ in the above definition.
+Some defeaters are rebuttals. An argument $(\Psi, \beta)$ \emph{rebuts} $(\Phi, \alpha)$ iff $\beta ↔ ¬\alpha$ is a tautology.
+
+Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Argument: $\alpha = (\set{p ↔ ¬q, p}, ¬q)$. Undercut: $\beta = (\set{r, r → ¬p}, ¬p)$. Rebuttal: $(\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
+
+As the authors prove, in that framework, a defeater always admits an undercut, and even a maximally conservative undercut. In the example, $\beta$ has an undercut $(\set{p, r → ¬p}, ¬r)$ and a maximally conservative undercut $(\set{p, r → ¬p}, ¬[r \land (r → ¬p)])$.
+
 \subsection{PAFs}
 \label{sec:pafs}
 Here we talk about Preference-based Argumentation Frameworks.
@@ -105,23 +122,6 @@ Given a set $A \subseteq \allargs$, say that $A$ is possibly failing iff $\exist
 Inversely, $A$ is necessarily resistant iff it is not possibly failing.
 
 Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. Here, 5 invalidates 3, which “suffices” to “resolve” the cycle as $(3, 2)$ “does not count” any more. Thus, 2 defends $d$ and $d$ is skeptically accepted. Also, consider: $(5, 4), (4, 3), (3, 2), (2, 4), (3, 1), (4, 1), (1, d)$. Without 5, $d$ is not sceptically accepted because 1 may be considered to resist thanks to the undecided status of the cycle, but with 5, $d$ becomes sceptically accepted as 1 is defeated.
-˘
-\subsection{Logic}
-$\Delta$ a finite set of formulae is predicate logic with a deduction operator. Given $\Phi \subseteq \Delta$, let $\land(\Phi)$ denote the conjunction of the formulæ in $\Phi$.
-
-An argument is a pair $(\Phi, \alpha)$ such that $\phi \nvdash \alpha$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
-
-As the authors note, arguments are supposedly formalized making explicit every claim left implicit. They give the example “The baby
-no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning.
-
-An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
-Some defeaters are also undercutters. An argument $(\Psi, \beta)$ \emph{undercuts} $(\Phi, \alpha)$ iff $\beta = ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
-An undercut is maximally conservative when $\Phi' = \Phi$ in the above definition.
-Some defeaters are rebuttals. An argument $(\Psi, \beta)$ \emph{rebuts} $(\Phi, \alpha)$ iff $\beta ↔ ¬\alpha$ is a tautology.
-
-Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Argument: $\alpha = (\set{p ↔ ¬q, p}, ¬q)$. Undercut: $\beta = (\set{r, r → ¬p}, ¬p)$. Rebuttal: $(\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
-
-As the authors prove, in that framework, a defeater always admits an undercut, and even a maximally conservative undercut. In the example, $\beta$ has an undercut $(\set{p, r → ¬p}, ¬r)$ and a maximally conservative undercut $(\set{p, r → ¬p}, ¬[r \land (r → ¬p)])$.
 
 \subsection{From text to logic arguments}
 Should we devote a section to discuss proposals to “translate” NL to logic?
