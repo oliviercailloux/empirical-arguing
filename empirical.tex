@@ -69,15 +69,16 @@ In Chapter 4, they argue for an enlarged view. Selectivity is important. Impract
 
 \section{The usual perspective (in FAT?) about attacks}
 \subsection{Classical logic}
-Let $\Delta^\text{ordered}$ be a finite set of formulas is predicate logic with a deduction operator $⊢$. 
+Let $F$ be a finite set of formulas is predicate logic with a deduction operator $⊢$. 
 
-As we will see, negation of conjunctive formulas play a special role in the approach proposed by the authors. It will be convenient in what follows to be able to treat formulas such as $¬(a \land b)$ and $¬(b \land a)$ as the same mathematical object. To that effect, informally speaking, we define $\Delta$ as the set of formulas corresponding to $\Delta^\text{ordered}$ except that in $\Delta$, negation of conjunctive formulas are considered to be equal when they only differ on the ordering of their conjuncts inside the negation. We also define $\land(\Phi) \in \Delta$, given $\Phi \subseteq \Delta$, as the conjunction of the formulas in $\Phi$, where the ordering of the formulas in $\Phi$ “does not matter”.
-The following remark defines $\Delta$ and $\land(\Phi)$ formally, and may be skipped without loss of continuity.
+As we will see, negation of conjunctive formulas play a special role in the approach proposed by the authors. It will be convenient in what follows to be able to treat formulas such as $¬(a \land b)$ and $¬(b \land a)$ as the same mathematical object. To that effect, informally speaking, we define $\Delta$ as the set of formulas corresponding to $F$ except that in $\Delta$, negation of conjunctive formulas are considered to be equal when they only differ on the ordering of their conjuncts inside the negation. We also define $\land(\Phi) \in \Delta$, given $\Phi \subseteq \Delta$, as the conjunction of the formulas in $\Phi$, where the ordering of the formulas in $\Phi$ “does not matter”.
+The following remark defines $\Delta$ and $\land(\Phi)$ formally, and may be skipped by readers who tolerate such informal parlance.
 \begin{remark}
-	To proceed formally, given $\Phi \subseteq \Delta^\text{ordered}$, let $\land(\Phi) \subseteq \Delta^\text{ordered}$ denote the set of conjunctions of the formulas in $\Phi$ following whatever ordering of the formulas in $\Phi$.
-Define an equivalence relation $\equiv$ on $\Delta^\text{ordered}$ as follows: two formulas are equivalent, $\alpha \equiv \beta$, iff $\alpha = \beta \lor [\exists \Phi \subseteq \Delta^\text{ordered} \suchthat \alpha \in (¬{\land}(\Phi)) \land \beta \in (¬{\land}(\Phi))]$, thus, iff they are equal or they both negate the same conjunctive formula when ignoring the order of the sub-formulas in the conjunction. For example, given $a, b \in \Delta$, $¬(a \land b) \equiv ¬(b \land a)$.
-Define $\Delta = \Delta^\text{ordered} / \equiv$ as the set of equivalence classes of $\equiv$, called “unordered formulas”.
-We extend $⊢$ on the domain of unordered formulas: given $\Phi \subseteq \Delta, \psi \in \Delta$, $\Phi ⊢ \psi$ iff $\cup(\Phi) ⊢ \cup(\psi)$.
+	To proceed formally, given $H \subseteq F$, let $\land(H) \subseteq F$ denote the set of conjunctions of the formulas in $H$ following whatever ordering of the formulas in $H$.
+Define an equivalence relation $\equiv$ on $F$ as follows: two formulas are equivalent, $f \equiv g$, iff $f = g \lor [\exists H \subseteq F \suchthat f \in (¬{\land}(H)) \land g \in (¬{\land}(H))]$, thus, iff they are equal or they both negate the same conjunctive formula when ignoring the order of the sub-formulas in the conjunction. For example, given $a, b \in F$, $¬(a \land b) \equiv ¬(b \land a)$.
+Define $\Delta = F / \equiv$ as the set of equivalence classes of $\equiv$, called (somewhat abusively) “unordered formulas”.
+Please note that as a consequence, any unordered formula $\phi \in \Delta$ corresponds to a set of formulas $\set{f_1, f_2, …} \subseteq F$ which are equivalent as considered by $\equiv$; thus, $\phi$ can be viewed (and should be thought of) as a single formula “up to order”.
+We extend $⊢$ on the domain of unordered formulas: given $\Phi \subseteq \Delta, \psi \in \Delta$, $\Phi ⊢ \psi$ iff $\forall f \in \psi: \cup(\Phi) ⊢ f$, or equivalently, iff $\exists f \in \psi \suchthat \cup(\Phi) ⊢ f$.
 In what follows, we abuse vocabulary by calling an unordered formula a formula.
 Note that $\land(\Phi) \in \Delta$.
 In our examples of formulas, we display only one element of an equivalence class to represent the whole equivalence class.
