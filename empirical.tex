@@ -79,7 +79,7 @@ As the authors note, arguments are supposedly formalized making the enthymemes e
 
 An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬{\land}(\Phi')$ for some $\Phi' \subseteq \Phi$.
 Some defeaters are also undercutters. An argument $(\Psi, \beta)$ \emph{undercuts} $(\Phi, \alpha)$ iff $\beta = ¬{\land}(\Phi')$ for some $\Phi' \subseteq \Phi$.
-An undercut is maximally conservative when $\Phi' = \Phi$ in the above definition.
+An undercut is maximally conservative when $\Phi' = \Phi$ in the above definition and $\forall \Psi' \subset \Psi: \Psi' ⊬ ¬{\land}(\Phi')$.
 Some defeaters are rebuttals. An argument $(\Psi, \beta)$ \emph{rebuts} $(\Phi, \alpha)$ iff $\beta ↔ ¬\alpha$ is a tautology.
 
 Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Argument: $a = (\set{p ↔ ¬q, p}, ¬q)$. Undercut: $b = (\set{r, r → ¬p}, ¬p)$. Rebuttal: $(\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
