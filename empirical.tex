@@ -68,22 +68,37 @@ Besnard \& Hunter (Chapter 3, p. 38 to 39): “Note that we do not assume any me
 In Chapter 4, they argue for an enlarged view. Selectivity is important. Impractical to represent every argument; some arguments are similar and can be summarized; readers do not want or can’t read many arguments and want a summary. They give multiple examples of situations where it is important to take into account the audience attitude towards the presented arguments.
 
 \section{The usual perspective (in FAT?) about attacks}
-\subsection{Logic}
-$\Delta$ a finite set of formulae is predicate logic with a deduction operator. Given $\Phi \subseteq \Delta$, let $\land(\Phi)$ denote the conjunction of the formulæ in $\Phi$.
+\subsection{Classical logic}
+Let $\Delta^\text{ordered}$ be a finite set of formulas is predicate logic with a deduction operator $⊢$. 
 
-An argument is a pair $(\Phi, \alpha)$ such that $\phi \nvdash \alpha$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
+As we will see, negation of conjunctive formulas play a special role in the approach proposed by the authors. It will be convenient in what follows to be able to treat formulas such as $¬(a \land b)$ and $¬(b \land a)$ as the same mathematical object. To that effect, informally speaking, we define $\Delta$ as the set of formulas corresponding to $\Delta^\text{ordered}$ except that in $\Delta$, negation of conjunctive formulas are considered to be equal when they only differ on the ordering of their conjuncts inside the negation. We also define $\land(\Phi) \in \Delta$, given $\Phi \subseteq \Delta$, as the conjunction of the formulas in $\Phi$, where the ordering of the formulas in $\Phi$ “does not matter”.
+The following remark defines $\Delta$ and $\land(\Phi)$ formally, and may be skipped without loss of continuity.
+\begin{remark}
+	To proceed formally, given $\Phi \subseteq \Delta^\text{ordered}$, let $\land(\Phi) \subseteq \Delta^\text{ordered}$ denote the set of conjunctions of the formulas in $\Phi$ following whatever ordering of the formulas in $\Phi$.
+Define an equivalence relation $\equiv$ on $\Delta^\text{ordered}$ as follows: two formulas are equivalent, $\alpha \equiv \beta$, iff $\alpha = \beta \lor [\exists \Phi \subseteq \Delta^\text{ordered} \suchthat \alpha \in (¬{\land}(\Phi)) \land \beta \in (¬{\land}(\Phi))]$, thus, iff they are equal or they both negate the same conjunctive formula when ignoring the order of the sub-formulas in the conjunction. For example, given $a, b \in \Delta$, $¬(a \land b) \equiv ¬(b \land a)$.
+Define $\Delta = \Delta^\text{ordered} / \equiv$ as the set of equivalence classes of $\equiv$, called “unordered formulas”.
+We extend $⊢$ on the domain of unordered formulas: given $\Phi \subseteq \Delta, \psi \in \Delta$, $\Phi ⊢ \psi$ iff $\cup(\Phi) ⊢ \cup(\psi)$.
+In what follows, we abuse vocabulary by calling an unordered formula a formula.
+Note that $\land(\Phi) \in \Delta$.
+In our examples of formulas, we display only one element of an equivalence class to represent the whole equivalence class.
+\end{remark}
 
-As the authors note, arguments are supposedly formalized making explicit every claim left implicit. They give the example “The baby
-no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning.
+An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$ and $\alpha \in \Delta$ such that $\Phi ⊬ ⊥$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
 
-An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
-Some defeaters are also undercutters. An argument $(\Psi, \beta)$ \emph{undercuts} $(\Phi, \alpha)$ iff $\beta = ¬\land(\Phi')$ for some $\Phi' \subseteq \Phi$.
+As the authors note, arguments are supposedly formalized making the enthymemes explicit (“An enthymeme is a form of reasoning in which some premises are implicit, most often because they are obvious” \citep[p.\ 41]{besnard_elements_2000}). They give the example “The baby no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning. 
+
+An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬{\land}(\Phi')$ for some $\Phi' \subseteq \Phi$.
+Some defeaters are also undercutters. An argument $(\Psi, \beta)$ \emph{undercuts} $(\Phi, \alpha)$ iff $\beta = ¬{\land}(\Phi')$ for some $\Phi' \subseteq \Phi$.
 An undercut is maximally conservative when $\Phi' = \Phi$ in the above definition.
 Some defeaters are rebuttals. An argument $(\Psi, \beta)$ \emph{rebuts} $(\Phi, \alpha)$ iff $\beta ↔ ¬\alpha$ is a tautology.
 
-Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Argument: $\alpha = (\set{p ↔ ¬q, p}, ¬q)$. Undercut: $\beta = (\set{r, r → ¬p}, ¬p)$. Rebuttal: $(\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
+Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Argument: $a = (\set{p ↔ ¬q, p}, ¬q)$. Undercut: $b = (\set{r, r → ¬p}, ¬p)$. Rebuttal: $(\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
 
-As the authors prove, in that framework, a defeater always admits an undercut, and even a maximally conservative undercut. In the example, $\beta$ has an undercut $(\set{p, r → ¬p}, ¬r)$ and a maximally conservative undercut $(\set{p, r → ¬p}, ¬[r \land (r → ¬p)])$.
+As the authors prove, a defeater always admits a maximally conservative undercut. In the example, $b$ has an undercut $(\set{p, r → ¬p}, ¬r)$ and a maximally conservative undercut $(\set{p, r → ¬p}, ¬[r \land (r → ¬p)])$.
+Given two formulas $\Phi, \Psi \in \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi ⊢ ¬\land(\Phi)$.
+
+Given an argument $(\Phi, \alpha)$, define the argumentation tree about $(\Phi, \alpha)$ as a tree of formulas whose root node is $\Phi$ and defined as follows. Given a node $\Psi$ in an argumentation tree, define $t[\Psi]$ as the set of its ancestors. Given any node $\Psi$, define its children as the subset of its canonical undercutters that satisfy $\Psi' \nsubseteq t[\Psi]$.
+Note that an argumentation tree $t$ about $(\Phi, \alpha)$ is defined as a tree of formulas but also corresponds to a tree $t'$ of arguments having the same structure as $t$, where the root node of $t'$ is $(\Phi, \alpha)$ and each node $\Psi'$ in $t$ with child $\Psi$ in $t$ corresponds to an argument $(\Psi', ¬{\land}(\Psi))$ in $t'$.
 
 \subsection{PAFs}
 \label{sec:pafs}
@@ -122,6 +137,8 @@ Given a set $A \subseteq \allargs$, say that $A$ is possibly failing iff $\exist
 Inversely, $A$ is necessarily resistant iff it is not possibly failing.
 
 Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. Here, 5 invalidates 3, which “suffices” to “resolve” the cycle as $(3, 2)$ “does not count” any more. Thus, 2 defends $d$ and $d$ is skeptically accepted. Also, consider: $(5, 4), (4, 3), (3, 2), (2, 4), (3, 1), (4, 1), (1, d)$. Without 5, $d$ is not sceptically accepted because 1 may be considered to resist thanks to the undecided status of the cycle, but with 5, $d$ becomes sceptically accepted as 1 is defeated.
+
+\subsection{Defeasible logic}
 
 \subsection{From text to logic arguments}
 Should we devote a section to discuss proposals to “translate” NL to logic?
