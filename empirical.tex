@@ -70,7 +70,9 @@ In Chapter 4, they argue for an enlarged view. Selectivity is important. Impract
 \section{The usual perspective (in FAT?) about attacks}
 \subsection{Classical logic}
 Let $\Delta$ be a finite set of formulas is predicate logic with a deduction operator $⊢$. 
-Given $\Phi \subseteq \Delta$, thus $\Phi = \set{\phi_1, …, \phi_{\card{\Phi}}}$, let ${\land}\Phi = \set{\phi_{\sigma(1)} \land … \land \phi_{\sigma(\card{\Phi})} \text{ with } \sigma \text{ any bijection of the } \card{\Phi} \text{ first natural numbers}}$ denote the set of formulas that are conjunctions of all the formulas of $\Phi$ in whatever order.
+Given $\Phi \subseteq \Delta$, let ${\land}\Phi \subseteq \Delta$ denote the set of formulas that are conjunctions of all the formulas of $\Phi$ in whatever order (thus $\phi \in {\land}\Phi$ iff $\phi$ is a conjunction of formulas and the set of its conjuncts equals $\Phi$).
+Given any $\Phi, \Psi \subseteq \Delta$, we write $\Psi ⊢ ¬{\land}\Phi$ iff $\forall \phi \in ¬{\land}\Phi: \Psi ⊢ \phi$, or equivalently, iff $\exists \phi \in ¬{\land}\Phi \suchthat \Psi ⊢ \phi$, thus, whenever $\Psi$ permits to deduce the negation of at least one of the formulas in $\Phi$.
+
 An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$ and $\alpha \in \Delta$ such that $\Phi ⊬ ⊥$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
 
 As the authors note, arguments are supposedly formalized making the enthymemes explicit (“An enthymeme is a form of reasoning in which some premises are implicit, most often because they are obvious” \citep[p.\ 41]{besnard_elements_2000}). They give the example “The baby no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning. 
