@@ -81,13 +81,29 @@ An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬{\l
 
 Given two formulas $\Phi, \Psi \in \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi ⊢ ¬{\land}\Phi \land \forall \Psi' \subset \Psi: \Psi' ⊬ ¬{\land}\Phi$.
 
-Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Examples of defeaters for the argument $(\set{p ↔ ¬q, p}, ¬q)$ include $b = (\set{r, r → ¬p}, ¬p)$ and $c = (\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
-
 As the authors prove, the support of a defeater always admits a canonical undercut. Indeed, that some $(\Psi, \beta)$ defeats some argument with support $\Phi$ implies that $\Psi ⊢ ¬{\land}\Phi$, equivalently, that $\Psi$ and $\Phi$ together are unsatisfiable, equivalently, that $\Phi ⊢ ¬{\land}\Psi$. In the example, $\set{r, r → ¬p}$, the support of $b$, admits $\set{p}$ as canonical undercut, as $\set{p}$ permits to deduce $¬[r \land (r → ¬p)]$.
 
-Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq \Delta × \Delta$ represents its successor relation (thus with $s$ acyclic). 
+Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (thus with $s$ acyclic). 
 Canonical undercuts permit to associate to any $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, with $u_\Phi$ defined as follows. 
 Given a node $\Psi$ in the tree, define $u_\Phi^{-1}[\Psi] \subseteq \Delta$ as the union of its ancestors (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
+We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $\Phi ⊢ \alpha$.
+
+\begin{example}
+	$\Delta = \set{a, b, b → ¬a, c, c → ¬b}$. Here is an undercut tree arguing for $a$: root $\set{a}$, having child $\set{b, b → ¬a}$, itself having child $\set{c, c → ¬b}$. Here is an undercut tree arguing for $¬a$: root $\set{b, b → ¬a}$, with child ${c, c → ¬b}$.
+\end{example}
+
+Given a tree $T$, define the set $R$ of defeated nodes as the set such that $r \in R$ iff some successor of $r$ in $T$ is not in $R$.
+One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves down to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
+
+The authors propose to use the status of root nodes to determine arguments that are warranted.
+In the above example, the root of our example tree arguing for $a$ is undefeated while the root of the tree arguing for $¬a$ is defeated. In fact, every undercut tree arguing for $a$ is undefeated while every undercut tree arguing for $¬a$ is defeated.
+
+The following example features the famous Tweety, where we wonder whether Tweety can fly.
+\begin{example}
+	Our language uses the atoms: “Birds fly; Tweety is a bird; Tweety flies; Penguins are birds; Penguins do not fly”.
+	$\Delta = \set{fly(birds), bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw), birds(pg), ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
+	An undercut tree arguing for $flies(Tw)$ is: root $\set{fly(birds),\allowbreak bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw)}$, having as child $\set{birds(pg),\allowbreak ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
+\end{example}
 
 Given an argument $(\Phi, \alpha)$, define the argumentation tree about $(\Phi, \alpha)$ as the tree of arguments $T$ rooted at $(\Phi, \alpha)$, having the same structure as $U = (\Phi, u_\Phi)$, and mapping each non-root node $\Psi'$ of $U$ with predecessor $\Psi$ to the argument $(\Psi', ¬{\land}(\Psi))$.
 
