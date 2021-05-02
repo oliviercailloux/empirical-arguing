@@ -83,10 +83,17 @@ Given two formulas $\Phi, \Psi \in \Delta$, say that $\Psi$ is a canonical under
 
 Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Examples of defeaters for the argument $(\set{p ↔ ¬q, p}, ¬q)$ include $b = (\set{r, r → ¬p}, ¬p)$ and $c = (\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
 
-As the authors prove, the support of a defeater always admits a canonical undercut. Indeed, that some $(\Psi, \beta)$ defeats some argument with support $\Phi$ implies that $\Psi ⊢ ¬{\land}\Phi$, equivalently, that $\Psi$ and $\Phi$ together are unsatisfiable, equivalently, that $\Phi ⊢ ¬{\land}\Psi$. In the example, $\set{r, r → ¬p}$, the support of $b$, admits $\set{p}$ as canonical undercut as this permits to deduce $¬[r \land (r → ¬p)]$.
+As the authors prove, the support of a defeater always admits a canonical undercut. Indeed, that some $(\Psi, \beta)$ defeats some argument with support $\Phi$ implies that $\Psi ⊢ ¬{\land}\Phi$, equivalently, that $\Psi$ and $\Phi$ together are unsatisfiable, equivalently, that $\Phi ⊢ ¬{\land}\Psi$. In the example, $\set{r, r → ¬p}$, the support of $b$, admits $\set{p}$ as canonical undercut, as $\set{p}$ permits to deduce $¬[r \land (r → ¬p)]$.
 
-Given an argument $(\Phi, \alpha)$, define the argumentation tree about $(\Phi, \alpha)$ as a tree of formulas whose root node is $\Phi$ and defined as follows. Given a node $\Psi$ in an argumentation tree, define $t[\Psi] \subseteq \Delta$ as the union of its ancestors. Given any node $\Psi$, its children are the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq t[\Psi]$.
-Note that an argumentation tree $t$ about $(\Phi, \alpha)$ is defined as a tree of formulas but also corresponds to a tree $t'$ of arguments having the same structure as $t$, where the root node of $t'$ is $(\Phi, \alpha)$ and each node $\Psi'$ in $t$ with child $\Psi$ in $t$ corresponds to an argument $(\Psi', ¬{\land}(\Psi))$ in $t'$.
+Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq \Delta × \Delta$ represents its successor relation (thus with $s$ acyclic). 
+Canonical undercuts permit to associate to any $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, with $u_\Phi$ defined as follows. 
+Given a node $\Psi$ in the tree, define $u_\Phi^{-1}[\Psi] \subseteq \Delta$ as the union of its ancestors (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
+
+Given an argument $(\Phi, \alpha)$, define the argumentation tree about $(\Phi, \alpha)$ as the tree of arguments $T$ rooted at $(\Phi, \alpha)$, having the same structure as $U = (\Phi, u_\Phi)$, and mapping each non-root node $\Psi'$ of $U$ with predecessor $\Psi$ to the argument $(\Psi', ¬{\land}(\Psi))$.
+
+A path from $a$ to $b$ in a tree $T = (n, s)$ is the empty sequence if $a = b$, and otherwise, is a sequence of pairs taken in $s$ connecting $a$ to $b$. The length of a path is the length of the sequence.
+
+Given a tree $(n, s)$ with $N = s[n]$ and $M \subseteq N$, define $D(M) = \set{S \subseteq N \suchthat s(M) \subseteq s^{-1}(S)}$ as the set of coalitions that attack all the attackers of $M$ (such a coalition is said to defend $M$). Say that $M$ is warranted iff for some finite sequence of the form $D_1 \in D(M), D_2 \in D(D_1), …, D_k \in D(D_{k - 1})$, we have $s(D_k) = \emptyset$.
 
 \subsection{PAFs}
 \label{sec:pafs}
