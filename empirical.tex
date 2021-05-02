@@ -71,23 +71,21 @@ In Chapter 4, they argue for an enlarged view. Selectivity is important. Impract
 \subsection{Classical logic}
 Let $\Delta$ be a finite set of formulas is predicate logic with a deduction operator $⊢$. 
 Given $\Phi \subseteq \Delta$, let ${\land}\Phi \subseteq \Delta$ denote the set of formulas that are conjunctions of all the formulas of $\Phi$ in whatever order (thus $\phi \in {\land}\Phi$ iff $\phi$ is a conjunction of formulas and the set of its conjuncts equals $\Phi$).
-Given any $\Phi, \Psi \subseteq \Delta$, we write $\Psi ⊢ ¬{\land}\Phi$ iff $\forall \phi \in ¬{\land}\Phi: \Psi ⊢ \phi$, or equivalently, iff $\exists \phi \in ¬{\land}\Phi \suchthat \Psi ⊢ \phi$, thus, whenever $\Psi$ permits to deduce the negation of at least one of the formulas in $\Phi$.
+Given any $\Phi, \Psi \subseteq \Delta$, we write $\Psi ⊢ ¬{\land}\Phi$ iff $\exists \phi \in {\land}\Phi \suchthat \Psi ⊢ ¬\phi$, or equivalently, iff $\Phi ≠ \emptyset \land \forall \phi \in {\land}\Phi: \Psi ⊢ ¬\phi$, thus, whenever $\Psi$ permits to deduce that the formulas in $\Phi$ cannot all be satisfied.
 
-An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$ and $\alpha \in \Delta$ such that $\Phi ⊬ ⊥$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
+An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha \in \Delta$, called the conclusion, such that $\Phi ⊬ ⊥$ and such that $\Phi$ is a minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
 
 As the authors note, arguments are supposedly formalized making the enthymemes explicit (“An enthymeme is a form of reasoning in which some premises are implicit, most often because they are obvious” \citep[p.\ 41]{besnard_elements_2000}). They give the example “The baby no longer has her parents; therefore, she is an orphan”, which is formalized by making the further implicit claim explicit: “if a baby no longer has her parents, then she is an orphan”, which makes it a correct reasoning. 
 
-An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬{\land}(\Phi')$ for some $\Phi' \subseteq \Phi$.
-Some defeaters are also undercutters. An argument $(\Psi, \beta)$ \emph{undercuts} $(\Phi, \alpha)$ iff $\beta = ¬{\land}(\Phi')$ for some $\Phi' \subseteq \Phi$.
-An undercut is maximally conservative when $\Phi' = \Phi$ in the above definition and $\forall \Psi' \subset \Psi: \Psi' ⊬ ¬{\land}(\Phi')$.
-Some defeaters are rebuttals. An argument $(\Psi, \beta)$ \emph{rebuts} $(\Phi, \alpha)$ iff $\beta ↔ ¬\alpha$ is a tautology.
+An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬{\land}\Phi'$ for some $\Phi' \subseteq \Phi$.
 
-Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Argument: $a = (\set{p ↔ ¬q, p}, ¬q)$. Undercut: $b = (\set{r, r → ¬p}, ¬p)$. Rebuttal: $(\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
+Given two formulas $\Phi, \Psi \in \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi ⊢ ¬{\land}\Phi \land \forall \Psi' \subset \Psi: \Psi' ⊬ ¬{\land}\Phi$.
 
-As the authors prove, a defeater always admits a maximally conservative undercut. In the example, $b$ has an undercut $(\set{p, r → ¬p}, ¬r)$ and a maximally conservative undercut $(\set{p, r → ¬p}, ¬[r \land (r → ¬p)])$.
-Given two formulas $\Phi, \Psi \in \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi ⊢ ¬\land(\Phi)$.
+Example (given by the authors). Variables: $p$ for being a member of the Parliament; $q$ for keeping quiet about the person; $r$ for resigning from Parliament. Examples of defeaters for the argument $(\set{p ↔ ¬q, p}, ¬q)$ include $b = (\set{r, r → ¬p}, ¬p)$ and $c = (\set{r, r → ¬p, ¬p, p ↔ ¬q}, q)$.
 
-Given an argument $(\Phi, \alpha)$, define the argumentation tree about $(\Phi, \alpha)$ as a tree of formulas whose root node is $\Phi$ and defined as follows. Given a node $\Psi$ in an argumentation tree, define $t[\Psi]$ as the set of its ancestors. Given any node $\Psi$, define its children as the subset of its canonical undercutters that satisfy $\Psi' \nsubseteq t[\Psi]$.
+As the authors prove, the support of a defeater always admits a canonical undercut. Indeed, that some $(\Psi, \beta)$ defeats some argument with support $\Phi$ implies that $\Psi ⊢ ¬{\land}\Phi$, equivalently, that $\Psi$ and $\Phi$ together are unsatisfiable, equivalently, that $\Phi ⊢ ¬{\land}\Psi$. In the example, $\set{r, r → ¬p}$, the support of $b$, admits $\set{p}$ as canonical undercut as this permits to deduce $¬[r \land (r → ¬p)]$.
+
+Given an argument $(\Phi, \alpha)$, define the argumentation tree about $(\Phi, \alpha)$ as a tree of formulas whose root node is $\Phi$ and defined as follows. Given a node $\Psi$ in an argumentation tree, define $t[\Psi] \subseteq \Delta$ as the union of its ancestors. Given any node $\Psi$, its children are the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq t[\Psi]$.
 Note that an argumentation tree $t$ about $(\Phi, \alpha)$ is defined as a tree of formulas but also corresponds to a tree $t'$ of arguments having the same structure as $t$, where the root node of $t'$ is $(\Phi, \alpha)$ and each node $\Psi'$ in $t$ with child $\Psi$ in $t$ corresponds to an argument $(\Psi', ¬{\land}(\Psi))$ in $t'$.
 
 \subsection{PAFs}
