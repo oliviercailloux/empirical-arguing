@@ -104,8 +104,7 @@ The following example features the famous Tweety, where we wonder whether Tweety
 	$\Delta = \set{fly(birds), bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw), birds(pg), ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
 	An undercut tree arguing for $flies(Tw)$ is: root $\set{fly(birds),\allowbreak bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw)}$, having as child $\set{birds(pg),\allowbreak ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
 \end{example}
-
-Given a tree $(n, s)$ with $N = s[n]$ and $M \subseteq N$, define $D(M) = \set{S \subseteq N \suchthat s(M) \subseteq s^{-1}(S)}$ as the set of coalitions that attack all the attackers of $M$ (such a coalition is said to defend $M$). Say that $M$ is warranted iff for some finite sequence of the form $D_1 \in D(M), D_2 \in D(D_1), …, D_k \in D(D_{k - 1})$, we have $s(D_k) = \emptyset$.
+\commentOC{La conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. Aurais-je raté qqch. ?}
 
 \subsection{PAFs}
 \label{sec:pafs}
@@ -157,11 +156,24 @@ To address these more difficult issues, an excellent starting point for consider
 We saw that most formal approaches in argumentation consider that the attack relation is (are) known. 
 We here point out reasons to lift this assumption.
 
+More precisely, we want to challenge the assumption, left implicit in the literature, that some procedure exists that permits to extract from texts in natural language non-trivial conclusions, and that makes no assumption on the quality or content of the arguments in the text.
+
+Let $T$ be a set of possible texts in natural language and $p$ a procedure that transforms any text in $T$ into a set of undercut trees $\mathcal{U}$. Considering the classical logic approach first, we assume $p$ takes the following form: it first applies a set of possible interpretations of the text using a function $i$ to yield $\Delta, \Delta', …$, which are then used to produce undercut trees. Define $C$ as the classical logic approach defined above; applying $C$ to $i(t)$ thus results in a set of sets of undercut trees (one set for each $\Delta$).
+
+For the conclusions to be non-trivial, we request that $\exists t \in T, \phi \in L(i(t)) \suchthat i(t) $ permits to deduce $\phi$ but $C(i(t))$ contains no tree with a warranted root arguing for $\phi$. Here $L(i(t))$ denotes the set of formulas that can be formed using the atoms in $\cup i(t)$.
+
+For the interpretations to be neutral (in the sense of making no assumption on the quality or content of the arguments in the text), we request that $i$ satisfies the following, for all $t$. If $\exists \Delta \in i(t), \Phi \subseteq \Delta \suchthat MUS(\Phi)$, then $\exists \phi \in \Phi, \phi' \notin \Phi \suchthat MUS(\Phi \setminus \set{\phi} \cup \set{\phi'})$. $MUS(\Phi)$ means that $\Phi$ is a minimal unsatisfiable set.
+
+Given a tree $(n, s)$ with $N = s[n]$ and $M \subseteq N$, define $D(M) = \set{S \subseteq N \suchthat s(M) \subseteq s^{-1}(S)}$ as the set of coalitions that attack all the attackers of $M$ (such a coalition is said to defend $M$). Say that $M$ is warranted iff for some finite sequence of the form $D_1 \in D(M), D_2 \in D(D_1), …, D_k \in D(D_{k - 1})$, we have $s(D_k) = \emptyset$.
+
 To be more precise, the assumption we want to discuss here is the following.
-Many articles start with a postulated known attack relation or logic representation of arguments. It is natural to wonder where this information might come from, and we suppose, although this is seldom discussed implicitly, that the assumption is that it is more or less easy to obtain such relations from the natural language form in which arguments generally arise in the wild. 
-The postulate that we want to discuss here is that by inspecting the arguments and using common sense, either the attack relation can be seen immediately, or a logical representation of the arguments can unambigiously be obtained, itself yielding one (or multiple forms of) attack relations by logical manipulation, as in some of the classical textbook examples.
+Many articles start with a postulated known attack relation or logic representation of arguments. It is natural to wonder where this information might come from, and we suppose, although this is seldom discussed explicitly, that the assumption is that it is more or less easy to obtain such relations from the natural language form in which arguments generally arise in the wild. 
+The postulate that we want to argue against here is that by inspecting the arguments and using common sense, either the attack relation can be seen immediately, or a logical representation of the arguments can unambigiously be obtained, itself yielding a non-trivial attack structure by logical manipulation.
+By non-trivial, we mean here that the structures that are obtained do permit, at least sometimes, to discriminate between a claim and its negation, even though both the claim and its negation can be deduced from arguments in the text. (Intuitively, we want to exclude cases of obtaining entirely symmetric conclusions.)
 
 Accordingly, we focus on the case of arguments given under natural language. 
+
+We make the following hypothesis of robustness against interpretion. The set of possible interpretations is $I$. If an interpretation leads to $\Delta$, and some argument in the DB says $\Phi$ and is attacked by $\Psi$, and it is possible to deduce, from the DB, using elements from $\Phi$ and $\Psi$, a counter-argument, then it is included in the set of interpretations.
 
 Undoubtedly, some situations let one determine easily the attack relation, by simple appeal to an obvious consensus. In the classical textbook example of Alice saying that “it will rain tomorrow because the weather forecast on the BBC said so” and Bob replying that “it will not rain tomorrow because the weather forecast on Channel 4 said so”, the situation is clear, and a simple appeal to consensus permits to solve any doubt to the contrary: give these arguments to any two persons, and they will agree that these arguments attack each other. Such trivial situations, although being possibly adequate for illustrative purposes of technical definitions, are however hardly representative of the complexity of the debates that an argumentation framework must be able to tackle. It seems reasonable to demand of argumentation theory to help us think about debates involving subtle, complicated arguments. For example, a framework could claim to be able to help a medical doctor take a decision about which treatment to prescribe, or help an individual to choose which political party she will vote for.
 
