@@ -43,8 +43,6 @@
 \label{sec:intro}
 Formal Argumentation Theory (FAT) \cite{Dung95} relies on “attacks” between arguments to compute most acceptable standpoints, in the form of the so-called “extensions”. These attacks are typically formalized as a binary relation considered as representing the directed contradiction or incompatibility status of pairs of arguments. In the vast majority of the articles in formal argumentation theory, the attacks are considered known, given to the analyst as a starting point of the study. 
 
-In this sense, it is clear that arguments that are not attacked are of prominent importance for society, since they correspond to messages that received no objection and can therefore serve as a basis for compromise building \cite{MoulinBT2018}.{\commentOC{I think we can remove this?} }
-
 In this position paper, we want to argue in favor of extending the scope of formal argumentation theory by relaxing this assumption. In particular, we argue that attacks should not necessarily be considered as representing an objective status of contradiction, as given for example by inspection of logical representation of arguments. We will give methodological and practical reasons to consider it of great importance to consider the attack relation as representing the subjective state of mind of an individual; and to study methods for obtaining information about this relation empirically.
 
 Although some authors seem to acknowledge incidentally that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that these questions would reveal hopelessly complex and that would be of interest only to the specific field of natural language processing. We provide here (partial) answers to these two points: we give reasons for doubting this assumpion; and we draw paths to study attack relations considered subjective that do not relate to natural language processing.
@@ -93,9 +91,9 @@ We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $\Phi
 \end{example}
 
 Given a tree $T$, define the set $R$ of defeated nodes as the set such that $r \in R$ iff some successor of $r$ in $T$ is not in $R$.
-One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves down to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
+One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves up to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
 
-The authors propose to use the status of root nodes to determine arguments that are warranted.
+The authors propose to use the status of root nodes to discriminate arguments.
 In the above example, the root of our example tree arguing for $a$ is undefeated while the root of the tree arguing for $¬a$ is defeated. In fact, every undercut tree arguing for $a$ is undefeated while every undercut tree arguing for $¬a$ is defeated.
 
 The following example features the famous Tweety, where we wonder whether Tweety can fly.
@@ -112,7 +110,7 @@ Here we talk about Preference-based Argumentation Frameworks.
 
 Considering the book Rahwan, Simari - Argumentation in Artificial Intelligence (2009), Chapter 15: Argumentation for Decision Making, Amgoud.
 
-We assume there is only one alternative on which to decide: $\dy$ or $\dn$ (e.g., surgery or do nothing). This simplifies the formal exposition without removing the crucial points of the propositions.
+We assume that there is only one alternative on which to decide: $\dy$ or $\dn$ (e.g., “surgery” or “do nothing”). This simplifies the formal exposition without removing the crucial points of the propositions.
 
 A decision system is $A_e, A_p^{\dy}, A_p^{\dn}, {≥_e}, {≥_p}, R_e, R_m$. 
 \footnote{I assume that ${≥_m} = A_e × A_p$. Her section 2.2 suggests ${≥_m} = A_e × A_p$, Example 15.5 suggests ${≥_m} \subseteq A_e × A_p$; I assume the mistake is in the example. Also, $Def_m = R_m$ and $Def_e = R_e \cap (\overline{>_e})^{-1}$. $(\overline{>_e})^{-1}$ contains the pairs $(a, b)$ such that $a$ is strictly preferred to $b$ or they are indifferent or incomparable. $Def = (R_e \cap (\overline{>_e})^{-1}) \cup R_m = R.$}
@@ -160,13 +158,23 @@ More precisely, we want to challenge the assumption, left implicit in the litera
 
 Let $T$ be a set of possible texts in natural language and $p$ a procedure that transforms any text in $T$ into a set of undercut trees $\mathcal{U}$. Considering the classical logic approach first, we assume $p$ takes the following form: it first applies a set of possible interpretations of the text using a function $i$ to yield $\Delta, \Delta', …$, which are then used to produce undercut trees. Define $C$ as the classical logic approach defined above; applying $C$ to $i(t)$ thus results in a set of sets of undercut trees (one set for each $\Delta$).
 
-For the conclusions to be non-trivial, we request that $\exists t \in T, \phi \in L(i(t)) \suchthat i(t) $ permits to deduce $\phi$ but $C(i(t))$ contains no tree with a warranted root arguing for $\phi$. Here $L(i(t))$ denotes the set of formulas that can be formed using the atoms in $\cup i(t)$.
+For the conclusions to be non-trivial, we request that $\exists t \in T, \phi \in L(i(t)) \suchthat i(t) $ permits to deduce $\phi$ but $C(i(t))$ contains no tree with an undefeated root arguing for $\phi$. Here $L(i(t))$ denotes the set of formulas that can be formed using the atoms in $\cup i(t)$.
 
-For the interpretations to be neutral (in the sense of making no assumption on the quality or content of the arguments in the text), we request that $i$ satisfies the following, for all $t$. If $\exists \Delta \in i(t), \Phi \subseteq \Delta \suchthat MUS(\Phi)$, then $\exists \phi \in \Phi, \phi' \notin \Phi \suchthat MUS(\Phi \setminus \set{\phi} \cup \set{\phi'})$. $MUS(\Phi)$ means that $\Phi$ is a minimal unsatisfiable set.
+For the interpretations to be neutral (in the sense of making no assumption on the quality or content of the arguments in the text), we request that $i$ satisfies the following: $\forall t, \Delta \in i(t)$, $\Delta$ is closed under $¬¬$ (thus $\Phi \in \Delta ⇒ ¬¬\Phi \in \Delta$).
+\footnote{Previously, but probably incorrectly, I requested for all $t$ that if $\exists \Delta \in i(t), \Phi \subseteq \Delta \suchthat MUS(\Phi)$, then $\exists \phi \in \Phi, \phi' \notin \Phi \suchthat MUS(\Phi \setminus \set{\phi} \cup \set{\phi'})$. $MUS(\Phi)$ means that $\Phi$ is a minimal unsatisfiable set.}
 
+\begin{theorem}
+	There exists no $p = C \circ i$ such that $i$ is neutral and $p$ has non-trivial conclusions.
+\end{theorem}
 Given a tree $(n, s)$ with $N = s[n]$ and $M \subseteq N$, define $D(M) = \set{S \subseteq N \suchthat s(M) \subseteq s^{-1}(S)}$ as the set of coalitions that attack all the attackers of $M$ (such a coalition is said to defend $M$). Say that $M$ is warranted iff for some finite sequence of the form $D_1 \in D(M), D_2 \in D(D_1), …, D_k \in D(D_{k - 1})$, we have $s(D_k) = \emptyset$.
+\begin{lemma}
+	A root is undefeated iff the singleton containing the root is warranted.
+\end{lemma}
 
-To be more precise, the assumption we want to discuss here is the following.
+\subsection{More discussion}
+\commentOCf{Contenu de cette section à reformuler ou effacer à terme…}
+
+The assumption we want to discuss here is the following.
 Many articles start with a postulated known attack relation or logic representation of arguments. It is natural to wonder where this information might come from, and we suppose, although this is seldom discussed explicitly, that the assumption is that it is more or less easy to obtain such relations from the natural language form in which arguments generally arise in the wild. 
 The postulate that we want to argue against here is that by inspecting the arguments and using common sense, either the attack relation can be seen immediately, or a logical representation of the arguments can unambigiously be obtained, itself yielding a non-trivial attack structure by logical manipulation.
 By non-trivial, we mean here that the structures that are obtained do permit, at least sometimes, to discriminate between a claim and its negation, even though both the claim and its negation can be deduced from arguments in the text. (Intuitively, we want to exclude cases of obtaining entirely symmetric conclusions.)
