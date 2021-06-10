@@ -188,13 +188,24 @@ Attacks: see \cref{fig:m1}.
 \begin{figure}
 	\caption{Attacks resulting from model 1}
 	\label{fig:m1}
-	\includegraphics{M1.pdf}
+	\begin{tikzpicture}
+		\tikzset{every node/.style={draw, ellipse}}
+		\path node (COM1) {COM1};
+		\path (COM1) ++(-3cm, -2cm) node (ECO1) {ECO1};
+		\path (COM1) ++(0, -2cm) node (ECO3) {ECO3};
+		\path (COM1) ++(3cm, -2cm) node (ECO4) {ECO4};
+		\path (COM1) ++(0, -4cm) node (ECO2) {ECO2};
+		\path[draw, line width=2pt, <->] (COM1) -- (ECO1);
+		\path[draw, line width=2pt, <->] (COM1) -- (ECO3);
+		\path[draw, line width=2pt, <->] (COM1) -- (ECO4);
+		\path[draw, line width=2pt, ->] (ECO2) -- (ECO1);
+	\end{tikzpicture}
 \end{figure}
 
 \subsubsection{Model 2}
 Arguments include COM1, ECO1, ECO3, ECO4, but ECO2 changes to:
 \begin{description}
-	\item[ECO2'] [ ( scalingUp $→$ (buildingCosts $\land$ labourCosts $\land$ automationCosts) ) $→$ increasedCosts ] $→$ reducedEconomicBenefit
+	\item[ECO2’] [ ( scalingUp $→$ (buildingCosts $\land$ labourCosts $\land$ automationCosts) ) $→$ increasedCosts ] $→$ reducedEconomicBenefit
 \end{description}
 
 Logical contradictions are the same.
@@ -203,7 +214,20 @@ Attacks: see \cref{fig:m2}.
 \begin{figure}
 	\caption{Attacks resulting from model 2}
 	\label{fig:m2}
-	\includegraphics{M2.pdf}
+	\begin{tikzpicture}
+		\tikzset{every node/.style={draw, ellipse}}
+		\path node (COM1) {COM1};
+		\path (COM1) ++(-3cm, -2cm) node (ECO1) {ECO1};
+		\path (COM1) ++(0, -2cm) node (ECO3) {ECO3};
+		\path (COM1) ++(3cm, -2cm) node (ECO4) {ECO4};
+		\path (COM1) ++(0, -4cm) node (ECO2) {ECO2’};
+		\path[draw, line width=2pt, <->] (COM1) -- (ECO1);
+		\path[draw, line width=2pt, <->] (COM1) -- (ECO3);
+		\path[draw, line width=2pt, <->] (COM1) -- (ECO4);
+		\path[draw, line width=2pt, <->] (ECO2) -- (ECO1);
+		\path[draw, line width=2pt, <->] (ECO2) -- (ECO3);
+		\path[draw, line width=2pt, <->] (ECO2) -- (ECO4);
+	\end{tikzpicture}
 \end{figure}
 
 \subsection{General study}
