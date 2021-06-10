@@ -1,0 +1,15 @@
+digraph M2 {
+  COM1 -> ECO1
+  COM1 -> ECO3
+  COM1 -> ECO4
+  ECO1 -> COM1
+  ECO3 -> COM1
+  ECO4 -> COM1
+  ECO2’ -> ECO1
+  ECO2’ -> ECO3
+  ECO2’ -> ECO4
+  ECO1 -> ECO2’
+  ECO3 -> ECO2’
+  ECO4 -> ECO2’
+}
+
