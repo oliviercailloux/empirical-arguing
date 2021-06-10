@@ -90,11 +90,11 @@ We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $\Phi
 	$\Delta = \set{a, b, b → ¬a, c, c → ¬b}$. Here is an undercut tree arguing for $a$: root $\set{a}$, having child $\set{b, b → ¬a}$, itself having child $\set{c, c → ¬b}$. Here is an undercut tree arguing for $¬a$: root $\set{b, b → ¬a}$, with child ${c, c → ¬b}$.
 \end{example}
 
-Given a tree $T$, define the set $R$ of defeated nodes as the set such that $r \in R$ iff some successor of $r$ in $T$ is not in $R$.
+Given a tree $U = (\Psi, u_\Psi)$, define the set $R$ of defeated nodes as the set such that $r \in R$ iff $u_\Psi(r) \nsubseteq R$, thus, if some successor of $r$ in $U$ is not in $R$.
 One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves up to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
 
-The authors propose to use the status of root nodes to discriminate arguments.
-In the above example, the root of our example tree arguing for $a$ is undefeated while the root of the tree arguing for $¬a$ is defeated. In fact, every undercut tree arguing for $a$ is undefeated while every undercut tree arguing for $¬a$ is defeated. \commentOC{To check.}
+The authors propose to use the status of root nodes as one way of discriminating arguments.
+In the above example, the root of our example tree arguing for $a$ is undefeated while the root of the tree arguing for $¬a$ is defeated. In fact, every undercut tree arguing for $a$ is undefeated while every undercut tree arguing for $¬a$ is defeated.
 
 The following example features the famous Tweety, where we wonder whether Tweety can fly.
 \begin{example}
@@ -102,7 +102,7 @@ The following example features the famous Tweety, where we wonder whether Tweety
 	$\Delta = \set{fly(birds), bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw), birds(pg), ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
 	An undercut tree arguing for $flies(Tw)$ is: root $\set{fly(birds),\allowbreak bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw)}$, having as child $\set{birds(pg),\allowbreak ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
 \end{example}
-\commentOC{La conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. Aurais-je raté qqch. ?}
+\commentOCf{Dans cet exemple, il n’y a pas d’arbre pour flies(Tw) dont la racine soit undefeated, ce qui suggère que flies(Tw) ne peut pas être raisonnablement conclu à cause du contre-argument concernant les penguins (et c’est bien ce que cet exemple semble vouloir montrer intuitivement). Mais la conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. En effet, l’arbre ayant la même racine que l’exemple admet maintenant un troisième nœud, qui vient attaquer l’argument sur les penguins, argument avec support $\set{¬¬fly(birds), birds(pg) \land ¬fly(pg) → ¬fly(birds)}$ et avec conclusion $¬(birds(pg) \land ¬fly(pg))$. Aurais-je raté qqch. ?}
 
 \subsection{PAFs}
 \label{sec:pafs}
