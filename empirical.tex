@@ -156,6 +156,57 @@ We here point out reasons to lift this assumption.
 
 More precisely, we want to challenge the assumption, left implicit in the literature, that some procedure exists that permits to extract from texts in natural language non-trivial conclusions, and that makes no assumption on the quality or content of the arguments in the text.
 
+\subsection{A case study}
+To transmit intuition, we give here a detailed example of a situation where two interpretations of given texts are natural, and lead to different conclusions.
+
+\subsubsection{Case description}
+This month, on 3 May 2021, the European Union approved a first insect, Tenebrio molitor, as novel food. This comes after several years of emulation and initiatives around entomoconversion in Western coutries, while in other parts of the world insect consumption has been practiced for centuries.
+
+Entomoconversion is not only considered for its potential in food provision, but also as an ecological way to sanitize and recycle biowaste, such as urban waste, for various uses from feed and food to chemicals, to name a few. On the other hand, as an innovation it raises questions concerning the legal framework regulating this activity, the technical issues related to its implementation, the safety of the products delivered, the conditions of its economic viability, etc. Networks, projects, debates and literature provide documentation about these various aspects.
+
+Part of these concerns are captured by the 2 models presented below.
+
+The difference between models 1 and 2 is that model 2 makes explicit the economic consequence of increased costs. This modifies the argument ECO2 of model 1 into ECO2’ in model 2, which generates additional attacks.
+
+\subsubsection{Model 1}
+Arguments:
+\begin{description}
+	\item[COM1] ( reducedProductAttractivity $→$ reducedSells )  $→$  reducedEconomicBenefit
+	\item[ECO1] ( biowasteUse $→$ reducedCosts )  $→$  increasedEconomicBenefit
+	\item[ECO2] ( scalingUp $→$ (buildingCosts $\land$ labourCosts $\land$ automationCosts) )  $→$  increasedCosts
+	\item[ECO3] ( highInsectGrowthRate $→$ highYield )  $→$  increasedEconomicBenefit
+	\item[ECO4] ( highInsectFertility $→$ highYield )  $→$  increasedEconomicBenefit
+\end{description}
+
+Logical contradictions:
+\begin{itemize}
+	\item reducedCosts, increasedCosts $→ ⊥$
+	\item reducedEconomicBenefit, increasedEconomicBenefit $→ ⊥$
+\end{itemize}
+
+Attacks: see \cref{fig:m1}.
+\begin{figure}
+	\caption{Attacks resulting from model 1}
+	\label{fig:m1}
+	\includegraphics{M1.pdf}
+\end{figure}
+
+\subsubsection{Model 2}
+Arguments include COM1, ECO1, ECO3, ECO4, but ECO2 changes to:
+\begin{description}
+	\item[ECO2'] [ ( scalingUp $→$ (buildingCosts $\land$ labourCosts $\land$ automationCosts) ) $→$ increasedCosts ] $→$ reducedEconomicBenefit
+\end{description}
+
+Logical contradictions are the same.
+
+Attacks: see \cref{fig:m2}.
+\begin{figure}
+	\caption{Attacks resulting from model 2}
+	\label{fig:m2}
+	\includegraphics{M2.pdf}
+\end{figure}
+
+\subsection{General study}
 Let $T$ be a set of possible texts in natural language and $p$ a procedure that transforms any text in $T$ into a set of undercut trees $\mathcal{U}$. Considering the classical logic approach first, we assume $p$ takes the following form: it first applies a set of possible interpretations of the text using a function $i$ to yield $\Delta, \Delta', …$, which are then used to produce undercut trees. Define $C$ as the classical logic approach defined above; applying $C$ to $i(t)$ thus results in a set of sets of undercut trees (one set for each $\Delta$).
 
 For the conclusions to be non-trivial, we request that $\exists t \in T, \phi \in L(i(t)) \suchthat i(t) $ permits to deduce $\phi$ but $C(i(t))$ contains no tree with an undefeated root arguing for $\phi$. Here $L(i(t))$ denotes the set of formulas that can be formed using the atoms in $\cup i(t)$.
