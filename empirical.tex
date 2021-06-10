@@ -67,7 +67,7 @@ In Chapter 4, they argue for an enlarged view. Selectivity is important. Impract
 
 \section{The usual perspective (in FAT?) about attacks}
 \subsection{Classical logic}
-Let $\Delta$ be a finite set of formulas is predicate logic with a deduction operator $⊢$. 
+Let $\Delta$ be a finite set of formulas in predicate logic with a deduction operator $⊢$. 
 Given $\Phi \subseteq \Delta$, let ${\land}\Phi \subseteq \Delta$ denote the set of formulas that are conjunctions of all the formulas of $\Phi$ in whatever order (thus $\phi \in {\land}\Phi$ iff $\phi$ is a conjunction of formulas and the set of its conjuncts equals $\Phi$).
 Given any $\Phi, \Psi \subseteq \Delta$, we write $\Psi ⊢ ¬{\land}\Phi$ iff $\exists \phi \in {\land}\Phi \suchthat \Psi ⊢ ¬\phi$, or equivalently, iff $\Phi ≠ \emptyset \land \forall \phi \in {\land}\Phi: \Psi ⊢ ¬\phi$, thus, whenever $\Psi$ permits to deduce that the formulas in $\Phi$ cannot all be satisfied.
 
@@ -77,12 +77,12 @@ As the authors note, arguments are supposedly formalized making the enthymemes e
 
 An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬{\land}\Phi'$ for some $\Phi' \subseteq \Phi$.
 
-Given two formulas $\Phi, \Psi \in \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi ⊢ ¬{\land}\Phi \land \forall \Psi' \subset \Psi: \Psi' ⊬ ¬{\land}\Phi$.
+Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a minimal subset of $\Delta$ satisfying $\Psi ⊢ ¬{\land}\Phi$ (thus $\Psi ⊢ ¬{\land}\Phi \land \forall \Psi' \subset \Psi: \Psi' ⊬ ¬{\land}\Phi$).
 
 As the authors prove, the support of a defeater always admits a canonical undercut. Indeed, that some $(\Psi, \beta)$ defeats some argument with support $\Phi$ implies that $\Psi ⊢ ¬{\land}\Phi$, equivalently, that $\Psi$ and $\Phi$ together are unsatisfiable, equivalently, that $\Phi ⊢ ¬{\land}\Psi$. In the example, $\set{r, r → ¬p}$, the support of $b$, admits $\set{p}$ as canonical undercut, as $\set{p}$ permits to deduce $¬[r \land (r → ¬p)]$.
 
-Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (thus with $s$ acyclic). 
-Canonical undercuts permit to associate to any $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, with $u_\Phi$ defined as follows. 
+Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (thus with $s$ defining at most one path to join any two points in $N$). 
+Canonical undercuts permit to associate to any $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, where nodes are sets of formulas, with $u_\Phi$ defined as follows. 
 Given a node $\Psi$ in the tree, define $u_\Phi^{-1}[\Psi] \subseteq \Delta$ as the union of its ancestors (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
 We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $\Phi ⊢ \alpha$.
 
@@ -94,7 +94,7 @@ Given a tree $T$, define the set $R$ of defeated nodes as the set such that $r \
 One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves up to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
 
 The authors propose to use the status of root nodes to discriminate arguments.
-In the above example, the root of our example tree arguing for $a$ is undefeated while the root of the tree arguing for $¬a$ is defeated. In fact, every undercut tree arguing for $a$ is undefeated while every undercut tree arguing for $¬a$ is defeated.
+In the above example, the root of our example tree arguing for $a$ is undefeated while the root of the tree arguing for $¬a$ is defeated. In fact, every undercut tree arguing for $a$ is undefeated while every undercut tree arguing for $¬a$ is defeated. \commentOC{To check.}
 
 The following example features the famous Tweety, where we wonder whether Tweety can fly.
 \begin{example}
