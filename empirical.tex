@@ -159,10 +159,12 @@ We here point out reasons to lift this assumption.
 More precisely, we want to challenge the assumption, left implicit in the literature, that some procedure exists that permits to extract from texts in natural language non-trivial conclusions, and that makes no assumption on the quality or content of the arguments in the text.
 
 \subsection{A case study}
-To transmit intuition, we give here a detailed example of a situation where two interpretations of given texts are natural, and lead to different conclusions.
+To transmit intuition, we give here a detailed example of a situation where 
+two interpretations of given texts are natural, and yet lead to different 
+conclusions. The example is taken from a timely social and scientific topic, namely the use of insect breeding as an ecological way to recycle and valorize bio-waste, known as ``entomoconversion'' \citep{FAO2021,Kialo2019}.
 
 \subsubsection{Case description}
-This month, on 3 May 2021, the European Union approved a first insect, Tenebrio molitor, as novel food. This comes after several years of emulation and initiatives around entomoconversion in Western coutries, while in other parts of the world insect consumption has been practiced for centuries.
+This year on 3 May 2021, the European Union approved a first insect, Tenebrio molitor, as novel food. This comes after several years of emulation and initiatives around entomoconversion in Western coutries, while in other parts of the world insect consumption has been practiced for centuries.
 
 Entomoconversion is not only considered for its potential in food provision, but also as an ecological way to sanitize and recycle biowaste, such as urban waste, for various uses from feed and food to chemicals, to name a few. On the other hand, as an innovation it raises questions concerning the legal framework regulating this activity, the technical issues related to its implementation, the safety of the products delivered, the conditions of its economic viability, etc. Networks, projects, debates and literature provide documentation about these various aspects.
 
@@ -231,6 +233,13 @@ Attacks: see \cref{fig:m2}.
 		\path[draw, line width=2pt, <->] (ECO2) -- (ECO4);
 	\end{tikzpicture}
 \end{figure}
+
+\subsection{Consequence of model differences}
+Presented to an expert consortium \citep{Insect4City2020} using the preferred semantics of acceptability, Model 1 highlights argument ECO2 as a major argument of the debate, unattacked, skeptically accepted. It clearly weakens ECO1 which is attacked by ECO2 and undefended. It tends to orient the debate on the need for precise evaluation of scaling-up costs --which is the focus of argument ECO2.
+
+On the other hand, Model 2 puts the question of costs back into the more general context of economic benefit. In this view, argument ECO2' (the new version of ECO2 in Model 2) is now faced to several arguments addressing economic benefit concerns, namely ECO1, ECO3 and ECO4, in a symmetric confrontation. This totally changes its status in the debate, which is now balanced between pessimistic arguments regarding entomoconversion's economic benefit (COM1, ECO2') and optimistic ones  (ECO1, ECO3, ECO4), with a numeric advantage for the latter.
+
+The differences between both model conclusions may be extremely puzzling for end-users who are not argumentation specialists. In this case, pedagogy and explanation of modeling choices and hypotheses are needed in order not to discredit the model.
 
 \subsection{General study}
 Let $T$ be a set of possible texts in natural language and $p$ a procedure that transforms any text in $T$ into a set of undercut trees $\mathcal{U}$. Considering the classical logic approach first, we assume $p$ takes the following form: it first applies a set of possible interpretations of the text using a function $i$ to yield $\Delta, \Delta', …$, which are then used to produce undercut trees. Define $C$ as the classical logic approach defined above; applying $C$ to $i(t)$ thus results in a set of sets of undercut trees (one set for each $\Delta$).
@@ -311,6 +320,6 @@ We should decide whether to include some of these points in the text or adding s
 	\item review existing experimental work in FAT? Other related works? Philosophical approaches (Rawls, Habermas)?
 \end{itemize}
 
-%\bibliography{bibl}
+\bibliography{empirical}
 
 \end{document}
