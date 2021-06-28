@@ -145,6 +145,7 @@ Inversely, $A$ is necessarily resistant iff it is not possibly failing.
 Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. Here, 5 invalidates 3, which “suffices” to “resolve” the cycle as $(3, 2)$ “does not count” any more. Thus, 2 defends $d$ and $d$ is skeptically accepted. Also, consider: $(5, 4), (4, 3), (3, 2), (2, 4), (3, 1), (4, 1), (1, d)$. Without 5, $d$ is not sceptically accepted because 1 may be considered to resist thanks to the undecided status of the cycle, but with 5, $d$ becomes sceptically accepted as 1 is defeated.
 
 \subsection{Defeasible logic}
+\commentOCf{TODO: formalisme de base de la logique defeasible. Pierre nous fournit un article ou livre de base s’il en trouve un qui semble adéquat.}
 
 \subsection{From text to logic arguments}
 Should we devote a section to discuss proposals to “translate” NL to logic?
@@ -234,12 +235,15 @@ Attacks: see \cref{fig:m2}.
 	\end{tikzpicture}
 \end{figure}
 
-\subsection{Consequence of model differences}
+\subsubsection{Consequence of model differences}
 Presented to an expert consortium \citep{Insect4City2020} using the preferred semantics of acceptability, Model 1 highlights argument ECO2 as a major argument of the debate, unattacked, skeptically accepted. It clearly weakens ECO1 which is attacked by ECO2 and undefended. It tends to orient the debate on the need for precise evaluation of scaling-up costs --which is the focus of argument ECO2.
 
 On the other hand, Model 2 puts the question of costs back into the more general context of economic benefit. In this view, argument ECO2' (the new version of ECO2 in Model 2) is now faced to several arguments addressing economic benefit concerns, namely ECO1, ECO3 and ECO4, in a symmetric confrontation. This totally changes its status in the debate, which is now balanced between pessimistic arguments regarding entomoconversion's economic benefit (COM1, ECO2') and optimistic ones  (ECO1, ECO3, ECO4), with a numeric advantage for the latter.
 
 The differences between both model conclusions may be extremely puzzling for end-users who are not argumentation specialists. In this case, pedagogy and explanation of modeling choices and hypotheses are needed in order not to discredit the model.
+
+\subsection{Example “short contraposition”}
+\commentOCf{Exemple trouvé par Pierre (orca.cf.ac.uk/84295/1/short\_contraposition.pdf) à décrire.}
 
 \subsection{General study}
 Let $T$ be a set of possible texts in natural language and $p$ a procedure that transforms any text in $T$ into a set of undercut trees $\mathcal{U}$. Considering the classical logic approach first, we assume $p$ takes the following form: it first applies a set of possible interpretations of the text using a function $i$ to yield $\Delta, \Delta', …$, which are then used to produce undercut trees. Define $C$ as the classical logic approach defined above; applying $C$ to $i(t)$ thus results in a set of sets of undercut trees (one set for each $\Delta$).
