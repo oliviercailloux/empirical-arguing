@@ -145,9 +145,14 @@ The authors propose to use the status of root nodes as one way of discriminating
 
 The following example features the famous Tweety, where we wonder whether Tweety can fly.
 \begin{example}
-	Our language uses the atoms: “Birds fly; Tweety is a bird; Tweety flies; Penguins are birds; Penguins do not fly”.
-	$\Delta = \set{fly(birds), bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw), birds(pg), ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
-	An undercut tree arguing for $flies(Tw)$ is: root $\set{fly(birds),\allowbreak bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw)}$, having as child $\set{birds(pg),\allowbreak ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
+	Our language uses the atoms 
+	$\mathit{fb}$ for \emph{Birds fly}; 
+	$\mathit{bT}$ for \emph{Tweety is a bird}; 
+	$\mathit{fT}$ for \emph{Tweety flies}; 
+	$\mathit{bp}$ for \emph{Penguins are birds}; 
+	$\mathit{fp}$ for \emph{Penguins do not fly}.
+	$\Delta = \set{\mathit{fb}, \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}, \mathit{bp}, ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
+	An undercut tree arguing for $\mathit{fT}$ is: root $\set{\mathit{fb},\allowbreak \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}}$, having as child $\set{\mathit{bp},\allowbreak ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
 \end{example}
 \commentOCf{Dans cet exemple, il n’y a pas d’arbre pour flies(Tw) dont la racine soit undefeated, ce qui suggère que flies(Tw) ne peut pas être raisonnablement conclu à cause du contre-argument concernant les penguins (et c’est bien ce que cet exemple semble vouloir montrer intuitivement). Mais la conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. En effet, l’arbre ayant la même racine que l’exemple admet maintenant un troisième nœud, qui vient attaquer l’argument sur les penguins, argument avec support $\set{¬¬fly(birds), birds(pg) \land ¬fly(pg) → ¬fly(birds)}$ et avec conclusion $¬(birds(pg) \land ¬fly(pg))$. Aurais-je raté qqch. ?
 %V1, defeated (desired intuitively):
@@ -201,7 +206,7 @@ Inversely, $A$ is necessarily resistant iff it is not possibly failing.
 Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. Here, 5 invalidates 3, which “suffices” to “resolve” the cycle as $(3, 2)$ “does not count” any more. Thus, 2 defends $d$ and $d$ is skeptically accepted. Also, consider: $(5, 4), (4, 3), (3, 2), (2, 4), (3, 1), (4, 1), (1, d)$. Without 5, $d$ is not sceptically accepted because 1 may be considered to resist thanks to the undecided status of the cycle, but with 5, $d$ becomes sceptically accepted as 1 is defeated.
 
 \subsection{Defeasible logic}
-\commentOCf{TODO: formalisme de base de la logique defeasible. Pierre nous fournit un article ou livre de base s’il en trouve un qui semble adéquat.}
+\commentOCf{TODO: formalisme de base de la logique defeasible. Pierre nous fournit un article ou livre de base s’il en trouve un qui semble adéquat. Thèse suggérée : \url{https://hal.inria.fr/tel-01904558v2}}
 
 \subsection{From text to logic arguments}
 Should we devote a section to discuss proposals to “translate” NL to logic?
