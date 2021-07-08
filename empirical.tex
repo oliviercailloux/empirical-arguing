@@ -115,7 +115,7 @@ As the authors observe, it follows that an argument tree arguing for $\alpha$ ha
 \end{figure}
 \begin{example}[Continuing \cref{ex:abstract}]
 	\label{ex:abstUnder}
-	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $(\set{x}, u_{\set{x}})$, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton composed of the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
+	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $(\set{x}, u_{\set{x}})$, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton constituted by the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
 	To compute the children of this node, $u_{\set{x}}(\Phi_2)$, observe that out of the two canonical undercuts for $\Phi_2$, only one uses some new formulas (that is, formulas that are not in $\Phi_1 \cup \Phi_2$). Thus, the unique child of $\Phi_2$ is $\Phi_3 = \set{z, z → ¬y}$. 
 	Finally, $u_{\set{x}}(\Phi_3) = \emptyset$ as $u_{\set{x}}^{-1}[\Phi_3] = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
 	
@@ -150,7 +150,7 @@ The following example features the famous Tweety, where we wonder whether Tweety
 	An undercut tree arguing for $flies(Tw)$ is: root $\set{fly(birds),\allowbreak bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw)}$, having as child $\set{birds(pg),\allowbreak ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
 \end{example}
 \commentOCf{Dans cet exemple, il n’y a pas d’arbre pour flies(Tw) dont la racine soit undefeated, ce qui suggère que flies(Tw) ne peut pas être raisonnablement conclu à cause du contre-argument concernant les penguins (et c’est bien ce que cet exemple semble vouloir montrer intuitivement). Mais la conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. En effet, l’arbre ayant la même racine que l’exemple admet maintenant un troisième nœud, qui vient attaquer l’argument sur les penguins, argument avec support $\set{¬¬fly(birds), birds(pg) \land ¬fly(pg) → ¬fly(birds)}$ et avec conclusion $¬(birds(pg) \land ¬fly(pg))$. Aurais-je raté qqch. ?
-%V1, not warranted (desired intuitively):
+%V1, defeated (desired intuitively):
 %fb and bT ⇒ fT
 %bp and ¬fp ⇒ ¬fb
 %
@@ -159,10 +159,7 @@ The following example features the famous Tweety, where we wonder whether Tweety
 %bp and ¬fp ⇒ ¬fb
 %¬¬fb
 %
-%V1, not warranted fT and fb.
-%V2, not warranted fT and fb?
-%
-%We should mandate that a coherent claim be made, including everything that is required during the argument: fT and fb and ¬¬fb. Then nothing is warranted, in all cases.
+%We should mandate that a coherent claim be made, including everything that is required during the argument: fT and fb and ¬¬fb. Then everything is always defeated.
 }
 
 \subsection{PAFs}
