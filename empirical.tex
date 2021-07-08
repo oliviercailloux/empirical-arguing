@@ -69,15 +69,22 @@ In Chapter 4, they argue for an enlarged view. Selectivity is important. Impract
 Here we describe succinctly the main paradigms that have been proposed in argumentation to model arguments and attack relations, focusing on the tactics used to obtain asymetric attacks (arguments such that one attack another one but not conversely).
 
 \subsection{Classical logic}
+In this section we consider the proposition described in the famous book by \citet{besnard_elements_2000} about argumentation on the basis of classical logic. We focus on their concept of trees, as it permits to determine which propositions are warranted. We simplify some of their definitions, for example, by defining trees over sets of formulas instead of over arguments, and show in footnotes the original definitions so that the reader can observe that our definitions are equivalent to the original propositions.
+
 Let $\Delta$ be a finite set of formulas in predicate logic with the usual deduction operator $⊢$. 
 Given $\Phi \subseteq \Delta$, let ${\land}\Phi \subseteq \Delta$ denote the set of formulas that are conjunctions of all the formulas of $\Phi$ in whatever order (thus $\phi \in {\land}\Phi$ iff $\Phi$ is the set of all the conjuncts of $\phi$).
 We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \Psi ⊢ ⊥$ denote that the formulas in $\Phi$ and $\Psi$ cannot all be satisfied. We say that a set of formulas $\Phi$ is consistent iff $\Phi ⊬ ⊥$.
 
-An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha \in \Delta$, called the conclusion, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$.
+An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha$ a formula not necessarily from $\Delta$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 
 An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\Phi \cup \set{\beta} ⊢ ⊥$.
+\footnote{The authors define this concept as: $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬(φ_1 ∧ \ldots ∧ φ_n)$ for some $\set{φ_1, \ldots, φ_n} ⊆ Φ$.}
 
 Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
+\footnote{The authors define an undercut for an argument $(Φ, α)$ as an argument $(Ψ , ¬(φ_1 ∧\ldots ∧ φ_n))$ where $\set{φ_1, \ldots, φ_n} ⊆ Φ$, and define that an argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ iff it is an undercut for $(Φ, α)$ and $(φ_1, \ldots, φ_n)$ is the canonical enumeration of $Φ$.
+As canonical undercuts depend only on the supports of the arguments, we choose to define this concept as a relation over the sets of formulas rather than on arguments.
+%It follows that $\Psi \subseteq \Delta$ is a canonical undercut for $\Phi \subseteq \Delta$ in our sense iff, writing $¬(φ_1 ∧ \ldots ∧ φ_n)$ for the canonical enumeration of $Φ$, the argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ in their sense, for any $\alpha$ entailed by $\Phi$.
+}
 
 \begin{example}
 	\label{ex:abstract}
@@ -90,14 +97,17 @@ Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a c
 
 As the authors observe, the support of a defeater always admits a canonical undercut. Indeed, if $(\Psi, \beta)$ defeats $(\Phi, \alpha)$, then $\Phi$, or some subset of it, is a canonical undercut to $\Psi$. In \cref{ex:abstract}, $\set{z, z → ¬y}$, the support of $a_3$ which defeats $a_2$, admits $\set{y}$, a subset of the support of $a_2$, as canonical undercut, as $\set{y}$ is a minimal set incompatible with $z \land (z → ¬y)$.
 
-Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (with $s$ connected and defining at most one path from the root to any $n' \in N$). 
+Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (with $s$ defining a tree, thus, $s$ connected and defining at most one path from the root to any $n' \in N$). 
 Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, where nodes are sets of formulas, with $u_\Phi$ defined as follows. 
-Given a node $\Psi$ in the tree, let $u_\Phi^{-1}[\Psi] \subseteq \Delta$ denote the union of its ancestors (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
-We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $\Phi ⊢ \alpha$.
+Given a node $\Psi$ in the tree, let $u_\Phi^{-1}[\Psi] \subseteq \Delta$ denote the union of its ancestors, including itself (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
+We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $(\Phi, \alpha)$ is an argument (thus $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 (Note that an undercut tree is finite, as $\Delta$ is finite.)
+\footnote{The authors define an argument tree for $\alpha$ as a tree of arguments, rooted at an argument $a_1 = (\Phi_1, \alpha)$, such that the children of a node $a = (\Phi, \beta)$ consist of all canonical undercuts $(\Psi, \gamma)$ for $a$ such that $\Psi$ is not a subset of $\Phi \cup \Phi_1 \cup \Phi_2 \cup … \cup \Phi_n$, where $(Φ_1, \beta_1), …, (Φ_n, \beta_n)$ denote the ancestors of $(\Phi, \beta)$.
+As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. As a result, we choose to consider only the sets of formulas as nodes of our trees, corresponding to the supports of their argument trees.
+}
 
 \begin{figure}
-	\caption{An undercut tree arguing for $x$}
+	\caption{The undercut tree arguing for $x$}
 	\label{fig:utx}
 	\begin{tikzpicture}
 		\tikzset{every node/.style={draw, ellipse, execute at begin node=$,execute at end node=$}}
@@ -110,14 +120,14 @@ We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $\Phi
 \end{figure}
 \begin{example}[Continuing \cref{ex:abstract}]
 	\label{ex:abstUnder}
-	An example of an undercut tree arguing for $x$, displayed in \cref{fig:utx}, is $(\set{x}, u_{\set{x}})$. This tree is linear. Its root is $\Phi_1 = \set{x}$. Its set of children $u_{\set{x}}(\set{x})$ is the singleton composed of the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
+	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $(\set{x}, u_{\set{x}})$, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton composed of the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
 	To compute the children of this node, $u_{\set{x}}(\Phi_2)$, observe that out of the two canonical undercuts for $\Phi_2$, only one uses some new formulas (that is, formulas that are not in $\Phi_1 \cup \Phi_2$). Thus, the unique child of $\Phi_2$ is $\Phi_3 = \set{z, z → ¬y}$. 
 	Finally, $u_{\set{x}}(\Phi_3) = \emptyset$ as $u_{\set{x}}^{-1}[\Phi_3] = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
 	
-	An example of an undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $(\Phi_2, u_{\Phi_2})$ with $u_{\Phi_2}(\Phi_2) = \set{\Phi_1, \Phi_3}$ and $u_{\Phi_2}(\Phi_1) = u_{\Phi_2}(\Phi_3) = \emptyset$.
+	The unique undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $(\Phi_2, u_{\Phi_2})$ with $u_{\Phi_2}(\Phi_2) = \set{\Phi_1, \Phi_3}$ and $u_{\Phi_2}(\Phi_1) = u_{\Phi_2}(\Phi_3) = \emptyset$.
 \end{example}
 \begin{figure}
-	\caption{An undercut tree arguing for $¬x$}
+	\caption{The undercut tree arguing for $¬x$}
 	\label{fig:utnx}
 	\begin{tikzpicture}
 		\tikzset{every node/.style={draw, ellipse, execute at begin node=$,execute at end node=$}}
@@ -133,7 +143,7 @@ Given a tree $U = (\Psi, u_\Psi)$, define the set $R$ of defeated nodes as the s
 One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves up to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
 
 \begin{example}[Continuing \cref{ex:abstUnder}]
-	The root of our example tree $(\set{x}, u_{\set{x}})$ arguing for $x$ is undefeated while the root of the tree $(\Phi_2, u_{\Phi_2})$ arguing for $¬x$ is defeated. In fact, every undercut tree arguing for $¬x$ has its root defeated: the root of any such tree must include $y$ and $y → ¬x$ in order to entail $¬x$, and may not include $x$ in order to be consistent; thus, the root admits at least $\Phi_1 = \set{x}$ as a child, itself having no children in that tree and thus being undefeated; which entails that the root is defeated.
+	The root of the tree $(\set{x}, u_{\set{x}})$ arguing for $x$ is undefeated while the root of the tree $(\Phi_2, u_{\Phi_2})$ arguing for $¬x$ is defeated.
 \end{example}
 
 The authors propose to use the status of root nodes as one way of discriminating arguments.
@@ -144,7 +154,21 @@ The following example features the famous Tweety, where we wonder whether Tweety
 	$\Delta = \set{fly(birds), bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw), birds(pg), ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
 	An undercut tree arguing for $flies(Tw)$ is: root $\set{fly(birds),\allowbreak bird(Tw),\allowbreak fly(birds) \land bird(Tw) → flies(Tw)}$, having as child $\set{birds(pg),\allowbreak ¬fly(pg),\allowbreak birds(pg) \land ¬fly(pg) → ¬fly(birds)}$.
 \end{example}
-\commentOCf{Dans cet exemple, il n’y a pas d’arbre pour flies(Tw) dont la racine soit undefeated, ce qui suggère que flies(Tw) ne peut pas être raisonnablement conclu à cause du contre-argument concernant les penguins (et c’est bien ce que cet exemple semble vouloir montrer intuitivement). Mais la conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. En effet, l’arbre ayant la même racine que l’exemple admet maintenant un troisième nœud, qui vient attaquer l’argument sur les penguins, argument avec support $\set{¬¬fly(birds), birds(pg) \land ¬fly(pg) → ¬fly(birds)}$ et avec conclusion $¬(birds(pg) \land ¬fly(pg))$. Aurais-je raté qqch. ?}
+\commentOCf{Dans cet exemple, il n’y a pas d’arbre pour flies(Tw) dont la racine soit undefeated, ce qui suggère que flies(Tw) ne peut pas être raisonnablement conclu à cause du contre-argument concernant les penguins (et c’est bien ce que cet exemple semble vouloir montrer intuitivement). Mais la conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. En effet, l’arbre ayant la même racine que l’exemple admet maintenant un troisième nœud, qui vient attaquer l’argument sur les penguins, argument avec support $\set{¬¬fly(birds), birds(pg) \land ¬fly(pg) → ¬fly(birds)}$ et avec conclusion $¬(birds(pg) \land ¬fly(pg))$. Aurais-je raté qqch. ?
+%V1, not warranted (desired intuitively):
+%fb and bT ⇒ fT
+%bp and ¬fp ⇒ ¬fb
+%
+%V2, we can warrant fT (undesired):
+%fb and bT ⇒ fT
+%bp and ¬fp ⇒ ¬fb
+%¬¬fb
+%
+%V1, not warranted fT and fb.
+%V2, not warranted fT and fb?
+%
+%We should mandate that a coherent claim be made, including everything that is required during the argument: fT and fb and ¬¬fb. Then nothing is warranted, in all cases.
+}
 
 \subsection{PAFs}
 \label{sec:pafs}
