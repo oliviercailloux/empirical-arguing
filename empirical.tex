@@ -77,9 +77,6 @@ We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \
 
 An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha$ a formula not necessarily from $\Delta$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 
-An argument $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\Phi \cup \set{\beta} ⊢ ⊥$.
-\footnote{The authors define this concept as: $(\Psi, \beta)$ \emph{defeats} $(\Phi, \alpha)$ iff $\beta ⊢ ¬(φ_1 ∧ \ldots ∧ φ_n)$ for some $\set{φ_1, \ldots, φ_n} ⊆ Φ$.}
-
 Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
 \footnote{The authors define an undercut for an argument $(Φ, α)$ as an argument $(Ψ , ¬(φ_1 ∧\ldots ∧ φ_n))$ where $\set{φ_1, \ldots, φ_n} ⊆ Φ$, and define that an argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ iff it is an undercut for $(Φ, α)$ and $(φ_1, \ldots, φ_n)$ is the canonical enumeration of $Φ$.
 As canonical undercuts depend only on the supports of the arguments, we choose to define this concept as a relation over the sets of formulas rather than on arguments.
@@ -88,14 +85,12 @@ As canonical undercuts depend only on the supports of the arguments, we choose t
 
 \begin{example}
 	\label{ex:abstract}
-	Consider $\Delta = \set{x, y, y → ¬x, z, z → ¬y}$. An example of an argument is $a_1 = (\set{x}, x)$. An argument that defeats this argument is $a_2 = (\set{y, y → ¬x}, ¬x)$, itself defeated by $a_3 = (\set{z, z → ¬y}, ¬y)$. 
+	Consider $\Delta = \set{x, y, y → ¬x, z, z → ¬y}$. Examples of arguments include $(\set{x}, x)$, $(\set{y, y → ¬x}, ¬x)$ and $(\set{z, z → ¬y}, ¬y)$. 
 	The only canonical undercut for $\set{x}$ is the set $\set{y, y → ¬x}$. 
 	The canonical undercuts for $\set{y}$ are the sets $\set{z, z → ¬y}$ and $\set{x, y → ¬x}$. 
 	The only canonical undercut for $\set{y → ¬x}$ is the set $\set{x, y}$. 
 	The canonical undercuts for $\set{y, y → ¬x}$ are $\set{z, z → ¬y}$ and $\set{x}$.
 \end{example}
-
-As the authors observe, the support of a defeater always admits a canonical undercut. Indeed, if $(\Psi, \beta)$ defeats $(\Phi, \alpha)$, then $\Phi$, or some subset of it, is a canonical undercut to $\Psi$. In \cref{ex:abstract}, $\set{z, z → ¬y}$, the support of $a_3$ which defeats $a_2$, admits $\set{y}$, a subset of the support of $a_2$, as canonical undercut, as $\set{y}$ is a minimal set incompatible with $z \land (z → ¬y)$.
 
 Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (with $s$ defining a tree, thus, $s$ connected and defining at most one path from the root to any $n' \in N$). 
 Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, where nodes are sets of formulas, with $u_\Phi$ defined as follows. 
