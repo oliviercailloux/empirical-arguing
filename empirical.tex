@@ -88,9 +88,9 @@ Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a c
 	The canonical undercuts for $\set{y, y → ¬x}$ are $\set{z, z → ¬y}$ and $\set{x}$.
 \end{example}
 
-As the authors observe, the support of a defeater always admits a canonical undercut. Indeed, if $(\Psi, \beta)$ defeats $(\Phi, \alpha)$, then $\Phi$, or some subset of it, is a canonical undercut to $\Psi$. In \cref{ex:abstract}, $\set{z, z → ¬y}$, the support of $a_3$ which defeats $a_2$, admits $\set{y}$ (a subset of the support of $a_2$) as canonical undercut, as $\set{y}$ is a minimal set incompatible with $z \land (z → ¬y)$.
+As the authors observe, the support of a defeater always admits a canonical undercut. Indeed, if $(\Psi, \beta)$ defeats $(\Phi, \alpha)$, then $\Phi$, or some subset of it, is a canonical undercut to $\Psi$. In \cref{ex:abstract}, $\set{z, z → ¬y}$, the support of $a_3$ which defeats $a_2$, admits $\set{y}$, a subset of the support of $a_2$, as canonical undercut, as $\set{y}$ is a minimal set incompatible with $z \land (z → ¬y)$.
 
-Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (with $s$ defining at most one path to join any two points in $N$). 
+Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (with $s$ connected and defining at most one path from the root to any $n' \in N$). 
 Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, where nodes are sets of formulas, with $u_\Phi$ defined as follows. 
 Given a node $\Psi$ in the tree, let $u_\Phi^{-1}[\Psi] \subseteq \Delta$ denote the union of its ancestors (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
 We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $\Phi ⊢ \alpha$.
