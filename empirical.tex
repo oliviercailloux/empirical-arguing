@@ -77,7 +77,7 @@ We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \
 
 An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha$ a formula not necessarily from $\Delta$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 
-Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
+Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a coherent minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Psi ⊬ ⊥, \Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
 \footnote{The authors define an undercut for an argument $(Φ, α)$ as an argument $(Ψ , ¬(φ_1 ∧\ldots ∧ φ_n))$ where $\set{φ_1, \ldots, φ_n} ⊆ Φ$, and define that an argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ iff it is an undercut for $(Φ, α)$ and $(φ_1, \ldots, φ_n)$ is the canonical enumeration of $Φ$.
 As canonical undercuts depend only on the supports of the arguments, we choose to define this concept as a relation over the sets of formulas rather than on arguments.
 %It follows that $\Psi \subseteq \Delta$ is a canonical undercut for $\Phi \subseteq \Delta$ in our sense iff, writing $¬(φ_1 ∧ \ldots ∧ φ_n)$ for the canonical enumeration of $Φ$, the argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ in their sense, for any $\alpha$ entailed by $\Phi$.
@@ -142,30 +142,6 @@ One can see that this defines a unique set by observing that the definition dete
 \end{example}
 
 The authors propose to use the status of root nodes as one way of discriminating arguments.
-
-The following example features the famous Tweety, where we wonder whether Tweety can fly.
-\begin{example}
-	Our language uses the atoms 
-	$\mathit{fb}$ for \emph{Birds fly}; 
-	$\mathit{bT}$ for \emph{Tweety is a bird}; 
-	$\mathit{fT}$ for \emph{Tweety flies}; 
-	$\mathit{bp}$ for \emph{Penguins are birds}; 
-	$\mathit{fp}$ for \emph{Penguins do not fly}.
-	$\Delta = \set{\mathit{fb}, \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}, \mathit{bp}, ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
-	An undercut tree arguing for $\mathit{fT}$ is: root $\set{\mathit{fb},\allowbreak \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}}$, having as child $\set{\mathit{bp},\allowbreak ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
-\end{example}
-\commentOCf{Dans cet exemple, il n’y a pas d’arbre pour flies(Tw) dont la racine soit undefeated, ce qui suggère que flies(Tw) ne peut pas être raisonnablement conclu à cause du contre-argument concernant les penguins (et c’est bien ce que cet exemple semble vouloir montrer intuitivement). Mais la conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. En effet, l’arbre ayant la même racine que l’exemple admet maintenant un troisième nœud, qui vient attaquer l’argument sur les penguins, argument avec support $\set{¬¬fly(birds), birds(pg) \land ¬fly(pg) → ¬fly(birds)}$ et avec conclusion $¬(birds(pg) \land ¬fly(pg))$. Aurais-je raté qqch. ?
-%V1, defeated (desired intuitively):
-%fb and bT ⇒ fT
-%bp and ¬fp ⇒ ¬fb
-%
-%V2, we can warrant fT (undesired):
-%fb and bT ⇒ fT
-%bp and ¬fp ⇒ ¬fb
-%¬¬fb
-%
-%We should mandate that a coherent claim be made, including everything that is required during the argument: fT and fb and ¬¬fb. Then everything is always defeated.
-}
 
 \subsection{PAFs}
 \label{sec:pafs}
@@ -301,12 +277,67 @@ Attacks: see \cref{fig:m2}.
 \subsubsection{Consequence of model differences}
 Presented to an expert consortium \citep{Insect4City2020} using the preferred semantics of acceptability, Model 1 highlights argument ECO2 as a major argument of the debate, unattacked, skeptically accepted. It clearly weakens ECO1 which is attacked by ECO2 and undefended. It tends to orient the debate on the need for precise evaluation of scaling-up costs --which is the focus of argument ECO2.
 
-On the other hand, Model 2 puts the question of costs back into the more general context of economic benefit. In this view, argument ECO2' (the new version of ECO2 in Model 2) is now faced to several arguments addressing economic benefit concerns, namely ECO1, ECO3 and ECO4, in a symmetric confrontation. This totally changes its status in the debate, which is now balanced between pessimistic arguments regarding entomoconversion's economic benefit (COM1, ECO2') and optimistic ones  (ECO1, ECO3, ECO4), with a numeric advantage for the latter.
+On the other hand, Model 2 puts the question of costs back into the more general context of economic benefit. In this view, argument ECO2' (the new version of ECO2 in Model 2) is now faced to several arguments addressing economic benefit concerns, namely ECO1, ECO3 and ECO4, in a symmetric confrontation. This totally changes its status in the debate, which is now balanced between pessimistic arguments regarding entomoconversion's economic benefit (COM1, ECO2') and optimistic ones (ECO1, ECO3, ECO4), with a numeric advantage for the latter.
 
 The differences between both model conclusions may be extremely puzzling for end-users who are not argumentation specialists. In this case, pedagogy and explanation of modeling choices and hypotheses are needed in order not to discredit the model.
 
 \subsection{Example “short contraposition”}
 \commentOCf{Exemple trouvé par Pierre (orca.cf.ac.uk/84295/1/short\_contraposition.pdf) à décrire.}
+
+\subsection{A contrast}
+Our first point is that asymetric attacks do not stem from logic alone. It requires some opinion about the quality of the arguments, about which point of view is better defended, more grounded.
+
+This can be illustrated by contrasting two examples with a similar structure. The first example is designed to make the conclusion feel intuitively justified, even though an (unreasonable) counter-argument is raised against it; whereas the second example features a similar situation from an argumentation attack point of view but where the conclusion feels intuitively unjustified.
+
+\begin{example}[Ballistic expert]
+	Assume that a ballistic expert says that an impact on a wall in a given context can be best explained only by a bullet having been fired from some given position in the room. A counter-argument is raised saying that this in fact requires to accept the classical laws of physics (as known in the scientific community), but they in fact are false: a gigantic plot has led to them being falsely viewed as empirically validated, but they are not.
+\end{example}
+A naïve model of this disagreement can be designed as follows.
+\begin{example}[Model about ballistics, with symmetric attack]
+	This disagreement can be modeled using the atoms $\mathit{lp}$ for \emph{The classical laws of physics are correct}, $\mathit{g}$ for \emph{There is a gigantic plot} and $\mathit{b}$ for $\emph{A bullet has been fired…}$.
+	$\Delta = \set{\mathit{lp},\allowbreak \mathit{g}, \mathit{lp} → \mathit{b}, \mathit{g} → ¬\mathit{lp}}$.
+	The undercut tree arguing for $\mathit{b}$ has root $\set{\mathit{lp},\allowbreak \mathit{lp} → \mathit{b}}$, having as child $\set{\mathit{g}, \mathit{g} → ¬\mathit{lp}}$.
+\end{example}
+This model seems to not adequately capture the featured disagreement: the asymmetric attack from $\set{\mathit{g}, \mathit{g} → ¬\mathit{lp}}$ against the conclusion of the expert suggests that its conclusion has been defeated and that the ballistic expert is wrong. On the contrary, it is very reasonable to assume that the very fact that the expert uses the classical laws of physics in her reasoning implicity entails that she considers that they are correct. 
+\begin{example}[Model about ballistics, with asymmetric attack]
+	This disagreement can be modeled using the atoms $\mathit{lp}$ for \emph{The classical laws of physics apply} and $\mathit{b}$ for $\emph{A bullet has been fired from the position … in the room}$.
+	$\Delta = \set{\mathit{lp},\allowbreak \mathit{lp} → \mathit{b}, ¬\mathit{lp}}$.
+	The undercut tree arguing for $\mathit{b}$ has root $\set{\mathit{lp},\allowbreak \mathit{lp} → \mathit{b}}$, having as child $\set{¬\mathit{lp}}$.
+\end{example}
+
+The following example features the famous Tweety, where we wonder whether Tweety can fly.
+\begin{example}[Full Tweety]
+	Our language uses the atoms 
+	$\mathit{fb}$ for \emph{Birds fly}; 
+	$\mathit{bT}$ for \emph{Tweety is a bird}; 
+	$\mathit{fT}$ for \emph{Tweety flies}; 
+	$\mathit{bp}$ for \emph{Penguins are birds}; 
+	$\mathit{fp}$ for \emph{Penguins do not fly}.
+	$\Delta = \set{\mathit{fb}, \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}, \mathit{bp}, ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
+	The undercut tree arguing for $\mathit{fT}$ has root $\set{\mathit{fb},\allowbreak \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}}$, having as child $\set{\mathit{bp},\allowbreak ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
+\end{example}
+\begin{example}[Short Tweety]
+	Our language uses the atoms 
+	$\mathit{fb}$ for \emph{Birds fly}; 
+	$\mathit{fT}$ for \emph{Tweety flies}; 
+	$\Delta = \set{\mathit{fb},\allowbreak \mathit{fb} → \mathit{fT}, ¬\mathit{fb}}$.
+	The undercut tree arguing for $\mathit{fT}$ has root $\set{\mathit{fb},\allowbreak \mathit{fb} → \mathit{fT}}$, having as child $\set{¬\mathit{fb}}$.
+\end{example}
+
+\commentOCf{Dans cet exemple, il n’y a pas d’arbre pour flies(Tw) dont la racine soit undefeated, ce qui suggère que flies(Tw) ne peut pas être raisonnablement conclu à cause du contre-argument concernant les penguins (et c’est bien ce que cet exemple semble vouloir montrer intuitivement). Mais la conclusion semble changer radicalement si la base inclut aussi $¬¬fly(birds)$, par exemple. En effet, l’arbre ayant la même racine que l’exemple admet maintenant un troisième nœud, qui vient attaquer l’argument sur les penguins, argument avec support $\set{¬¬fly(birds), birds(pg) \land ¬fly(pg) → ¬fly(birds)}$ et avec conclusion $¬(birds(pg) \land ¬fly(pg))$. Aurais-je raté qqch. ?
+%V1, defeated (desired intuitively):
+%fb and bT ⇒ fT
+%bp and ¬fp ⇒ ¬fb
+%
+%V2, we can warrant fT (undesired):
+%fb and bT ⇒ fT
+%bp and ¬fp ⇒ ¬fb
+%¬¬fb
+%
+%We should mandate that a coherent claim be made, including everything that is required during the argument: fT and fb and ¬¬fb. Then everything is always defeated.
+%
+%Example where we add ¬¬stuff to get warranted conclusion. Problem is that some implications are implied in the discourse, and the modeler makes a hypothesis on those.
+}
 
 \subsection{General study}
 Let $T$ be a set of possible texts in natural language and $p$ a procedure that transforms any text in $T$ into a set of undercut trees $\mathcal{U}$. Considering the classical logic approach first, we assume $p$ takes the following form: it first applies a set of possible interpretations of the text using a function $i$ to yield $\Delta, \Delta', …$, which are then used to produce undercut trees. Define $C$ as the classical logic approach defined above; applying $C$ to $i(t)$ thus results in a set of sets of undercut trees (one set for each $\Delta$).
