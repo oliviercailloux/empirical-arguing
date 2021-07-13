@@ -5,8 +5,10 @@
 \input{preamble/math_basics}
 \input{preamble/math_mine}
 
+
 \usepackage{silence}
 \WarningsOff[natbib]
+
 
 %I find these settings useful in draft mode. Should be removed for final versions.
 	%Which line breaks are chosen: accept worse lines, therefore reducing risk of overfull lines. Default = 200.
@@ -183,6 +185,79 @@ Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. 
 
 \subsection{Defeasible logic}
 \commentOCf{TODO: formalisme de base de la logique defeasible. Pierre nous fournit un article ou livre de base s’il en trouve un qui semble adéquat. Thèse suggérée : \url{https://hal.inria.fr/tel-01904558v2}}
+
+Consider a propositional language $\mathcal{L}_p$ with the implication and conjunction connectives ($\rightarrow$,$\Rightarrow$,$\curly$,$\land$) and strong negation ($\lnot$) on a finite set of literals (facts) where a literal is either an atomic proposition or its negation. 
+The set of facts is denoted $F$.
+
+A fact in $\mathcal{L}_p$ is a literal; the body and head of a rule are finite conjunction of literals. A rule expressed in $\mathcal{L}_p$ is applicable on a set of literals if its body is included in this set.
+There are three kinds of rules:
+\begin{itemize}
+\item \emph{strict rules}, denoted $\Phi \rightarrow \varphi$, indicating definite implications; we denote by $R_s$ the set of strict rules;
+\item \emph{defeasible rules}, denoted $\Phi \Rightarrow \varphi$, indicating plausible implications; we denote by $R_d$ the set of defeasible rules;
+\item \emph{defeater rules}, denoted $\Phi \curly \varphi$, preventing defeasible implications; we denote by $R_{df}$ the set of defeater rules;
+\end{itemize}
+The set of all rules is denoted $R$, the conclusion of a rule $r$ is denoted $Head(r)$ and its body $Body(r)$.
+
+In order to express higher plausibility for some defeasible implications, a (generally acyclic) preference relation $\succ$ on $R$ is needed; $r_1 \succ r_2$ indicates that $r_1$ is superior to $r_2$ (and $r_2$ inferior to $r_1$).
+
+A defeasible theory $T$ is a triple $(F,R,\succ)$ which will assign a label to any literal $f$ according to its provability:
+\begin{itemize}
+\item $+\Delta f$: $f$ is provable using only strict rules and facts in $T$,
+\item $-\Delta f$: it is proved that $f$ is not strictly provable in $T$,
+\item $+\delta f$: $f$ is provable using at least one defeasible rule or fact in $T$,
+\item $-\delta f$: it is proved that $f$ is not deeasibly provable in $T$.
+\end{itemize}
+
+The general idea of defeasible logics is then to provide a proof for a given conclusion (fact). A proof is a finite sequence $P = (P(1), \dots, P(n))$ of labeled literals ($P(1..i)$ denotes the initial part of the proof P of length $i$) satisfying the following conditions \cite{Billington1993}:
+
+\begin{itemize}
+\item $+\Delta$: if $P(i+1) = +\Delta f$ then either
+  \begin{enumerate}
+  \item $f \in F$ or
+  \item $\exists r \in R_s$ s.t. $f \in Head(r)$ and $\forall \varphi \in Body(r): +\Delta \varphi \in P(1..i)$.
+  \end{enumerate}
+
+\item $-\Delta$: if $P(i+1) = -\Delta f$ then
+  \begin{enumerate}
+  \item $f \notin F$ and
+  \item $\forall r \in R_s$ s.t. $f \in Head(r)$, $\exists \varphi \in Body(r): -\Delta \varphi \in P(1..i)$.
+  \end{enumerate}
+
+\item $+\delta$: if $P(i+1) = +\delta f$ then either
+  \begin{enumerate}
+  \item $+\Delta f \in P(1..i)$ or
+  \item \vspace{-0.1cm}
+    \begin{enumerate}
+    \item $\exists r \in R_s \cup R_d$ s.t. $f \in Head(r)$ and $\forall \varphi \in Body(r): +\delta \varphi \in P(1..i)$ and
+    \item $-\Delta \lnot f \in P(1..i)$ and
+    \item $\forall r' \in R$ s.t. $\lnot f \in Head(r')$, either:
+      \begin{enumerate}
+      \item $\exists \varphi \in Body(r')$ s.t. $-\delta \varphi \in P(1..i)$ or
+      \item $\exists r^{\prime\prime} \in R$ s.t. $f \in Head(r^{\prime\prime})$ and $\forall \varphi \in Body(r^{\prime\prime}): +\delta f \in P(1..i)$ and $r^{\prime\prime} \succ r'$.
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+
+\item $-\delta$: if $P(i+1) = -\delta f$ then
+  \begin{enumerate}
+  \item $-\Delta f \in P(1..i)$ and
+  \item \vspace{-0.1cm}
+    \begin{enumerate}
+    \item $\forall r \in R_s \cup R_d$ s.t. $f \in Head(r)$, $\exists \varphi \in Body(r): -\delta \varphi \in P(1..i)$ or
+    \item $+\Delta \lnot f \in P(1..i)$ or
+    \item $\exists r' \in R$ s.t. $\lnot f \in Head(r')$, and:
+      \begin{enumerate}
+      \item $\forall \varphi \in Body(r')$, $+\delta \varphi \in P(1..i)$ and
+      \item $\forall r^{\prime\prime} \in R$ s.t. $f \in Head(r^{\prime\prime})$, either $\exists \varphi \in Body(r^{\prime\prime}): -\delta f \in P(1..i)$ or $r^{\prime\prime} \not\succ r'$
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+\end{itemize}
+
+A fact $f$ is provable in $T$, denoted $T \models f$, if and only if there exists a proof $P$ in $T$ s.t. $f \in P$. For instance, intuitively, for $f$ to be strictly proven there needs to exist a strict rule $r \in R_s$ s.t. $f \in Head(r)$, and for any literal $l \in Body(r)$, there exists a strict rule $r' \in R_s$ s.t. $l \in Head(r')$, and so on recursively until a fact $t \in F$ is reached.
+
+Ambiguity is the situation where a conflict between rules arises and the superiority relation does not indicate which rule should be used. Different intuitions on how ambiguity should be solved have been introduced over the years; these intuitions modify subtly the way $+\delta$ and $-\delta$ are computed in order to account for how ambiguity, e.g., should be propagated to other facts. The interested reader might refer to \cite{Hecham2018} for both an intuitive and formal overview.
+
 
 \subsection{From text to logic arguments}
 Should we devote a section to discuss proposals to “translate” NL to logic?
