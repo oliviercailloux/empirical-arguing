@@ -73,7 +73,7 @@ Here we describe succinctly the main paradigms that have been proposed in argume
 \subsection{Classical logic}
 In this section we consider the proposition described in the famous book by \citet{besnard_elements_2000} about argumentation on the basis of classical logic. We focus on their concept of trees, as it permits to determine which propositions are warranted. We simplify some of their definitions, for example, by defining trees over sets of formulas instead of over arguments, and show in footnotes the original definitions so that the reader can observe that our definitions are equivalent to the original propositions.
 
-Let $\Delta$ be a finite set of formulas in predicate logic with the usual deduction operator $⊢$. 
+Let $\allformulas$ be an (infinite) set of possible formulas in predicate logic with the usual deduction operator $⊢$. Let $\Delta \subseteq \allformulas$ be a finite set of formulas.
 Given $\Phi \subseteq \Delta$, let ${\land}\Phi \subseteq \Delta$ denote the set of formulas that are conjunctions of all the formulas of $\Phi$ in whatever order (thus $\phi \in {\land}\Phi$ iff $\Phi$ is the set of all the conjuncts of $\phi$).
 We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \Psi ⊢ ⊥$ denote that the formulas in $\Phi$ and $\Psi$ cannot all be satisfied. We say that a set of formulas $\Phi$ is consistent iff $\Phi ⊬ ⊥$.
 
@@ -361,88 +361,71 @@ The differences between both model conclusions may be extremely puzzling for end
 \subsection{Example “short contraposition”}
 \commentOCf{Exemple trouvé par Pierre (orca.cf.ac.uk/84295/1/short\_contraposition.pdf) à décrire.}
 
-\subsection{A contrast}
-Our first point is that asymetric attacks do not stem from logic alone. It requires some opinion about the quality of the arguments, about which point of view is better defended, more grounded.
+\subsection{Guaranteeing neutrality is incompatible with warrants}
+In this section we wish to argue that modeling a debate in a way that is guaranteed to be neutral does not permit to obtain any warranted tree. 
 
-This can be illustrated by contrasting two examples with a similar structure. The first example is designed to make the conclusion feel intuitively justified, even though an (unreasonable) counter-argument is raised against it; whereas the second example features a similar situation from an argumentation attack point of view but where the conclusion feels intuitively unjustified.
+We first observe, using a pair of examples, that neutrality requires to be robust considering some kinds of implicit claims. That is because some situations feature obvious disagreements which can be left implicit and we do not want the model to give the false impression that a claim is warranted just because some obvious implicit disagreement has not been included in the model.
+
+Second, we argue, using further examples, that there is no neutral way to determine which implicit disagreements are obvious. Because of contrapositives, any argument attacking a claim can in principle be counter-attacked, and determining whether such a counter-attack should be included in the model requires to determine whether the person utterring the initial claim would consider the contrapositive as obvious. As far as we are aware, no automated procedure has been proposed to determine this. We provide an example which suggest that it is in general a very difficult matter indeed. Doing it on the basis of the informal intuition of the modeler is possible (and is done routinely), but this does not guarantee neutrality. Taking a sufficiently prudent view towards this difficult issue requires to include all possible implicit disagreements. This gives only models which have no warranted trees.
 
 \begin{example}[Ballistic expert]
 	\label{ex:ball}
-	Assume that a ballistic expert says that an impact on a wall in a given context can be best explained only by a bullet having been fired from some given position in the room. A counter-argument is raised saying that this in fact requires to accept the classical laws of physics (as known in the scientific community), but they in fact are false: a gigantic plot has led to them being falsely viewed as empirically validated, but they are not.
+	A discussion happens about the possible cause of death of a person. Someone claims she has been shot by a sniper situated on the opposite building. A ballistic expert replies that no bullet could have reached the victim, considering her position, from the suspected position of the sniper. A counter-argument is raised saying that this in fact requires to use classical results in ballistics (as known in the scientific community), but they are in fact not known to be correct: a gigantic plot has led to them being falsely viewed as empirically validated, but they are not. The expert replies to this argument with a shrug by saying that there obviously exist no plot that render the use of ballistics illegitimate in this context.
 \end{example}
 A naïve model of this disagreement can be designed as follows.
 \begin{example}[Model for \cref{ex:ball}, with non-rebutted attack]
 	\label{ex:ball1}
-	This disagreement can be modeled using the atoms $\mathit{lp}$ for \emph{The classical laws of physics are correct} and $\mathit{b}$ for $\emph{A bullet has been fired from position … in the room}$.
-	$\Delta = \set{\mathit{lp},\allowbreak \mathit{lp} → \mathit{b}, ¬\mathit{lp}}$.
-	The undercut tree arguing for $\mathit{b}$ has root $\set{\mathit{lp},\allowbreak \mathit{lp} → \mathit{b}}$, having as child $\set{¬\mathit{lp}}$.
+	This disagreement can be modeled using the atoms $\mathit{s}$ for \emph{A sniper shot the victim}, $\mathit{b}$ for \emph{Ballistics can be used in this context} and $\mathit{p}$ for \emph{A plot has led to a false impression of validity of ballistics}.
+	$\Delta = \set{\mathit{s},\allowbreak \mathit{b}, \mathit{b} → ¬\mathit{s}, \mathit{p}, \mathit{p} → ¬\mathit{b}, ¬\mathit{p}}$.
 \end{example}
-This model seems to not adequately capture the featured disagreement: the non rebutted attack from $¬\mathit{lp}$ against the conclusion of the expert suggests that its conclusion has been defeated and that the ballistic expert is wrong, as illustrated by the root of the undercut tree being unwarranted. On the contrary, it is very reasonable to assume that the very fact that the expert uses the classical laws of physics in her reasoning implicity indicates that she considers them correct. 
-\begin{example}[Model for \cref{ex:ball}, with rebutted attack]
+This model seems to adequately capture the featured disagreement: neither the argumentation tree for $\mathit{s}$ nor the one for $¬\mathit{s}$ is warranted, reflecting the fact that who is right remains undetermined at this stage (if one wants to remain neutral, thus, not use the fact that one of the featured arguments seems weak).
+
+Consider now the following variant of that scenario.
+\begin{example}[Model for \cref{ex:ball}, with disagreement left implicit]
 	\label{ex:ball2}
-	We add the atom $\mathit{lp}'$ for \emph{The classical laws of physics are obviously correct}.
-	$\Delta' = \set{\mathit{lp},\allowbreak \mathit{lp} → \mathit{b}, ¬\mathit{lp}, \mathit{lp}', \mathit{lp}' → \mathit{lp}}$.
-	The undercut tree arguing for $\mathit{b}$ now has three nodes: root $\set{\mathit{lp},\allowbreak \mathit{lp} → \mathit{b}}$, having as child $\set{¬\mathit{lp}}$, having as child $\set{\mathit{lp}'}$.
+	This example is identical to \cref{ex:ball}, except that the ballistic expert does not reply to the last argument (either because she has not had the opportunity to reply, or because she finds the argument too stupid to be worth answering). A naïve model for this example is $\Delta^\text{l} = \set{\mathit{s},\allowbreak \mathit{b}, \mathit{b} → ¬\mathit{s}, \mathit{p}, \mathit{p} → ¬\mathit{b}}$.
 \end{example}
+This model seems to not adequately capture the opinion of the expert: the argumentation tree for the claim $\mathit{s}$ is now warranted, as if the counter-argument of the expert, using $\mathit{b}$ and $\mathit{b} → ¬\mathit{s}$, had been convincingly rebutted by $\mathit{p}$ and $\mathit{p} → ¬\mathit{b}$. This model hence seems to not treat the two featured opinions on equal footing. Furthermore, this difference of conclusion compared to \cref{ex:ball} stems from the arbitrary fact that the expert did not utter her counter-argument to $\mathit{p}$ and may be considered to reflect an undesirable lack of robustness towards this kind of contingency.
 
-Note that a model similar to \cref{ex:ball2}, with identical conclusions, is obtained by considering that the expert, instead of claiming implicitly $\mathit{lp}'$, claims that the claim of her opponent is false, thus, replacing $\set{\mathit{lp}', \mathit{lp}' → \mathit{lp}}$ by $¬¬\mathit{lp}$.
+As \citeauthor{besnard_elements_2000} observe, it is often necessary to add implicit statements to a text in natural language for it to make logical sense. People may omit obvious implications; may use “if” when obviously meaning “if and only if”, may use “or” with the obvious meaning “exclusive or”, and so on. Sticking to the text without attempting at all to interpret what the protagonists really mean would yield pedantic and uninteresting debates. It seems like the modeler should have the right to deviate from the raw text at least to consider what the debater “obviously mean”. In this example, the expert can reasonably be interpreted as obviously meaning that her use of classical knowledge in ballistics is legitimate, from the simple fact that she uses them. Whether or not she explicitly said it during the exchange of arguments should not be relevant.
 
-The coexistence of \cref{ex:ball1,ex:ball2}, two apparently plausible models but that suggest very different conclusions, raise a problem for the modeler: choosing one seems to require to abandon an a priori neutrality about “who is right”. 
+These two arguments suggest to adopt the same model for \cref{ex:ball2} than for \cref{ex:ball}, and leave the debate formally unanswered, with both $\mathit{s}$ and $¬\mathit{s}$ unwarranted.
 
-One apparent way out of this conundrum is to “stick to the text”. By sticking to the text, we mean the strategy that consists in considering only arguments that explictly appear in the raw source. Under that approach, if the ballistic expert did not effectively answer that “The classical laws of physics are obviously correct” to the person giving the counter-argument, then, this is not included in the set of formulas. This strategy fails for two related reasons. First, it does not achieve the goal we are interested in here, of summarizing the arguments as best possible for displaying to a decision maker. When the goal is to display the arguments related to some issue, it is arbitrary to decide not to include an argument just because it has not been effectively uttered, if it can reasonably be thought that the argument would have been uttered, had the debater have had the possibility to say it. Second, it raises a difficult problem about where to stop. As \citeauthor{besnard_elements_2000} observe, it is often necessary to add implicit statements to a text in natural language for it to make logical sense. People may omit obvious implications; may use “if” when obviously meaning “if and only if”, may use “or” with the obvious meaning “exclusive or”, and so on. Sticking to the text without attempting at all to interpret what the protagonists really mean would yield pedantic and uninteresting debates. It seems like the modeler should have the right to deviate from the raw text at least to consider what the debater “obviously mean”. In this example, the expert can reasonably be interpreted as obviously meaning that her use of classical physics law is legitimate. Whether or not she explicitly said it during the exchange of arguments should not be relevant.
-
-Another apparent solution is, in the name of neutrality, to systematically prefer the models which do not make any conclusion warranted, in case of possible hesitation. In our ballistic example, this would lead to favor \cref{ex:ball1}. One reasoning in favor of that choice is that when going to \cref{ex:ball2}, we might as well go one step further and define $\Delta^{\prime\prime} = \Delta' \cup \set{\mathit{¬lp'}}$, reflecting the arguably implicit position of the second protagonist that the claim “The classical laws of physics are obviously correct” is incorrect, and yielding again that $b$ is unwarranted. At this stage, this reasoning suggests that we might as well stick to \cref{ex:ball1}, which is simpler and seems to avoid redundant arguments. The problem with this approach is that the problem is general, as can be easily guessed intuitively (and made formal by the theorem below): any non-consensual situation, thus, situation where $\Delta$ permits to deduce both $\phi$ and $¬\phi$, suffers from the problem considered here, hence, following systematically the strategy of preferring models that leave propostions unwarranted in case some non-neutral choice is required would lead to trivial models only, which leave everything unwarranted except on those issues on which every protagonist agree from the start. 
-
-We now turn to a similar example situation, where the opposite conclusion seems to be intuitively desired (that of making the claim unwarranted, instead of warranted), to further illustrate the difficulty of choice that the modeler faces.
+We now turn to a similar example situation, to further illustrate the difficulty of choice that the modeler faces.
 
 The following example features the famous Tweety, where we wonder whether Tweety can fly.
 \begin{example}[Full Tweety]
 	\label{ex:fullTweety}
+	A bird expert talks with a man about a specific bird called Tweety on a given island that she visited. Although they agree that Tweety is a bird, she disagrees with the man when he claims that Tweety does not fly: because birds fly, she explains, Tweety flies. Interrogated afterwards, the man still thinks that the expert was wrong: he argues that penguins are birds, for example, but do not fly.
+	
+	Here is a naïve model of this disagreement.
 	Our language uses the atoms 
 	$\mathit{fb}$ for \emph{Birds fly}; 
 	$\mathit{bT}$ for \emph{Tweety is a bird}; 
 	$\mathit{fT}$ for \emph{Tweety flies}; 
-	$\mathit{bp}$ for \emph{Penguins are birds}; 
-	$\mathit{fp}$ for \emph{Penguins do not fly}.
-	$\Delta = \set{\mathit{fb}, \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}, \mathit{bp}, ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
-	The undercut tree arguing for $\mathit{fT}$ has root $\set{\mathit{fb},\allowbreak \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}}$, having as child $\set{\mathit{bp},\allowbreak ¬\mathit{fp},\allowbreak \mathit{bp} \land ¬\mathit{fp} → ¬\mathit{fb}}$.
+	$\mathit{p}$ for \emph{Penguins are birds but do not fly}.
+	$\Delta = \set{\mathit{fb}, \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}, \mathit{p},\allowbreak \mathit{p} → ¬\mathit{fb}}$.
 \end{example}
 In the interest of conceptual simplicity, the model can be summarized as follows.
 \begin{example}[Short Tweety]
 	\label{ex:shortTweety}
 	Our language uses the atoms 
-	$\mathit{fb}$ for \emph{Birds fly}; 
+	$\mathit{fb}$ for \emph{Birds fly and Tweety is a bird}; 
 	$\mathit{fT}$ for \emph{Tweety flies}; 
 	$\Delta = \set{\mathit{fb},\allowbreak \mathit{fb} → \mathit{fT}, ¬\mathit{fb}}$.
-	The undercut tree arguing for $\mathit{fT}$ has root $\set{\mathit{fb},\allowbreak \mathit{fb} → \mathit{fT}}$, having as child $\set{¬\mathit{fb}}$.
 \end{example}
 
-This model has the same structure as \cref{ex:ball1}, but now it feels like the conclusion, $\mathit{fT}$, should not be warranted. (Our simplification of the model has no bearing on this discussion as \cref{ex:ball1} could be made more complex in order to reflect the structure of \cref{ex:fullTweety} instead.) However, another model is logically possible.
-\begin{example}[Saving Tweety]
-	\label{ex:savingTweety}
-	We here assume that the speaker is a bird expert, talking about observations on an isolated island on which indeed every birds fly (there are no penguins on that island). It is therefore reasonable to think that she meant that birds fly in that context, not in general. Accordingly, we can include the atom $\mathit{ii}$, standing for \emph{“We are on an isolated island where no penguins (or other non-flying birds) live”}, and make the argument for $\mathit{fT}$ warranted by following the approach of \cref{ex:ball2}.
-\end{example}
+The proposed model suggests that the man has given a decisive counter-argument to the expert, and that his claim is therefore shown to hold, at the current stage of the debate. However, this is arguable. Because a bird expert would not make such an obvious mistake as thinking that every bird fly, it is very reasonable to interpret her sentence as referring implicitly to the birds that can be observed in the specific island that is in the context of this discussion. There, it holds that every birds (that can be seen on the island) do fly. Under this interpretation, the expert would argue that Penguins are not birds that can be seen on the island. We observe a structure identical to the one of \cref{ex:ball,ex:ball2}: because the expert claims some proposition $\phi$, and it is consensual that $\psi$ entails $\phi$, then taking the expert seriously (or merely being kind with the expert) requires to suppose that the expert thinks that $¬\psi$, and that possibly she did not say it because she finds it obvious. In other words, not including $¬\psi$ in the model in such a situation requires to take a non-neutral position against the expert by assuming that she did not think about the fact that her claim of $\phi$ entails $\psi$, that she does not hold that $¬\psi$, and that she would not know how to answer the counter-argument. (Not including $¬\psi$ in the model without making that hypothesis, for the simple reason that the expert did not explicitly say that she supports $¬\psi$, is a fall-back to the already discussed strategy of trying to stick to the text and not interpret what the debaters mean, which has the drawbacks we highlighted here above.)
 
-This again shows that, in the classical logic approach, the modeler needs to take a position on which arguments are implicit, which hurts neutrality, as this may determine the positions that will seem to be well supported as a conclusion of the analysis. Our claim is not that no reasonable ground ever exist to choose one model rather than another one. Indeed, practitioners routinely make such choice with common sense, based on what is known about the context of the discussion, which claims are plausible, and what the protagonists may reasonably be considered to mean. In the Tweety example, unless strong hints indicate that we face a particular context such as the one of \cref{ex:savingTweety}, it is clear that \cref{ex:shortTweety} is the reasonable model. Our claim is simply that there is no purely logical ground to choose one model rather than another one that would be easily summarized in a few rules. The model that will be adopted for any non-trivial debate is a subtle mix of the content of the debate and of hypothesis about the world that are in the modeler’s mind. Because there is no publicly known algorithm to obtain a model from arguments in natural language form, it is impossible to follow a systematic procedure to determine if the model is indeed reasonable. Trusting that the model is reasonable requires trust in the modeler, in the classical approach.
-
-There is a need for an approach that makes the correctness of the attack relations a scientific (meaning, here, a precise and falsifiable) claim.
-
-More generally, whenever an argument can be built using formulas from $\Delta$ such that $\Phi \cup \Psi ⊢ ⊥$, with coherent $\Phi, \Psi$, then it may be considered that a person holding that $\Phi$ could answer to the counter-argument $\Psi$ that, indeed, $\Psi$ is incompatible with $\Phi$, but that this is because $\Psi$ is false. This merely uses the well-known principle that an implication always has a corresponding contrapositive.
-
-The following theorem shows that the problem illustrated here is not restricted to structures similar to the ones we chose as examples: as long as there is disagreement about some issue $\phi$ in a set of propositions $\Delta$, it is possible, by choosing to include or not a supplementary argument in favor of something that can be deduced already from $\Delta$, to make $\phi$ warranted or unwarranted.
-
-\begin{definition}[Open-minded operator]
-	For any $ \Psi, \Phi \subseteq \Delta$ such that $\Delta$ contains an unwarranted tree rooted at $\Phi$ arguing for $\phi$ with $\Psi$ as canonical undercutter, include a formula $\Phi → ¬\Psi$ in $O(\Delta) = \Delta'$. 
+The following definitions summarize our arguments. (To be continued.)
+\begin{definition}
+	Let $I \subseteq \allformulas$ be a set of formulas (supposedly, implicit claims). Consider some finite $\Delta \subset \allformulas$. The model $\Delta$ is said to be fragile considering the implicit claims in $I$ iff: $\exists \phi \in \Delta, I' \subseteq I \suchthat \Delta' = \Delta \cup I'$ is finite and $\phi$ is $\Delta$-warranted but $\phi$ is $\Delta'$-un-warranted.
+\end{definition}
+\begin{definition}
+	Consider some finite $\Delta \subset \allformulas$. Define the implicit disagreements from $\Delta$ as $I_\Delta$ = $\set{¬\psi \suchthat \phi \in \Delta \text{ and } \Delta \text{ contains an argument } (\psi, ¬\phi)}$.
 \end{definition}
 
-\begin{theorem}
-	For all propositions that are controversial ($\Delta$ permits to deduce both $\phi$ and $¬\phi$), $\phi$ is not warranted in $\Delta$ or in $O(\Delta) = \Delta'$.
-\end{theorem}
-Note that we merely assume that $\Delta'$ includes arguments whose entailments were already included in $\Delta$.
-
-We conclude this section with a short note about the condition of non-repetition of the authors. Undercut trees are defined in such a way as to avoid repeating counter-arguments again and again, saying $\phi$, then as a counter argument, $¬\phi$, then as a counter-counter-argument $\phi$ again, and so on indefinitely. The technical trick used is to forbid a canonical undercutter of some node to be included in a tree if it consists solely of formulas that have been used already in the parents of that node (or the node itself). This rule makes sense to avoid infinite trees, and may also apparently solve the problem we highlight…
-
-TODO: rather use $x$ attacked by $y → ¬x$ and then an implicit counter-argument $¬y$ (which can be used because either the first one disagrees that $y → ¬x$ or can logically claim from $x$ that $¬y$). This avoid the problem that it feels like repeating the argument. About $x$ attacked by $¬x$: need not say anything about this as it is already symmetric.
+There is a need for an approach that makes the correctness of the attack relations a scientific (meaning, here, a precise and falsifiable) claim.
 
 \subsection{General study}
 Let $T$ be a set of possible texts in natural language and $p$ a procedure that transforms any text in $T$ into a set of undercut trees $\mathcal{U}$. Considering the classical logic approach first, we assume $p$ takes the following form: it first applies a set of possible interpretations of the text using a function $i$ to yield $\Delta, \Delta', …$, which are then used to produce undercut trees. Define $C$ as the classical logic approach defined above; applying $C$ to $i(t)$ thus results in a set of sets of undercut trees (one set for each $\Delta$).
