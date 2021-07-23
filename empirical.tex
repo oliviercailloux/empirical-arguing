@@ -188,6 +188,7 @@ Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. 
 
 Consider a propositional language $\mathcal{L}_p$ with the implication and conjunction connectives ($\rightarrow$,$\Rightarrow$,$\curly$,$\land$) and strong negation ($\lnot$) on a finite set of literals (facts) where a literal is either an atomic proposition or its negation. 
 The set of facts is denoted $F$.
+\commentOC{Is Fact the same thing as Literal? If so, I suggest to use only one of these two words.}
 
 A fact in $\mathcal{L}_p$ is a literal; the body and head of a rule are finite conjunction of literals. A rule expressed in $\mathcal{L}_p$ is applicable on a set of literals if its body is included in this set.
 There are three kinds of rules:
@@ -212,6 +213,7 @@ The general idea of defeasible logics is then to provide a proof for a given con
 
 \begin{itemize}
 \item $+\Delta$: if $P(i+1) = +\Delta f$ then either
+\commentOC{Here, $+\Delta f$ seems to be a literal, as $P(.)$ is defined as a literal (as $P$ is a sequence of literals). But it is not defined as a literal but rather as a label, above. Is a label a special kind of literal?}
   \begin{enumerate}
   \item $f \in F$ or
   \item $\exists r \in R_s$ s.t. $f \in Head(r)$ and $\forall \varphi \in Body(r): +\Delta \varphi \in P(1..i)$.
