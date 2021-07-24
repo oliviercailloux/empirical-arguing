@@ -372,27 +372,28 @@ Second, we argue, using further examples, that there is no neutral way to determ
 \begin{example}[Ballistic expert]
 	\label{ex:ball}
 	A discussion happens about the possible cause of death of a person. Someone claims she has been shot by a sniper situated on the opposite building. A ballistic expert replies that no bullet could have reached the victim, considering her position, from the suspected position of the sniper. A counter-argument is raised saying that this in fact requires to use classical results in ballistics (as known in the scientific community), but they are in fact not known to be correct: a gigantic plot has led to them being falsely viewed as empirically validated, but they are not. The expert replies to this argument with a shrug by saying that there obviously exist no plot that render the use of ballistics illegitimate in this context.
-\end{example}
-A naïve model of this disagreement can be designed as follows.
-\begin{example}[Model for \cref{ex:ball}, with non-rebutted attack]
-	\label{ex:ball1}
-	This disagreement can be modeled using the atoms $\mathit{s}$ for \emph{A sniper shot the victim}, $\mathit{b}$ for \emph{Ballistics can be used in this context} and $\mathit{p}$ for \emph{A plot has led to a false impression of validity of ballistics}.
+	
+	This disagreement can be modeled using the atoms 
+	$\mathit{s}$ for \emph{A sniper shot the victim}, 
+	$\mathit{b}$ for \emph{Ballistics can be used in this context} and 
+	$\mathit{p}$ for \emph{A plot has led to a false impression of validity of ballistics}, 
+	and using the model 
 	$\Delta = \set{\mathit{s},\allowbreak \mathit{b}, \mathit{b} → ¬\mathit{s}, \mathit{p}, \mathit{p} → ¬\mathit{b}, ¬\mathit{p}}$.
 \end{example}
 This model seems to adequately capture the featured disagreement: neither the argumentation tree for $\mathit{s}$ nor the one for $¬\mathit{s}$ is warranted, reflecting the fact that who is right remains undetermined at this stage (if one wants to remain neutral, thus, not use the fact that one of the featured arguments seems weak).
 
 Consider now the following variant of that scenario.
-\begin{example}[Model for \cref{ex:ball}, with disagreement left implicit]
+\begin{example}[Variation of \cref{ex:ball}]
 	\label{ex:ball2}
 	This example is identical to \cref{ex:ball}, except that the ballistic expert does not reply to the last argument (either because she has not had the opportunity to reply, or because she considers that the argument is not worth answering). A naïve model for this example is $\Delta^\text{l} = \set{\mathit{s},\allowbreak \mathit{b}, \mathit{b} → ¬\mathit{s}, \mathit{p}, \mathit{p} → ¬\mathit{b}}$.
 \end{example}
-This model seems to not adequately capture the opinion of the expert: the argumentation tree for the claim $\mathit{s}$ is now warranted, as if the counter-argument of the expert, using $\mathit{b}$ and $\mathit{b} → ¬\mathit{s}$, had been convincingly rebutted by $\mathit{p}$ and $\mathit{p} → ¬\mathit{b}$. This model hence seems to not treat the two featured opinions on equal footing. Furthermore, this difference of conclusion compared to \cref{ex:ball} stems from the arbitrary fact that the expert did not utter her counter-argument to $\mathit{p}$ and may be considered to reflect an undesirable lack of robustness towards this kind of contingency.
+This model seems to not adequately capture the opinion of the expert: the argumentation tree for the claim $\mathit{s}$ is now warranted, as if the counter-argument of the expert, using $\mathit{b}$ and $\mathit{b} → ¬\mathit{s}$, had been convincingly rebutted by $\mathit{p}$ and $\mathit{p} → ¬\mathit{b}$. This model hence seems to not treat the two featured opinions on equal footing. Furthermore, this difference of conclusion compared to \cref{ex:ball} stems from the arbitrary fact that the expert did not utter her disagreement with $\Psi = \set{\mathit{p}, \mathit{p} → ¬\mathit{b}}$, although, arguably, it is clear that she believe $¬\Psi$ (thus $¬\mathit{p}$ or $¬(\mathit{p} → ¬\mathit{b})$), as $¬\Psi$ is entailed by her claim $\mathit{b}$. This difference of conclusion between both models may be considered to reflect an undesirable lack of robustness towards this kind of contingency.
 
 As \citeauthor{besnard_elements_2000} observe, it is often necessary to add implicit statements to a text in natural language for it to make logical sense. People may omit obvious implications; may use “if” when obviously meaning “if and only if”, may use “or” with the obvious meaning “exclusive or”, and so on. Sticking to the text without attempting at all to interpret what the protagonists really mean would yield pedantic and uninteresting debates. It seems like the modeler should have the right to deviate from the raw text at least to consider what the debater “obviously mean”. In this example, the expert can reasonably be interpreted as obviously meaning that her use of classical knowledge in ballistics is legitimate, from the simple fact that she uses them. Whether or not she explicitly said it during the exchange of arguments should not be relevant.
 
 These two arguments suggest to adopt the same model for \cref{ex:ball2} than for \cref{ex:ball}, and leave the debate formally unanswered, with both $\mathit{s}$ and $¬\mathit{s}$ unwarranted.
 
-We now turn to a similar example situation, to further illustrate the difficulty of choice that the modeler faces.
+The problem is that this situation is general: when there is a disagreement about some conclusion, and some model seems to support some claim as warranted even though the model also permits to deduce its opposite claim, the question can in principle always be raised whether some implicit disagreement has been omitted, which would make the claim non warranted. The following example permit to understand intuitively why this problem is general.
 
 The following example features the famous Tweety, where we wonder whether Tweety can fly.
 \begin{example}[Full Tweety]
@@ -429,6 +430,19 @@ The following definitions summarize our arguments. (To be continued.)
 \begin{definition}
 	Consider some finite $\Delta \subset \allformulas$. Define the implicit disagreements from $\Delta$ as $I_\Delta$ = $\set{¬\psi \suchthat \phi \in \Delta \text{ and } \Delta \text{ contains an argument } (\psi, ¬\phi)}$.
 \end{definition}
+
+\begin{conjecture}
+	Consider a finite $\Delta \subseteq \allformulas$ and the corresponding implicit disagreements $I_\Delta$. If $\Delta$ contains a warranted proposition, then it is fragile considering the implicit claims in $I_\Delta$.
+\end{conjecture}
+
+For the reasons stated in this section, we consider being guaranteed neutral as requiring to not use models that are fragile considering implicit disagreements. It follows that neutrality is incompatible with obtaining warranted propositions.
+
+\begin{remark}
+	Being neutral is less stringent than being guaranteed neutral. We use the latter phrase to refer to the requirement of using a procedure that is automatically verifiable by third-parties. A modeler can be neutral and not guaranteed neutral: she may use her intuition and unformalized knowledge about the context of a debate to determine which claims are implicit and which ones are arguably not. The usual example about Tweety features such situation: in many circumstances, the modeler would be justified in considering that the counter-argument about penguins indeed attacks the argument about birds supposedly implying an ability to fly, because there may be a presumption, unless the context indicates it, that the “right” meaning of bird in that context is the one of general birds, and the modeler may use the fact that she knows that the argument about penguins is correct in that sense. 
+	
+	Using intuition and unformalized knowledge is routinely practiced in obtaining formal models. 
+	We do not claim that this is a mistake. We only claim that this requires to use “common sense”, which is notoriously difficult to define precisely, and does therefore not guarantee neutrality, in the sense that someone seeing the result of the model may still doubt whether the modeler did the model correctly; and if a claim to the contrary is raised, no criteria are known to determine who is right. This is especially a problem in situations where trusting the modeler is undesirable.
+\end{remark}
 
 There is a need for an approach that makes the correctness of the attack relations a scientific (meaning, here, a precise and falsifiable) claim.
 
