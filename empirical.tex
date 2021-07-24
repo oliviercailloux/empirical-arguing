@@ -95,10 +95,13 @@ As canonical undercuts depend only on the supports of the arguments, we choose t
 \end{example}
 
 Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (with $s$ defining a tree, thus, $s$ connected and defining at most one path from the root to any $n' \in N$). 
+
 Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, where nodes are sets of formulas, with $u_\Phi$ defined as follows. 
 Given a node $\Psi$ in the tree, let $u_\Phi^{-1}[\Psi] \subseteq \Delta$ denote the union of its ancestors, including itself (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
-We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $(\Phi, \alpha)$ is an argument (thus $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 (Note that an undercut tree is finite, as $\Delta$ is finite.)
+Abusing notation, we use $u_\Phi$ to denote the tree $(\Phi, u_\Phi)$ when it raises no ambiguity.
+
+We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $(\Phi, \alpha)$ is an argument (thus $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 \footnote{The authors define an argument tree for $\alpha$ as a tree of arguments, rooted at an argument $a_1 = (\Phi_1, \alpha)$, such that the children of a node $a = (\Phi, \beta)$ consist of all canonical undercuts $(\Psi, \gamma)$ for $a$ such that $\Psi$ is not a subset of $\Phi \cup \Phi_1 \cup \Phi_2 \cup … \cup \Phi_n$, where $(Φ_1, \beta_1), …, (Φ_n, \beta_n)$ denote the ancestors of $(\Phi, \beta)$.
 As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. As a result, we choose to consider only the sets of formulas as nodes of our trees, corresponding to the supports of their argument trees.
 }
@@ -117,9 +120,9 @@ As the authors observe, it follows that an argument tree arguing for $\alpha$ ha
 \end{figure}
 \begin{example}[Continuing \cref{ex:abstract}]
 	\label{ex:abstUnder}
-	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $(\set{x}, u_{\set{x}})$, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton constituted by the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
+	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $(\set{x}, u_{\set{x}})$, or $u_{\set{x}}$ for short, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton constituted by the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
 	To compute the children of this node, $u_{\set{x}}(\Phi_2)$, observe that out of the two canonical undercuts for $\Phi_2$, only one uses some new formulas (that is, formulas that are not in $\Phi_1 \cup \Phi_2$). Thus, the unique child of $\Phi_2$ is $\Phi_3 = \set{z, z → ¬y}$. 
-	Finally, $u_{\set{x}}(\Phi_3) = \emptyset$ as $u_{\set{x}}^{-1}[\Phi_3] = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
+	Finally, $u_{\set{x}}(\Phi_3) = \emptyset$ as no new formulas exist at this stage: $u_{\set{x}}^{-1}[\Phi_3] = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
 	
 	The unique undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $(\Phi_2, u_{\Phi_2})$ with $u_{\Phi_2}(\Phi_2) = \set{\Phi_1, \Phi_3}$ and $u_{\Phi_2}(\Phi_1) = u_{\Phi_2}(\Phi_3) = \emptyset$.
 \end{example}
@@ -383,7 +386,7 @@ This model seems to adequately capture the featured disagreement: neither the ar
 Consider now the following variant of that scenario.
 \begin{example}[Model for \cref{ex:ball}, with disagreement left implicit]
 	\label{ex:ball2}
-	This example is identical to \cref{ex:ball}, except that the ballistic expert does not reply to the last argument (either because she has not had the opportunity to reply, or because she finds the argument too stupid to be worth answering). A naïve model for this example is $\Delta^\text{l} = \set{\mathit{s},\allowbreak \mathit{b}, \mathit{b} → ¬\mathit{s}, \mathit{p}, \mathit{p} → ¬\mathit{b}}$.
+	This example is identical to \cref{ex:ball}, except that the ballistic expert does not reply to the last argument (either because she has not had the opportunity to reply, or because she considers that the argument is not worth answering). A naïve model for this example is $\Delta^\text{l} = \set{\mathit{s},\allowbreak \mathit{b}, \mathit{b} → ¬\mathit{s}, \mathit{p}, \mathit{p} → ¬\mathit{b}}$.
 \end{example}
 This model seems to not adequately capture the opinion of the expert: the argumentation tree for the claim $\mathit{s}$ is now warranted, as if the counter-argument of the expert, using $\mathit{b}$ and $\mathit{b} → ¬\mathit{s}$, had been convincingly rebutted by $\mathit{p}$ and $\mathit{p} → ¬\mathit{b}$. This model hence seems to not treat the two featured opinions on equal footing. Furthermore, this difference of conclusion compared to \cref{ex:ball} stems from the arbitrary fact that the expert did not utter her counter-argument to $\mathit{p}$ and may be considered to reflect an undesirable lack of robustness towards this kind of contingency.
 
