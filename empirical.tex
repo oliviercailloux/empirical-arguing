@@ -74,14 +74,13 @@ Here we describe succinctly the main paradigms that have been proposed in argume
 In this section we consider the proposition described in the famous book by \citet{besnard_elements_2000} about argumentation on the basis of classical logic. We focus on their concept of trees, as it permits to determine which propositions are warranted. We simplify some of their definitions, for example, by defining trees over sets of formulas instead of over arguments, and show in footnotes the original definitions so that the reader can observe that our definitions are equivalent to the original propositions.
 
 Let $\allformulas$ be an (infinite) set of possible formulas in predicate logic with the usual deduction operator $⊢$. Let $\Delta \subseteq \allformulas$ be a finite set of formulas.
-Given $\Phi \subseteq \Delta$, let ${\land}\Phi \subseteq \Delta$ denote the set of formulas that are conjunctions of all the formulas of $\Phi$ in whatever order (thus $\phi \in {\land}\Phi$ iff $\Phi$ is the set of all the conjuncts of $\phi$).
-We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \Psi ⊢ ⊥$ denote that the formulas in $\Phi$ and $\Psi$ cannot all be satisfied. We say that a set of formulas $\Phi$ is consistent iff $\Phi ⊬ ⊥$.
+We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \Psi ⊢ ⊥$ denote that the formulas in $\Phi$ and $\Psi$ cannot all be satisfied. A set of formulas $\Phi$ is \emph{consistent} iff $\Phi ⊬ ⊥$.
 
-An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha$ a formula not necessarily from $\Delta$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
+An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha \in \allformulas$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 
-Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a coherent minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Psi ⊬ ⊥, \Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
-\footnote{The authors define an undercut for an argument $(Φ, α)$ as an argument $(Ψ , ¬(φ_1 ∧\ldots ∧ φ_n))$ where $\set{φ_1, \ldots, φ_n} ⊆ Φ$, and define that an argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ iff it is an undercut for $(Φ, α)$ and $(φ_1, \ldots, φ_n)$ is the canonical enumeration of $Φ$.
-As canonical undercuts depend only on the supports of the arguments, we choose to define this concept as a relation over the sets of formulas rather than on arguments.
+Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Psi ⊬ ⊥, \Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
+\footnote{The authors define an undercut for an argument $(Φ, α)$ as an argument $(Ψ , ¬(φ_1 ∧\ldots ∧ φ_n))$ where $\set{φ_1, \ldots, φ_n} ⊆ Φ$, and define that an argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ iff it is an undercut for $(Φ, α)$ and $(φ_1, \ldots, φ_n)$ is the canonical enumeration of $Φ$ (a canonical enumeration of every $\Phi \subseteq \Delta$ is supposedly given).
+We define this concept as a relation over the sets of formulas rather than on arguments to make it clear that canonical undercuts depend only on the supports of the arguments.
 %It follows that $\Psi \subseteq \Delta$ is a canonical undercut for $\Phi \subseteq \Delta$ in our sense iff, writing $¬(φ_1 ∧ \ldots ∧ φ_n)$ for the canonical enumeration of $Φ$, the argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ in their sense, for any $\alpha$ entailed by $\Phi$.
 }
 
@@ -94,16 +93,17 @@ As canonical undercuts depend only on the supports of the arguments, we choose t
 	The canonical undercuts for $\set{y, y → ¬x}$ are $\set{z, z → ¬y}$ and $\set{x}$.
 \end{example}
 
-Given some set $N$, we represent a tree rooted at $n \in N$ using a pair $(n, s)$ where $s \subseteq N × N$ represents its successor relation (with $s$ defining a tree, thus, $s$ connected and defining at most one path from the root to any $n' \in N$). 
+The authors propose to use the status of the root nodes of argument trees as one way of discriminating arguments. Let us define undercut trees with this goal in mind.
 
-Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $U = (\Phi, u_\Phi)$, where nodes are sets of formulas, with $u_\Phi$ defined as follows. 
+Given some set $N$, we represent a tree using its successor relation $u \subseteq N × N$, with $u$ defining a tree, thus, $u$ connected and defining at most one path from the root to any $n \in N$. 
+
+Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $u_\Phi$, where nodes are sets of formulas, rooted at $\Phi$, with $u_\Phi$ defined recursively as follows. 
 Given a node $\Psi$ in the tree, let $u_\Phi^{-1}[\Psi] \subseteq \Delta$ denote the union of its ancestors, including itself (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
 (Note that an undercut tree is finite, as $\Delta$ is finite.)
-Abusing notation, we use $u_\Phi$ to denote the tree $(\Phi, u_\Phi)$ when it raises no ambiguity.
 
 We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $(\Phi, \alpha)$ is an argument (thus $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 \footnote{The authors define an argument tree for $\alpha$ as a tree of arguments, rooted at an argument $a_1 = (\Phi_1, \alpha)$, such that the children of a node $a = (\Phi, \beta)$ consist of all canonical undercuts $(\Psi, \gamma)$ for $a$ such that $\Psi$ is not a subset of $\Phi \cup \Phi_1 \cup \Phi_2 \cup … \cup \Phi_n$, where $(Φ_1, \beta_1), …, (Φ_n, \beta_n)$ denote the ancestors of $(\Phi, \beta)$.
-As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. As a result, we choose to consider only the sets of formulas as nodes of our trees, corresponding to the supports of their argument trees.
+As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. As a result, we consider only the sets of formulas as nodes of our trees, corresponding to the supports of their argument trees.
 }
 
 \begin{figure}
@@ -120,11 +120,11 @@ As the authors observe, it follows that an argument tree arguing for $\alpha$ ha
 \end{figure}
 \begin{example}[Continuing \cref{ex:abstract}]
 	\label{ex:abstUnder}
-	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $(\set{x}, u_{\set{x}})$, or $u_{\set{x}}$ for short, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton constituted by the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
+	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $u_{\set{x}}$, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton constituted by the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
 	To compute the children of this node, $u_{\set{x}}(\Phi_2)$, observe that out of the two canonical undercuts for $\Phi_2$, only one uses some new formulas (that is, formulas that are not in $\Phi_1 \cup \Phi_2$). Thus, the unique child of $\Phi_2$ is $\Phi_3 = \set{z, z → ¬y}$. 
 	Finally, $u_{\set{x}}(\Phi_3) = \emptyset$ as no new formulas exist at this stage: $u_{\set{x}}^{-1}[\Phi_3] = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
 	
-	The unique undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $(\Phi_2, u_{\Phi_2})$ with $u_{\Phi_2}(\Phi_2) = \set{\Phi_1, \Phi_3}$ and $u_{\Phi_2}(\Phi_1) = u_{\Phi_2}(\Phi_3) = \emptyset$.
+	The unique undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $u_{\Phi_2}$ with $u_{\Phi_2}(\Phi_2) = \set{\Phi_1, \Phi_3}$ and $u_{\Phi_2}(\Phi_1) = u_{\Phi_2}(\Phi_3) = \emptyset$.
 \end{example}
 \begin{figure}
 	\caption{The undercut tree arguing for $¬x$}
@@ -139,14 +139,12 @@ As the authors observe, it follows that an argument tree arguing for $\alpha$ ha
 	\end{tikzpicture}
 \end{figure}
 
-Given a tree $U = (\Psi, u_\Psi)$, define the set $R$ of defeated nodes as the set such that $r \in R$ iff $u_\Psi(r) \nsubseteq R$, thus, if some successor of $r$ in $U$ is not in $R$.
+Given a tree $u_\Phi$, define the set $R$ of defeated nodes as the subset of nodes such that $\Psi \in R$ iff $u_\Phi(\Psi) \nsubseteq R$, thus, if some successor of $\Psi$ in $u_\Phi$ is not in $R$.
 One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves up to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
-
+We say that a formula $\phi \in \allformulas$ is \emph{warranted} iff some undercut tree arguing for $\phi$ has an undefeated root.
 \begin{example}[Continuing \cref{ex:abstUnder}]
-	The root of the tree $(\set{x}, u_{\set{x}})$ arguing for $x$ is undefeated while the root of the tree $(\Phi_2, u_{\Phi_2})$ arguing for $¬x$ is defeated.
+	The formula $x$ is warranted: the leaf $\Phi_3$ of the tree $u_{\set{x}}$ is undefeated, thus its parent $\Phi_2$ is defeated, hence, the root $\Phi_1$ is undefeated. The formula $¬x$ is not warranted, as the root of the unique tree $u_{\Phi_2}$ arguing for $¬x$ is defeated.
 \end{example}
-
-The authors propose to use the status of root nodes as one way of discriminating arguments.
 
 \subsection{PAFs}
 \label{sec:pafs}
@@ -406,7 +404,7 @@ The following example features the famous Tweety, where we wonder whether Tweety
 	$\mathit{fb}$ for \emph{Birds fly}; 
 	$\mathit{bT}$ for \emph{Tweety is a bird}; 
 	$\mathit{fT}$ for \emph{Tweety flies}; 
-	$\mathit{p}$ for \emph{Penguins are birds but do not fly}.
+	$\mathit{p}$ for \emph{penguins are birds but do not fly}.
 	$\Delta = \set{\mathit{fb}, \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}, \mathit{p},\allowbreak \mathit{p} → ¬\mathit{fb}}$.
 \end{example}
 In the interest of conceptual simplicity, the model can be summarized as follows.
@@ -418,11 +416,15 @@ In the interest of conceptual simplicity, the model can be summarized as follows
 	$\Delta = \set{\mathit{fb},\allowbreak \mathit{fb} → \mathit{fT}, ¬\mathit{fb}}$.
 \end{example}
 
-The proposed model suggests that the man has given a decisive counter-argument to the expert, and that his claim is therefore shown to hold, at the current stage of the debate. However, this is arguable. Because a bird expert would not make such an obvious mistake as thinking that every bird fly, it is very reasonable to interpret her sentence as referring implicitly to the birds that can be observed in the specific island that is in the context of this discussion. There, it holds that every birds (that can be seen on the island) do fly. Under this interpretation, the expert would argue that Penguins are not birds that can be seen on the island. We observe a structure identical to the one of \cref{ex:ball,ex:ball2}: because the expert claims some proposition $\phi$, and it is consensual that $\psi$ entails $\phi$, then taking the expert seriously (or merely being kind with the expert) requires to suppose that the expert thinks that $¬\psi$, and that possibly she did not say it because she finds it obvious. In other words, not including $¬\psi$ in the model in such a situation requires to take a non-neutral position against the expert by assuming that she did not think about the fact that her claim of $\phi$ entails $\psi$, that she does not hold that $¬\psi$, and that she would not know how to answer the counter-argument. (Not including $¬\psi$ in the model without making that hypothesis, for the simple reason that the expert did not explicitly say that she supports $¬\psi$, is a fall-back to the already discussed strategy of trying to stick to the text and not interpret what the debaters mean, which has the drawbacks we highlighted here above.)
+The proposed model suggests that the man has given a decisive counter-argument to the expert, and that his claim is therefore shown to hold, at the current stage of the debate. However, this is arguable. Because a bird expert would not make such an obvious mistake as thinking that every bird fly, it is very reasonable to interpret her sentence as referring implicitly to the birds that can be observed in the specific island that is in the context of this discussion. There, it holds that every birds (that can be seen on the island) do fly. Under this interpretation, the expert would argue that penguins are not birds that can be seen on the island. We observe a structure identical to the one of \cref{ex:ball,ex:ball2}: because the expert claims some proposition $\phi$ (here, that birds in the relevant sense fly), and it is consensual that $\psi$ entails $¬\phi$ (here, that if penguins are birds in the relevant sense, then birds in that relevant sense do not fly), then taking the expert seriously (or merely being kind with the expert) requires to suppose that the expert thinks that $¬\psi$, and that possibly she did not say it because she finds it obvious. In other words, not including $¬\psi$ in the model in such a situation requires to take a non-neutral position against the expert by assuming that she does not hold that $¬\psi$, and that she thus did not think about the fact that her claim of $\phi$ entails $¬\psi$. (Not including $¬\psi$ in the model without making that hypothesis, for the simple reason that the expert did not explicitly say that she supports $¬\psi$, is a fall-back to the already discussed strategy of trying to stick to the text and not interpret what the debaters mean, which has the drawbacks we highlighted here above.)
+
+Note that one may which to use different letters to represent the two meanings of the term birds: birds as understood in their general definition or birds with the implicit meaning: birds of this island. We stick to one letter for brievity, but this choice has no impact on our argument.
+
+Our examples involve experts, but the requirements of neutrality apply equally when the debaters are not known as experts, for the same reasons: the modeler should not have to try to guess which entailments the debaters considered but left implicit when making their claims.
 
 The following definitions summarize our arguments. (To be continued.)
 \begin{definition}
-	Let $I \subseteq \allformulas$ be a set of formulas (supposedly, implicit claims). Consider some finite $\Delta \subset \allformulas$. The model $\Delta$ is said to be fragile considering the implicit claims in $I$ iff: $\exists \phi \in \Delta, I' \subseteq I \suchthat \Delta' = \Delta \cup I'$ is finite and $\phi$ is $\Delta$-warranted but $\phi$ is $\Delta'$-un-warranted.
+	Let $I \subseteq \allformulas$ be a set of formulas (supposedly, implicit claims). Consider some finite $\Delta \subset \allformulas$. The model $\Delta$ is said to be fragile considering the implicit claims in $I$ iff: $\exists \phi \in \Delta, I' \subseteq I \suchthat \Delta' = \Delta \cup I'$ is finite and $\phi$ is warrented in the model $\Delta$ but $\phi$ is not warranted in the model $\Delta'$.
 \end{definition}
 \begin{definition}
 	Consider some finite $\Delta \subset \allformulas$. Define the implicit disagreements from $\Delta$ as $I_\Delta$ = $\set{¬\psi \suchthat \phi \in \Delta \text{ and } \Delta \text{ contains an argument } (\psi, ¬\phi)}$.
