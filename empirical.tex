@@ -460,17 +460,30 @@ The following definitions and result indicate how our arguments generalize. (To 
 	The model $\Delta$ is said to be robust considering the implicit claims in $I$ iff it is not fragile considering the implicit claims in $I$.
 \end{definition}
 \begin{definition}
-	Consider some finite $\Delta \subset \allformulas$. Define the implicit disagreements from $\Delta$ as $I_\Delta$ = $\set{¬\psi \suchthat \phi \in \Delta \text{ and } \Delta \text{ contains an argument } (\psi, ¬\phi)}$.
+	Consider some finite $\Delta \subset \allformulas$. Define the implicit disagreements from $\Delta$ as $I_\Delta$ = $\set{¬\Psi \suchthat \phi \in \Delta, \Psi = \set{\psi_1, \psi_2, …} \subseteq \Delta \text{ and } (\Psi, ¬\phi) \text{ is an argument}}$. Here, $¬\Psi$ represents the formula $¬\psi_1 \lor ¬\psi_2 \lor …$.
 	\commentOC{In the theorem, any set of implicit dis would suffice, where $¬\psi$ is anything that contradicts $\Psi$.}
 \end{definition}
+Note that $¬\Psi$ can arguably be considered as an implicit disagreement in the provided condition, as it is entailed by $\phi$, which is in $\Delta$.
 \begin{definition}
 	A model $\Delta$ has \emph{only trivial warrants} iff its set of warranted propositions is $\set{\phi \in \allformulas \suchthat \Delta \vdash \phi \land \Delta \nvdash ¬\phi}$.
 \end{definition}
 
+\commentOC{Strange. If Delta has any non-consensual proposition, then anything holds and Delta has only non-consensual propositions! Need to assume that there is an argument for $¬\phi$.}
+
 \begin{conjecture}
 	Consider a finite $\Delta \subseteq \allformulas$ and the corresponding implicit disagreements $I_\Delta$. If $\Delta$ is robust considering the implicit claims in $I_\Delta$, then $\Delta$ has only trivial warrants.
 \end{conjecture}
-
+\begin{proof}
+	Consider $\phi \in \Delta$. Assume $\phi$ non consensual in $\Delta$. 
+	Let $\mathcal{U}$ denote the set of undercut trees arguing for $\phi$ with an undefeated root. 
+	Given an undercut tree $u$, let $u^{-1}(\emptyset)$ denote its set of leaves (the nodes with no children).
+	Given a node $\Psi$ in an undercut tree $u$, let $n(\Psi, u)$ denote $¬\Psi$ if $¬\Psi$ is not used in $u$, $¬¬(¬\Psi)$ if $¬\Psi$ is a node in $u$ but $¬¬(¬\Psi)$ isn’t, and so on. (Note that as $u$ is finite, there is necessarily some formula $(¬¬)^k(¬\Psi)$ that is not used in $u$).
+	Define $\Delta' = \Delta \cup \set{n(\Psi, u) \suchthat u \in \mathcal{U} \text{ and } \Psi \in u^{-1}(\emptyset)}$.
+	 
+	We show that every undercut tree arguing for $\phi$ in $\Delta'$ has a defeated root.
+	
+\end{proof}
+	
 For the reasons stated in this section, we consider being guaranteed neutral as requiring to not use models that are fragile considering implicit disagreements. It follows that neutrality is incompatible with obtaining non-trivial warranted propositions.
 
 \begin{remark}
@@ -478,6 +491,9 @@ For the reasons stated in this section, we consider being guaranteed neutral as 
 	
 	Using intuition and unformalized knowledge is routinely practiced in obtaining formal models. 
 	We do not claim that this is necessarily a mistake. We only claim that this requires to use “common sense”, which is notoriously difficult to define precisely, and does therefore not guarantee neutrality, in the sense that someone seeing the result of the model may still doubt whether the modeler considered implicit claims correctly; and if a suspicion to the contrary is raised, no criteria are known to determine who is right. This is especially a problem in situations where trusting the modeler is undesirable.
+	
+	To summarize: if one may use $\Psi$ to attack $\phi$, when $\Psi \vdash ¬\phi$, with $\phi \in \Delta$, then neutrality requires to also authorize to use $¬\Psi$, which is obtained by the contrapositive fact that $\phi \vdash ¬\Psi$.
+	Proceeding otherwise requires to assume that the entailment from $\Psi$ to $¬\phi$ is justified whereas the contrapositive one is not, which may not be justified by logic alone, although it may be justified on grounds related to which facts hold in the world or what one may assume the protagonists in a debate know and ignore. In the famous classical Tweety example (and assuming consensual that penguins do not fly), it may be justified to use the fact that pengins being birds, birds do not fly; and not justified to use the contrapositive fact that “birds fly” logically entail that penguins are not birds. But this does not result from logic, but from our knowledge that in fact, that birds fly is an incorrect claim which should be defeated by penguins being birds, and not the other way around. Our conclusion, thus, is that non-trivial warrants can be obtained only at the price of the modeler deciding who is right, not as a result of a logical model using only logic deduction.
 \end{remark}
 
 There is a need for an approach that makes the correctness of the attack relations a scientific (meaning, here, a precise and falsifiable) claim.
