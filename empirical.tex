@@ -446,14 +446,6 @@ The following example features the famous Tweety, where we wonder whether Tweety
 	$\mathit{p}$ for \emph{penguins are birds but do not fly}.
 	$\Delta = \set{¬\mathit{fT}, \mathit{fb}, \mathit{bT},\allowbreak \mathit{fb} \land \mathit{bT} → \mathit{fT}, \mathit{p},\allowbreak \mathit{p} → ¬\mathit{fb}}$.
 \end{example}
-In the interest of conceptual simplicity, the model can be summarized as follows.
-\begin{example}[Short Tweety]
-	\label{ex:shortTweety}
-	Our language uses the atoms 
-	$\mathit{fb}$ for \emph{Birds fly and Tweety is a bird}; 
-	$\mathit{fT}$ for \emph{Tweety flies}; 
-	$\Delta = \set{\mathit{fb},\allowbreak \mathit{fb} → \mathit{fT}, ¬\mathit{fb}}$.
-\end{example}
 
 The proposed model suggests that the man has given a decisive counter-argument to the expert, and that his claim is therefore shown to hold, at the current stage of the debate. However, this is arguable. Because a bird expert would not make such an obvious mistake as thinking that every bird fly, it is very reasonable to interpret her sentence as referring implicitly to the birds that can be observed in the specific island that is in the context of this discussion. There, it holds that every birds (that can be seen on the island) do fly. Under this interpretation, the expert would argue that penguins are not birds that can be seen on the island. We observe a structure identical to the one of \cref{ex:ball,ex:ball2}: because the expert claims some proposition $\phi$ (here, that birds in the relevant sense fly), and it is consensual that $\psi$ entails $¬\phi$ (here, that if penguins are birds in the relevant sense, then birds in that relevant sense do not fly), then taking the expert seriously (or merely being kind with the expert) requires to suppose that the expert thinks that $¬\psi$, and that possibly she did not say it because she finds it obvious. In other words, not including $¬\psi$ in the model in such a situation requires to take a non-neutral position against the expert by assuming that she does not hold that $¬\psi$, and that she thus did not think about the fact that her claim of $\phi$ entails $¬\psi$. (Not including $¬\psi$ in the model without making that hypothesis, for the simple reason that the expert did not explicitly say that she supports $¬\psi$, is a fall-back to the already discussed strategy of trying to stick to the text and not interpret what the debaters mean, which has the drawbacks we highlighted here above.)
 
@@ -461,25 +453,31 @@ Note that one may which to use different letters to represent the two meanings o
 
 Our examples involve experts, but the requirements of neutrality apply equally when the debaters are not known as experts, for the same reasons: the modeler should not have to try to guess which entailments the debaters considered but left implicit when making their claims.
 
-The following definitions summarize our arguments. (To be continued.)
+The following definitions and result indicate how our arguments generalize. (To be continued.)
 \begin{definition}
-	Let $I \subseteq \allformulas$ be a set of formulas (supposedly, implicit claims). Consider some finite $\Delta \subset \allformulas$. The model $\Delta$ is said to be fragile considering the implicit claims in $I$ iff: $\exists \phi \in \Delta, I' \subseteq I \suchthat \Delta' = \Delta \cup I'$ is finite and $\phi$ is warrented in the model $\Delta$ but $\phi$ is not warranted in the model $\Delta'$.
+	Let $I \subseteq \allformulas$ and $\Delta \subset \allformulas$ be sets of formulas, with $\Delta$ finite. The model $\Delta$ is said to be fragile considering the implicit claims in $I$ iff: $\exists \phi \in \Delta, I' \subseteq I, I' \text{ finite} \suchthat \phi$ is warranted in the model $\Delta$ but $\phi$ is not warranted in the model $\Delta' = \Delta \cup I'$.
+	
+	The model $\Delta$ is said to be robust considering the implicit claims in $I$ iff it is not fragile considering the implicit claims in $I$.
 \end{definition}
 \begin{definition}
 	Consider some finite $\Delta \subset \allformulas$. Define the implicit disagreements from $\Delta$ as $I_\Delta$ = $\set{¬\psi \suchthat \phi \in \Delta \text{ and } \Delta \text{ contains an argument } (\psi, ¬\phi)}$.
+	\commentOC{In the theorem, any set of implicit dis would suffice, where $¬\psi$ is anything that contradicts $\Psi$.}
+\end{definition}
+\begin{definition}
+	A model $\Delta$ has \emph{only trivial warrants} iff its set of warranted propositions is $\set{\phi \in \allformulas \suchthat \Delta \vdash \phi \land \Delta \nvdash ¬\phi}$.
 \end{definition}
 
 \begin{conjecture}
-	Consider a finite $\Delta \subseteq \allformulas$ and the corresponding implicit disagreements $I_\Delta$. If $\Delta$ contains a warranted proposition, then it is fragile considering the implicit claims in $I_\Delta$.
+	Consider a finite $\Delta \subseteq \allformulas$ and the corresponding implicit disagreements $I_\Delta$. If $\Delta$ is robust considering the implicit claims in $I_\Delta$, then $\Delta$ has only trivial warrants.
 \end{conjecture}
 
-For the reasons stated in this section, we consider being guaranteed neutral as requiring to not use models that are fragile considering implicit disagreements. It follows that neutrality is incompatible with obtaining warranted propositions.
+For the reasons stated in this section, we consider being guaranteed neutral as requiring to not use models that are fragile considering implicit disagreements. It follows that neutrality is incompatible with obtaining non-trivial warranted propositions.
 
 \begin{remark}
-	Being neutral is less stringent than being guaranteed neutral. We use the latter phrase to refer to the requirement of using a procedure that is automatically verifiable by third-parties. A modeler can be neutral and not guaranteed neutral: she may use her intuition and unformalized knowledge about the context of a debate to determine which claims are implicit and which ones are arguably not. The usual example about Tweety features such situation: in many circumstances, the modeler would be justified in considering that the counter-argument about penguins indeed attacks the argument about birds supposedly implying an ability to fly, because there may be a presumption, unless the context indicates it, that the “right” meaning of bird in that context is the one of general birds, and the modeler may use the fact that she knows that the argument about penguins is correct in that sense. 
+	Being neutral is less stringent than being guaranteed neutral. We use the latter phrase to refer to the requirement of using a modeling procedure that is automatically verifiable by third-parties. A modeler can be neutral and not guaranteed neutral: she may use her intuition and unformalized knowledge about the context of a debate to determine which claims are implicit and which ones are arguably not. The usual example about Tweety features such situation: in many circumstances, the modeler would be justified in considering that the counter-argument about penguins indeed attacks the argument about birds supposedly implying an ability to fly, because there may be a presumption, unless the context indicates it, that the “right” meaning of bird in that context is the one of general birds, and the modeler may use the fact that she knows that the argument about penguins is correct in that sense. 
 	
 	Using intuition and unformalized knowledge is routinely practiced in obtaining formal models. 
-	We do not claim that this is a mistake. We only claim that this requires to use “common sense”, which is notoriously difficult to define precisely, and does therefore not guarantee neutrality, in the sense that someone seeing the result of the model may still doubt whether the modeler did the model correctly; and if a claim to the contrary is raised, no criteria are known to determine who is right. This is especially a problem in situations where trusting the modeler is undesirable.
+	We do not claim that this is necessarily a mistake. We only claim that this requires to use “common sense”, which is notoriously difficult to define precisely, and does therefore not guarantee neutrality, in the sense that someone seeing the result of the model may still doubt whether the modeler considered implicit claims correctly; and if a suspicion to the contrary is raised, no criteria are known to determine who is right. This is especially a problem in situations where trusting the modeler is undesirable.
 \end{remark}
 
 There is a need for an approach that makes the correctness of the attack relations a scientific (meaning, here, a precise and falsifiable) claim.
