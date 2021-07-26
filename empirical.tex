@@ -460,28 +460,30 @@ The following definitions and result indicate how our arguments generalize. (To 
 	The model $\Delta$ is said to be robust considering the implicit claims in $I$ iff it is not fragile considering the implicit claims in $I$.
 \end{definition}
 \begin{definition}
-	Consider some finite $\Delta \subset \allformulas$. Define the implicit disagreements from $\Delta$ as $I_\Delta$ = $\set{¬\Psi \suchthat \phi \in \Delta, \Psi = \set{\psi_1, \psi_2, …} \subseteq \Delta \text{ and } (\Psi, ¬\phi) \text{ is an argument}}$. Here, $¬\Psi$ represents the formula $¬\psi_1 \lor ¬\psi_2 \lor …$.
-	\commentOC{In the theorem, any set of implicit dis would suffice, where $¬\psi$ is anything that contradicts $\Psi$.}
+	Given a finite set of formulas $\Psi = \set{\psi_1, \psi_2, …, \psi_n} \subset \allformulas$, say that a formula $p \in \allformulas$ has the form $¬\Psi$ when $p$ has the form $¬\psi_1 \lor ¬\psi_2 \lor … \lor ¬\psi_n$ or any permutation of these $n$ disjunctions.
+	
+	Consider some finite $\Delta \subset \allformulas$ and any $I \subseteq \allformulas$. Say that $I$ is a set of implicit disagreements from $\Delta$ iff $\forall \phi \in \Delta, \Psi = \set{\psi_1, \psi_2, …} \subseteq \Delta \suchthat (\Psi, ¬\phi) \text{ is an argument}: \exists p \in I \text{ that has the form } ¬\Psi$.
 \end{definition}
-Note that $¬\Psi$ can arguably be considered as an implicit disagreement in the provided condition, as it is entailed by $\phi$, which is in $\Delta$.
-\begin{definition}
-	A model $\Delta$ has \emph{only trivial warrants} iff its set of warranted propositions is $\set{\phi \in \allformulas \suchthat \Delta \vdash \phi \land \Delta \nvdash ¬\phi}$.
-\end{definition}
+Note that such a $p$ (a negation of the conjunction of the propositions in $\Psi$) can arguably be considered as a natural answer to the argument $(\Psi, ¬\phi)$ under the provided conditions, as $p$ is then entailed by $\phi$, which is in $\Delta$.
 
-\commentOC{Strange. If Delta has any non-consensual proposition, then anything holds and Delta has only non-consensual propositions! Need to assume that there is an argument for $¬\phi$.}
+A trivial warrant is defined as any claim that is not contested in $\Delta$.
+\begin{definition}
+	A model $\Delta$ has \emph{only trivial warrants} iff its set of warranted propositions is $\set{\phi \in \allformulas \suchthat \exists \Phi \subseteq \Delta \suchthat \Phi \vdash \phi \land \nexists \Psi \subseteq \Delta \suchthat \Psi \nvdash \bot \text{ and } \Psi \vdash ¬\phi}$.
+\end{definition}
+Note that $\phi$ is a trivial warrant iff some undercut tree arguing for $\phi$ contain a single node.
 
 \begin{conjecture}
-	Consider a finite $\Delta \subseteq \allformulas$ and the corresponding implicit disagreements $I_\Delta$. If $\Delta$ is robust considering the implicit claims in $I_\Delta$, then $\Delta$ has only trivial warrants.
+	Consider a finite $\Delta \subseteq \allformulas$ and any set of implicit disagreements $I$. If $\Delta$ is robust considering the implicit claims in $I$, then $\Delta$ has only trivial warrants.
 \end{conjecture}
 \begin{proof}
-	Consider $\phi \in \Delta$. Assume $\phi$ non consensual in $\Delta$. 
+	Consider $\Delta$ not having only trivial warrant. Consider some $\phi \in \Delta$ that is not a trivial warrant. 
 	Let $\mathcal{U}$ denote the set of undercut trees arguing for $\phi$ with an undefeated root. 
 	Given an undercut tree $u$, let $u^{-1}(\emptyset)$ denote its set of leaves (the nodes with no children).
-	Given a node $\Psi$ in an undercut tree $u$, let $n(\Psi, u)$ denote $¬\Psi$ if $¬\Psi$ is not used in $u$, $¬¬(¬\Psi)$ if $¬\Psi$ is a node in $u$ but $¬¬(¬\Psi)$ isn’t, and so on. (Note that as $u$ is finite, there is necessarily some formula $(¬¬)^k(¬\Psi)$ that is not used in $u$).
+	Given a node $\Psi$ in an undercut tree $u$, let $n(\Psi, u)$ denote a formula of the form $¬\Psi$ if some formula of that form is not used in $u$, a formula of the form $¬¬(¬\Psi)$ if every formulas of the form $¬\Psi$ are used in $u$ but some formula of the form $¬¬(¬\Psi)$ isn’t, and so on. (Note that as $u$ is finite, there is necessarily some formula of the form $(¬¬)^k(¬\Psi)$ that is not used in $u$).
 	Define $\Delta' = \Delta \cup \set{n(\Psi, u) \suchthat u \in \mathcal{U} \text{ and } \Psi \in u^{-1}(\emptyset)}$.
 	 
 	We show that every undercut tree arguing for $\phi$ in $\Delta'$ has a defeated root.
-	
+	Note that every $u \in \mathcal{U}$ have at least two nodes, as $\phi$ is not a trivial warrant.
 \end{proof}
 	
 For the reasons stated in this section, we consider being guaranteed neutral as requiring to not use models that are fragile considering implicit disagreements. It follows that neutrality is incompatible with obtaining non-trivial warranted propositions.
