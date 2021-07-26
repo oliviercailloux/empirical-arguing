@@ -146,6 +146,7 @@ We say that a formula $\phi \in \allformulas$ is \emph{warranted} iff some under
 	The formula $x$ is warranted: the leaf $\Phi_3$ of the tree $u_{\set{x}}$ is undefeated, thus its parent $\Phi_2$ is defeated, hence, the root $\Phi_1$ is undefeated. The formula $¬x$ is not warranted, as the root of the unique tree $u_{\Phi_2}$ arguing for $¬x$ is defeated.
 \end{example}
 
+\commentOC{TODO define undercuts with the claims. Mandatory for the following to be an argumentation tree. $\Delta = \set{a, ¬a, ¬¬a, ¬¬¬a}$. Consider the tree rooted at $a$, with undercuts $¬a$ and $¬¬¬a$, both having $¬¬a$ as undercut.}
 \subsection{PAFs}
 \label{sec:pafs}
 Here we talk about Preference-based Argumentation Frameworks.
@@ -484,6 +485,8 @@ Note that $\phi$ is a trivial warrant iff some undercut tree arguing for $\phi$ 
 	 
 	We show that every undercut tree arguing for $\phi$ in $\Delta'$ has a defeated root.
 	Note that every $u \in \mathcal{U}$ have at least two nodes, as $\phi$ is not a trivial warrant.
+	
+	\textbf{In fact, the stated conjecture is false, because of some trees that use rebuttals. Consider $a$ undercut by $¬¬¬a$ undercut by $¬¬a$. Here, adding $¬¬¬a$ does not change anything. Similarly, with root $a$ and undercut $\set{¬b, ¬b → ¬a}$ undercut by $b$, there seems to be nothing we can add.}
 \end{proof}
 	
 For the reasons stated in this section, we consider being guaranteed neutral as requiring to not use models that are fragile considering implicit disagreements. It follows that neutrality is incompatible with obtaining non-trivial warranted propositions.
