@@ -45,9 +45,24 @@
 \label{sec:intro}
 Formal Argumentation Theory (FAT) \cite{Dung95} relies on “attacks” between arguments to compute most acceptable standpoints, in the form of the so-called “extensions”. These attacks are typically formalized as a binary relation considered as representing the directed contradiction or incompatibility status of pairs of arguments. In the vast majority of the articles in formal argumentation theory, the attacks are considered known, given to the analyst as a starting point of the study. 
 
-In this position paper, we want to argue in favor of extending the scope of formal argumentation theory by relaxing this assumption. In particular, we argue that attacks should not necessarily be considered as representing an objective status of contradiction, as given for example by inspection of logical representation of arguments. We will give methodological and practical reasons to consider it of great importance to consider the attack relation as representing the subjective state of mind of an individual; and to study methods for obtaining information about this relation empirically.
+In this position paper, we want to argue in favor of extending the scope of formal argumentation theory by relaxing this assumption. In particular, we argue that attacks should not necessarily be considered as representing an objective status of contradiction, as given for example by inspection of logical representation of arguments. We will give methodological and practical reasons to consider the attack relation as representing the subjective state of mind of an individual; and to study methods for obtaining information about this relation empirically.
 
-Although some authors seem to acknowledge incidentally that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that these questions would reveal hopelessly complex and that would be of interest only to the specific field of natural language processing. We provide here (partial) answers to these two points: we give reasons for doubting this assumpion; and we draw paths to study attack relations considered subjective that do not relate to natural language processing.
+Although some authors seem to acknowledge incidentally that attack relations sometimes can’t be considered known (cite Besnard \& Hunter), as we will see, few works in FAT avoid this assumption. One may think of at least two reasons for this apparent gap. First, to the best of our knowledge, the reasons for doubting this assumption have not been analyzed clearly. Second, there might be a lack of an idea of where to start if one relaxes this assumption, perhaps fearing that these questions would reveal hopelessly complex and that would be of interest only to the specific field of natural language processing. We provide here (partial) answers to these two points: we give reasons for doubting this assumption; and we draw paths to study attack relations considered subjective that do not relate to natural language processing.
+
+Obtaining a formal argumentation model out of debates expressed in natural language is useful in various circumstances. Two goals that we have in mind are, first, when the modeler wants to faithfully reflect the protagonists’ opinions; second, when the modeler wants to help individuals not taking part in the exchange of arguments to form a deliberated opinion about a topic. 
+
+Our first point is that formal models do not generally rest on logic alone. It is necessary to use judgment about the quality of the arguments and the implicit claims, those that can reasonably be assumed to be held by some protagonists without having been expressly uttered in the debate. We suspect many readers will readily acknowledge that this claim is true, but considering that this is seldom discussed explicitly in the FAT literature, we will provide examples to explain why this must be considered to hold.
+This threatens the neutrality of the modeler, as judgments about quality of arguments or about what can reasonably be considered to be implicit arguments in a debate rest, in all but the most trivial cases, on a vast amount of unformalized assumptions about the world and about how human beings think; and making all of them explicit is generally out of reach in practical real-world cases.
+
+One may declare this to not be a problem: the modeler could use “common sense” in modeling the arguments, and postulate that other modelers would reach the same decisions, thus, that their common sense leads to the same model as anyone else’s. In the positive cases, the modeler applies good faith, has “good common sense”, and is not biased towards one side of the debate. We summarize these attributes by saying that the modeler is neutral.
+Practitioners can use such neutrality to obtain models, as our examples will illustrate, and if neutrality holds, the validity of the resulting model can be considered good even though the model rests on unformalized assumptions about the world. This requires, however, to trust that the modeler is neutral.
+ 
+It is sometimes important to not require trust in the modeler. Consider for example an application where a modeler is paid by a social network company to summarize arguments in order to help participants see more clearly faulty reasoning, in an attempt to decrease the speed at which false news spread on such networks.
+Trusting blindly the modeler in such a case can be undesirable, as it may give an undesired high power to the company.
+Similarly, when a public authority organizes public debates about some social matter, it is desirable to not have to trust the modeler.
+In such examples, it is required but not sufficient that the modeler be neutral. The well known phrase, that justice must not only be done, but must also be seen to be done, applies here. In order to build and legitimate public trust, one must be able to verify that the modeler is neutral. This article therefore proposes to build a procedure that allows principled verifications to be done in order to relax the requirement of neutrality on the modeler.
+
+One way to ensure neutrality may be to not take position at all. Whenever there is a disagreement, just record the fact that the disagreement exist, and take no position on the possible results. This approach fails to accomplish the goals we are interested in here, of helping third-parties to form a deliberated judgment or of recording the debater’s opinions to present them truthfully to an audience. In many practical cases, judgment is required to summarize the information in a useful way. For example, some arguments may be redundant (express the same point in different ways); some arguments may be weaker than other ones. We will present a strategy that permits to take such differences into account in a model, without requiring a complete account of how to determine the strengths of various arguments, but by providing a means to check whether the resulting model is adequate.
 
 Preference based approaches still considers an attack relation, and the preference is supplementary data on top of the attack relation. (TODO: check Besnard \& Hunter - Elements of Argumentation, Chapter 6: Considering the Audience.) \commentRT{Transition sur preference-based approaches \`a expliquer car tombe comme un cheveu sur la soupe. 1) Subjective = related to a given audience, 2) Audiences introduced in (contextual) preference-based frameworks, 3) Cite different works (PAF, VAF ...)}
 
@@ -69,6 +84,18 @@ In Chapter 4, they argue for an enlarged view. Selectivity is important. Impract
 
 \section{The usual perspective (in FAT?) about attacks}
 Here we describe succinctly the main paradigms that have been proposed in argumentation to model arguments and attack relations, focusing on the tactics used to obtain asymetric attacks (arguments such that one attack another one but not conversely).
+
+Our main goal is to argue that a model cannot be obtained out of a text in natural language using a systematic procedure that requires no judgment on the quality of the arguments or about implicit arguments.
+To discuss the contrary intuition, let us start with the famous example about Tweety.
+\begin{example}
+	Assume that it is consensual in some conversation that Tweety is a bird. Someone says that because Tweety is a bird, Tweety flies. Another person disagrees and says that penguins are birds but do not fly; therefore, we cannot conclude that Tweety flies.
+\end{example}
+This example is interesting because it may suggest that it is possible to obtain a useful and formal model by applying some systematic procedure, mapping sentences in natural language to, e.g., sentences in a formal language. 
+
+We want to convey reasons to believe that such approach is generally mislead, if it does not grant that unformalized judgment is required while building the model.
+Far too many procedures and formal languages have been proposed for examining them all, but applying the discussion on a few important paradigms should suffice to realize that the problem is fundamental, and not related to the specificities of a given formal language or a given procedure.
+
+We will in this section review important classical proposals in obtaining formal argumentation models, and then illustrate that they do require judgment on the modeler’s part.
 
 \subsection{Classical logic}
 In this section we consider the proposition described in the famous book by \citet{besnard_elements_2000} about argumentation on the basis of classical logic. We focus on their concept of trees, as it permits to determine which propositions are warranted. We simplify some of their definitions, for example, by defining trees over sets of formulas instead of over arguments, and show in footnotes the original definitions so that the reader can observe that our definitions are equivalent to the original propositions.
@@ -147,6 +174,7 @@ We say that a formula $\phi \in \allformulas$ is \emph{warranted} iff some under
 \end{example}
 
 \commentOC{TODO define undercuts with the claims. Mandatory for the following to be an argumentation tree. $\Delta = \set{a, ¬a, ¬¬a, ¬¬¬a}$. Consider the tree rooted at $a$, with undercuts $¬a$ and $¬¬¬a$, both having $¬¬a$ as undercut.}
+
 \subsection{PAFs}
 \label{sec:pafs}
 Here we talk about Preference-based Argumentation Frameworks.
@@ -383,7 +411,7 @@ Second, we argue, using further examples, that there is no neutral way to determ
 	\end{tikzpicture}
 \end{figure}
 \begin{figure}
-	\caption{The undercut tree arguing for $¬\mathit{s}$ in \cref{ex:ball}}
+	\caption{The undercut tree arguing for $¬\mathit{s}$ in \cref{ex:ball} (incomplete)}
 	\label{fig:ballnot}
 	\begin{tikzpicture}
 		\tikzset{every node/.style={draw, ellipse, execute at begin node=$,execute at end node=$}}
