@@ -100,8 +100,12 @@ We will in this section review important classical proposals in obtaining formal
 \subsection{Classical logic}
 In this section we consider the proposition described in the famous book by \citet{besnard_elements_2000} about argumentation on the basis of classical logic. We focus on their concept of trees, as it permits to determine which propositions are warranted. We simplify some of their definitions, for example, by defining trees over sets of formulas instead of over arguments, and show in footnotes the original definitions so that the reader can observe that our definitions are equivalent to the original propositions.
 
-Let $\allformulas$ be an (infinite) set of possible formulas in predicate logic with the usual deduction operator $⊢$. Let $\Delta \subseteq \allformulas$ be a finite set of formulas.
+Let $\allformulas$ be an (infinite) set of possible formulas in predicate logic with the usual logical connectives $\land$, $\lor$, $¬$, $→$ and the usual deduction operator $⊢$. 
 We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \Psi ⊢ ⊥$ denote that the formulas in $\Phi$ and $\Psi$ cannot all be satisfied. A set of formulas $\Phi$ is \emph{consistent} iff $\Phi ⊬ ⊥$.
+
+Let $\Delta \subseteq \allformulas$ be a finite set of formulas.
+We consider defined a complete ordering over $\Delta$, called the canonical ordering. (Such an ordering necessarily exists as $\Delta$ is finite.) It permits to associate any set of formulas $\Phi = \set{\phi_1, …, \phi_n} \subseteq \Delta$, with $(\phi_i)$ numbered following the canonical ordering, to a single formula $\phi_1 \land … \land \phi_n$ that is the conjunction of the formulas in $\Phi$ following the canonical ordering.
+Given $\Phi = \set{\phi_1, …, \phi_n}$, with $(\phi_i)$ numbered following the canonical ordering, we define $¬\Phi \in \allformulas$ as the formula $¬\phi_1 \lor … \lor ¬\phi_n$, that negates the canonical formula associated to $\Phi$.
 
 An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha \in \allformulas$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 
@@ -218,9 +222,6 @@ Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. 
 
 Consider a propositional language $\mathcal{L}_p$ with the implication and conjunction connectives ($\rightarrow$,$\Rightarrow$,$\curly$,$\land$) and strong negation ($\lnot$) on a finite set of literals where a literal is either an atomic proposition or its negation. 
 The set of literals is denoted $F$.
-\commentOC{Is Fact the same thing as Literal? If so, I suggest to use only one of these two words.}
-\commentPB{It's indeed the same thing in this context, and AFAIK this is the usual presentation. But I don't mind to use only one
-  of them, and probably ``literal'' would be the most precise (so I'm removing all mention of ``fact'').}
 
 The body and head of a rule are finite conjunction of literals. A rule expressed in $\mathcal{L}_p$ is applicable on a set of literals if its body is included in this set.
 There are three kinds of rules:
@@ -234,21 +235,21 @@ The set of all rules is denoted $R$, the conclusion of a rule $r$ is denoted $He
 In order to express higher plausibility for some defeasible implications, a (generally acyclic) preference relation $\succ$ on $R$ is needed; $r_1 \succ r_2$ indicates that $r_1$ is superior to $r_2$ (and $r_2$ inferior to $r_1$).
 
 A defeasible theory $T$ is a triple $(F,R,\succ)$ which will assign a label to any literal $f$ according to its provability:
+\commentOCf{Est-ce que toute théorie affecte un unique label à tout litéral ? (Ou est-ce qu’un litéral n’a parfois aucun label, ou que plusieurs labels peuvent s’appliquer ?)} 
 \begin{itemize}
 \item $+\Delta f$: $f$ is provable using only strict rules and literals in $T$,
 \item $-\Delta f$: it is proved that $f$ is not strictly provable in $T$,
 \item $+\delta f$: $f$ is provable using at least one defeasible rule or literals in $T$,
 \item $-\delta f$: it is proved that $f$ is not deeasibly provable in $T$.
 \end{itemize}
+Here $+\Delta f$ represents a labeled literal, where $f$ is a literal and $+\Delta$ is its label.
 
 The general idea of defeasible logics is then to provide a proof for a given conclusion (literal). A proof is a finite sequence $P = (P(1), \dots, P(n))$ of labeled literals ($P(1..i)$ denotes the initial part of the proof P of length $i$) satisfying the following conditions \cite{Billington1993}:
+\commentOCf{Un litéral a un label donné ssi il existe une preuve qui se termine par ce litéral avec ce label ?}
+%je comprends correctement que tout litéral est soit $+ \Delta$, soit $- \Delta$ ? Donc soit $f$ est prouvable strictement, soit il est prouvable qu’il n’est pas prouvable strictement ? Et même chose pour $+ \Delta$ VS $- \Delta$, n’est-ce pas ?}
 
 \begin{itemize}
 \item $+\Delta$: if $P(i+1) = +\Delta f$ then either
-\commentOC{Here, $+\Delta f$ seems to be a literal, as $P(.)$ is defined as a literal (as $P$ is a sequence of literals). But it is not defined as a literal but rather as a label, above. Is a label a special kind of literal?}
-\commentPB{Hmm maybe the presentation is not clear enough. The idea is that $+\Delta$ is the label, and $+\Delta f$ is a labeled
-  literal (as any member of the sequence $P(...)$, and thus $P(.)$ also). So essentially, the literal $f$ will be labeled with
-  $+\Delta$ (and denoted $+\Delta f$) if the conditions hold.}
   \begin{enumerate}
   \item $f \in F$ or
   \item $\exists r \in R_s$ s.t. $f \in Head(r)$ and $\forall \varphi \in Body(r): +\Delta \varphi \in P(1..i)$.
@@ -263,6 +264,7 @@ The general idea of defeasible logics is then to provide a proof for a given con
 \item $+\delta$: if $P(i+1) = +\delta f$ then either
   \begin{enumerate}
   \item $+\Delta f \in P(1..i)$ or
+  \commentOCf{Il me semble qu’on peut avoir $+\Delta f$ et $+ \delta f$ : avec $f \in F$, $P(1) = +\Delta f$, $P(2) = +\delta  f$.}
   \item \vspace{-0.1cm}
     \begin{enumerate}
     \item $\exists r \in R_s \cup R_d$ s.t. $f \in Head(r)$ and $\forall \varphi \in Body(r): +\delta \varphi \in P(1..i)$ and
@@ -293,8 +295,9 @@ The general idea of defeasible logics is then to provide a proof for a given con
 
 A literal $f$ is provable in $T$, denoted $T \models f$, if and only if there exists a proof $P$ in $T$ s.t. $f \in P$. For instance, intuitively, for $f$ to be strictly proven there needs to exist a strict rule $r \in R_s$ s.t. $f \in Head(r)$, and for any literal $l \in Body(r)$, there exists a strict rule $r' \in R_s$ s.t. $l \in Head(r')$, and so on recursively until a literal $t \in F$ is reached.
 
-Ambiguity is the situation where a conflict between rules arises and the superiority relation does not indicate which rule should be used. Different intuitions on how ambiguity should be solved have been introduced over the years; these intuitions modify subtly the way $+\delta$ and $-\delta$ are computed in order to account for how ambiguity, e.g., should be propagated to other literals. The interested reader might refer to \cite{Hecham2018} for both an intuitive and formal overview.
-
+Ambiguity is the situation where a conflict between rules arises and the superiority relation does not indicate which rule should be used. 
+\commentOCf{Je ne suis pas sûr de comprendre cette définition. Est-ce que une situation ambigue représente justement le cas où un litéral peut être affecté à plus d’un label selon les règles ci-dessus ?}
+Different intuitions on how ambiguity should be solved have been introduced over the years; these intuitions modify subtly the way $+\delta$ and $-\delta$ are computed in order to account for how ambiguity, e.g., should be propagated to other literals. The interested reader might refer to \cite{Hecham2018} for both an intuitive and formal overview.
 
 \subsection{From text to logic arguments}
 Should we devote a section to discuss proposals to “translate” NL to logic?
@@ -519,7 +522,9 @@ Note that $\phi$ is a trivial warrant iff some undercut tree arguing for $\phi$ 
 	We show that every undercut tree arguing for $\phi$ in $\Delta'$ has a defeated root.
 	Note that every $u \in \mathcal{U}$ have at least two nodes, as $\phi$ is not a trivial warrant.
 	
-	\textbf{In fact, the stated conjecture is false, because of some trees that use rebuttals. Consider $a$ undercut by $¬¬¬a$ undercut by $¬¬a$. Here, adding $¬¬¬a$ does not change anything. Similarly, with root $a$ and undercut $\set{¬b, ¬b → ¬a}$ undercut by $b$, there seems to be nothing we can add.}
+	In fact, the stated conjecture is false, because of some trees that use rebuttals. Consider $a$ undercut by $¬¬¬a$ undercut by $¬¬a$. Here, adding $¬¬¬a$ does not change anything. Similarly, with root $a$ and undercut $\set{¬b, ¬b → ¬a}$ undercut by $b$, there seems to be nothing we can add.
+	
+	We’d rather add the implication $\phi → ¬\Psi$.
 \end{proof}
 	
 For the reasons stated in this section, we consider being guaranteed neutral as requiring to not use models that are fragile considering implicit disagreements. It follows that neutrality is incompatible with obtaining non-trivial warranted propositions.
