@@ -216,11 +216,13 @@ Interesting examples. $(5, 3), (3, 2), (2, 4), (4, 3), (2, 1), (1, d), (4, d)$. 
 \subsection{Defeasible logic}
 \commentOCf{TODO: formalisme de base de la logique defeasible. Pierre nous fournit un article ou livre de base s’il en trouve un qui semble adéquat. Thèse suggérée : \url{https://hal.inria.fr/tel-01904558v2}}
 
-Consider a propositional language $\mathcal{L}_p$ with the implication and conjunction connectives ($\rightarrow$,$\Rightarrow$,$\curly$,$\land$) and strong negation ($\lnot$) on a finite set of literals (facts) where a literal is either an atomic proposition or its negation. 
-The set of facts is denoted $F$.
+Consider a propositional language $\mathcal{L}_p$ with the implication and conjunction connectives ($\rightarrow$,$\Rightarrow$,$\curly$,$\land$) and strong negation ($\lnot$) on a finite set of literals where a literal is either an atomic proposition or its negation. 
+The set of literals is denoted $F$.
 \commentOC{Is Fact the same thing as Literal? If so, I suggest to use only one of these two words.}
+\commentPB{It's indeed the same thing in this context, and AFAIK this is the usual presentation. But I don't mind to use only one
+  of them, and probably ``literal'' would be the most precise (so I'm removing all mention of ``fact'').}
 
-A fact in $\mathcal{L}_p$ is a literal; the body and head of a rule are finite conjunction of literals. A rule expressed in $\mathcal{L}_p$ is applicable on a set of literals if its body is included in this set.
+The body and head of a rule are finite conjunction of literals. A rule expressed in $\mathcal{L}_p$ is applicable on a set of literals if its body is included in this set.
 There are three kinds of rules:
 \begin{itemize}
 \item \emph{strict rules}, denoted $\Phi \rightarrow \varphi$, indicating definite implications; we denote by $R_s$ the set of strict rules;
@@ -233,17 +235,20 @@ In order to express higher plausibility for some defeasible implications, a (gen
 
 A defeasible theory $T$ is a triple $(F,R,\succ)$ which will assign a label to any literal $f$ according to its provability:
 \begin{itemize}
-\item $+\Delta f$: $f$ is provable using only strict rules and facts in $T$,
+\item $+\Delta f$: $f$ is provable using only strict rules and literals in $T$,
 \item $-\Delta f$: it is proved that $f$ is not strictly provable in $T$,
-\item $+\delta f$: $f$ is provable using at least one defeasible rule or fact in $T$,
+\item $+\delta f$: $f$ is provable using at least one defeasible rule or literals in $T$,
 \item $-\delta f$: it is proved that $f$ is not deeasibly provable in $T$.
 \end{itemize}
 
-The general idea of defeasible logics is then to provide a proof for a given conclusion (fact). A proof is a finite sequence $P = (P(1), \dots, P(n))$ of labeled literals ($P(1..i)$ denotes the initial part of the proof P of length $i$) satisfying the following conditions \cite{Billington1993}:
+The general idea of defeasible logics is then to provide a proof for a given conclusion (literal). A proof is a finite sequence $P = (P(1), \dots, P(n))$ of labeled literals ($P(1..i)$ denotes the initial part of the proof P of length $i$) satisfying the following conditions \cite{Billington1993}:
 
 \begin{itemize}
 \item $+\Delta$: if $P(i+1) = +\Delta f$ then either
 \commentOC{Here, $+\Delta f$ seems to be a literal, as $P(.)$ is defined as a literal (as $P$ is a sequence of literals). But it is not defined as a literal but rather as a label, above. Is a label a special kind of literal?}
+\commentPB{Hmm maybe the presentation is not clear enough. The idea is that $+\Delta$ is the label, and $+\Delta f$ is a labeled
+  literal (as any member of the sequence $P(...)$, and thus $P(.)$ also). So essentially, the literal $f$ will be labeled with
+  $+\Delta$ (and denoted $+\Delta f$) if the conditions hold.}
   \begin{enumerate}
   \item $f \in F$ or
   \item $\exists r \in R_s$ s.t. $f \in Head(r)$ and $\forall \varphi \in Body(r): +\Delta \varphi \in P(1..i)$.
@@ -286,9 +291,9 @@ The general idea of defeasible logics is then to provide a proof for a given con
   \end{enumerate}
 \end{itemize}
 
-A fact $f$ is provable in $T$, denoted $T \models f$, if and only if there exists a proof $P$ in $T$ s.t. $f \in P$. For instance, intuitively, for $f$ to be strictly proven there needs to exist a strict rule $r \in R_s$ s.t. $f \in Head(r)$, and for any literal $l \in Body(r)$, there exists a strict rule $r' \in R_s$ s.t. $l \in Head(r')$, and so on recursively until a fact $t \in F$ is reached.
+A literal $f$ is provable in $T$, denoted $T \models f$, if and only if there exists a proof $P$ in $T$ s.t. $f \in P$. For instance, intuitively, for $f$ to be strictly proven there needs to exist a strict rule $r \in R_s$ s.t. $f \in Head(r)$, and for any literal $l \in Body(r)$, there exists a strict rule $r' \in R_s$ s.t. $l \in Head(r')$, and so on recursively until a literal $t \in F$ is reached.
 
-Ambiguity is the situation where a conflict between rules arises and the superiority relation does not indicate which rule should be used. Different intuitions on how ambiguity should be solved have been introduced over the years; these intuitions modify subtly the way $+\delta$ and $-\delta$ are computed in order to account for how ambiguity, e.g., should be propagated to other facts. The interested reader might refer to \cite{Hecham2018} for both an intuitive and formal overview.
+Ambiguity is the situation where a conflict between rules arises and the superiority relation does not indicate which rule should be used. Different intuitions on how ambiguity should be solved have been introduced over the years; these intuitions modify subtly the way $+\delta$ and $-\delta$ are computed in order to account for how ambiguity, e.g., should be propagated to other literals. The interested reader might refer to \cite{Hecham2018} for both an intuitive and formal overview.
 
 
 \subsection{From text to logic arguments}
