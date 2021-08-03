@@ -124,8 +124,8 @@ Given an argument $(\Phi, \alpha) \in \allargs$, define the set of its canonical
 
 The authors propose to use the status of the root nodes of argument trees as one way of discriminating arguments. Let us define undercut trees with this goal in mind.
 
-Given some set $N$, we represent a tree using a pair $(r, u)$, where $r \in N$ is called the root of the tree, and  $u \subseteq N × N$ is called the successor relation. Define the predecessor relation as $u^{-1}$. 
-We write $u[n]$ for the set of nodes reachable from $n$ following $u$, where the brackets designate the reflexive and transitive closure. We define the set of nodes as the set of elements $u[r] \subseteq N$ reachable from the root, and require $u$ to associate at most one predecessor to each element (thus $\forall n \in N: \card{u^{-1}(n)} ≤ 1$). 
+Given some set $N$, we represent a tree using its successor relation $u \subseteq N × N$. 
+As usual, we refer to the union of the domain and codomain of $u$, $N' = u^{-1}(N) \cup u(N)$, as the set of nodes, and require $u$ connected, $u$ associating at most one predecessor to each node (thus $\forall n \in N': \card{u^{-1}(n)} ≤ 1$) and no predecessor to exactly one node, called the root of the tree. 
 
 Canonical undercuts permit to associate to any argument $(\Phi, \alpha)$ its \emph{argument tree} $u_{(\Phi, \alpha)}$, where nodes are arguments, rooted at $(\Phi, \alpha)$, with $u_{(\Phi, \alpha)}$ defined recursively as follows. 
 Given a node $(\Psi, \beta)$ in the tree, let $u_{(\Phi, \alpha)}^{-1}[(\Psi, \beta)] \subseteq \allargs$ denote the set of its ancestors, including itself (the brackets denote the reflexive and transitive closure); define $S = \bigcup_{\set{(\Psi', \beta') \in u_{(\Phi, \alpha)}^{-1}[(\Psi, \beta)]}} \Psi' \subseteq \Delta$ as the union of the supports used at or above the node $(\Psi, \beta)$; and define the successors of $(\Psi, \beta)$, $u_{(\Phi, \alpha)}((\Psi, \beta))$, as the canonical undercutters $(\Omega, ¬\Psi)$ for $(\Psi, \beta)$ that satisfy $\Omega \nsubseteq S$.
