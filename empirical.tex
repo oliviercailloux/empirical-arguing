@@ -131,12 +131,34 @@ We display the nodes in undercut trees using only their last element, thus, usin
 Say that an undercut tree rooted at $\Phi$ argues for $\alpha \in \allformulas$ iff $(\Phi, \alpha)$ is an argument.
 \footnote{The authors define an argument tree for $\alpha$ as a tree of arguments, rooted at an argument $a_1 = (\Phi_1, \alpha)$, such that the children of a node $a = (\Phi, \beta)$ consist of all canonical undercuts $(\Psi, \gamma)$ for $a$ such that $\Psi$ is not a subset of $\Phi \cup \Phi_1 \cup \Phi_2 \cup … \cup \Phi_n$, where $(Φ_1, \beta_1), …, (Φ_n, \beta_n)$ denote the ancestors of $(\Phi, \beta)$.
 
+This does not seem to always define a tree. Consider $\Delta = \set{a, ¬a, ¬¬¬a, a \land b, ¬b}$ and the argument tree displayed in \cref{fig:notTree}.
+
 As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. We neglect claims and focus on supports in the nodes of our trees in order to reflect formally the fact that claims bring no information (apart from the one at the root).
 
 Our definition corresponds to theirs for the following reason.
 An argumentation path in an undercut tree is uniquely defined by its last two elements, because two siblings $p, p'$ (nodes at a given level $k$) in such a tree have different last elements ($p_k ≠ p'_k$), as is easily seen by induction on the depth of the tree (it follows from that observation that if two paths have the same last elements, they are not siblings, thus, have a different parent).
 We can thus also view any undercut tree $u$ rooted at $\Phi$ arguing for $\alpha$ as a tree defined over arguments, having the same topology as $u$, having $(\Phi, \alpha)$ as root, and having in place of each argumentation path $p$ of length $k ≥ 2$ in $u$ the argument $(p_k, ¬p_{k - 1})$.
 }
+
+\begin{figure}
+	\caption{An argument tree that is not a tree}
+	\label{fig:notTree}
+	\begin{tikzpicture}
+		\tikzset{every node/.style={draw, ellipse, execute at begin node=$,execute at end node=$}}
+		\path node (a) {(\set{a}, a)};
+		\path (a) ++(-3cm, -2cm) node (na) {(\set{¬a}, ¬a)};
+		\path (a) ++(3cm, -2cm) node (nnna) {(\set{¬¬¬a}, ¬a)};
+		\path (na) ++(0, -2cm) node (ab1) {(\set{a \land b}, ¬(¬a))};
+		\path (nnna) ++(0, -2cm) node (ab2) {(\set{a \land b}, ¬(¬¬¬a))};
+		\path (ab1) ++(3cm, -2cm) node (nb) {(\set{¬b}, ¬(a \land b))};
+		\path[draw, <-] (a) -- (na);
+		\path[draw, <-] (a) -- (nnna);
+		\path[draw, <-] (na) -- (ab1);
+		\path[draw, <-] (nnna) -- (ab2);
+		\path[draw, <-] (ab1) -- (nb);
+		\path[draw, <-] (ab2) -- (nb);
+	\end{tikzpicture}
+\end{figure}
 
 \begin{figure}
 	\caption{The undercut tree arguing for $x$}
@@ -486,7 +508,7 @@ The following example features the famous Tweety, where we wonder whether Tweety
 
 The proposed model suggests that the man has given a decisive counter-argument to the expert, and that his claim is therefore shown to hold, at the current stage of the debate. However, this is arguable. Because a bird expert would not make such an obvious mistake as thinking that every bird fly, it is very reasonable to interpret her sentence as referring implicitly to the birds that can be observed in the specific island that is in the context of this discussion. There, it holds that every birds (that can be seen on the island) do fly. Under this interpretation, the expert would argue that penguins are not birds that can be seen on the island. We observe a structure identical to the one of \cref{ex:ball,ex:ball2}: because the expert claims some proposition $\phi$ (here, that birds in the relevant sense fly), and it is consensual that $\psi$ entails $¬\phi$ (here, that if penguins are birds in the relevant sense, then birds in that relevant sense do not fly), then taking the expert seriously (or merely being kind with the expert) requires to suppose that the expert thinks that $¬\psi$, and that possibly she did not say it because she finds it obvious. In other words, not including $¬\psi$ in the model in such a situation requires to take a non-neutral position against the expert by assuming that she does not hold that $¬\psi$, and that she thus did not think about the fact that her claim of $\phi$ entails $¬\psi$. (Not including $¬\psi$ in the model without making that hypothesis, for the simple reason that the expert did not explicitly say that she supports $¬\psi$, is a fall-back to the already discussed strategy of trying to stick to the text and not interpret what the debaters mean, which has the drawbacks we highlighted here above.)
 
-Note that one may which to use different letters to represent the two meanings of the term birds: birds as understood in their general definition or birds with the implicit meaning: birds of this island. We stick to one letter for brievity, but this choice has no impact on our argument.
+Note that one may which to use different letters to represent the two meanings of the term birds: as understood under its usual sense or with the implicit restriction to the birds of this island. We stick to one letter for brievity, but this choice has no impact on our argument.
 
 Our examples involve experts, but the requirements of neutrality apply equally when the debaters are not known as experts, for the same reasons: the modeler should not have to try to guess which entailments the debaters considered but left implicit when making their claims.
 
