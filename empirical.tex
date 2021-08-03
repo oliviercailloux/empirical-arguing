@@ -104,9 +104,6 @@ Let $\allformulas$ be an (infinite) set of possible formulas in predicate logic 
 We use $⊥$ for “falsity”, as is classical, thus, for example, $\Phi \cup \Psi ⊢ ⊥$ denote that the formulas in $\Phi$ and $\Psi$ cannot all be satisfied. A set of formulas $\Phi$ is \emph{consistent} iff $\Phi ⊬ ⊥$.
 
 Let $\Delta \subseteq \allformulas$ be a finite set of formulas.
-We consider defined a complete ordering over $\Delta$, called the canonical ordering. (Such an ordering necessarily exists as $\Delta$ is finite.) It permits to associate any set of formulas $\Phi = \set{\phi_1, …, \phi_n} \subseteq \Delta$, with $(\phi_i)$ numbered following the canonical ordering, to a single formula $\phi_1 \land … \land \phi_n$ that is the conjunction of the formulas in $\Phi$ following the canonical ordering.
-Given $\Phi = \set{\phi_1, …, \phi_n}$, with $(\phi_i)$ numbered following the canonical ordering, we define $¬\Phi \in \allformulas$ as the formula $¬\phi_1 \lor … \lor ¬\phi_n$, that negates the canonical formula associated to $\Phi$.
-
 An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha \in \allformulas$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
 Let $\allargs$ denote the set of all arguments.
 
@@ -127,17 +124,19 @@ The authors propose to use the status of the root nodes of argument trees as one
 
 Define an argumentation path of length $k$ as a finite sequence $p \in \powerset{\Delta}^k$ of subsets of $\Delta$ such that every subset of formulas undercuts the previous one (thus $\forall 1 ≤ i ≤ k - 1$: $p_{i + 1}$ undercuts $p_i$) and every subset of formulas contain some new formulas compared to the ones used before (thus $\forall 1 ≤ i ≤ k - 1$: $p_{i + 1} \nsubseteq \cup_{l ≤ i} p_l$).
 
-Canonical undercuts permit to associate to any set of formulas $\Phi \subseteq \Delta$ the undercut tree $u_\Phi$, defined as a tree of argumentation paths, whose root is the path $(\Phi)$ of length $1$, and whose children are defined recursively as follows. Given a node $p$ of length $k$ in the tree, the children of $p$ are all the argumentation paths of length $k + 1$ that extend $p$ (thus, the paths $p'$ such that $\forall i ≤ k: p'_i = p_i$, such that $p'_{k + 1}$ undercuts $p_k$ and such that $p'_{k + 1}$ has some formula not used in $p$).
+Canonical undercuts permit to associate to any set of formulas $\Phi \subseteq \Delta$ the undercut tree $u_\Phi$, defined as a tree of argumentation paths, whose root is the path $(\Phi)$ of length $1$, and whose children are defined recursively as follows. Given a node $p$ of length $k$ in the tree, its children $u_\Phi(p)$ are all the argumentation paths of length $k + 1$ that extend $p$ (thus, the paths $p'$ such that $\forall i ≤ k: p'_i = p_i$, such that $p'_{k + 1}$ undercuts $p_k$ and such that $p'_{k + 1}$ has some formula not used in $p$).
 
-We display the nodes in undercut trees using only their last element, thus, using a single set of formulas. (It is however required to define formally nodes as more complex objects and not merely as sets of formulas, in order to guarantee that the resulting structures are trees, thus, that a node has only one parent.)
+We display the nodes in undercut trees using only their last element, thus, using a single set of formulas. (It is however required in the general case to define formally nodes as more complex objects and not merely as sets of formulas, in order to guarantee that the resulting structures are trees, thus, that a node has only one parent.)
 
 Say that an undercut tree rooted at $\Phi$ argues for $\alpha \in \allformulas$ iff $(\Phi, \alpha)$ is an argument.
 \footnote{The authors define an argument tree for $\alpha$ as a tree of arguments, rooted at an argument $a_1 = (\Phi_1, \alpha)$, such that the children of a node $a = (\Phi, \beta)$ consist of all canonical undercuts $(\Psi, \gamma)$ for $a$ such that $\Psi$ is not a subset of $\Phi \cup \Phi_1 \cup \Phi_2 \cup … \cup \Phi_n$, where $(Φ_1, \beta_1), …, (Φ_n, \beta_n)$ denote the ancestors of $(\Phi, \beta)$.
-As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. As a result, we consider only the sets of formulas as nodes of our trees, corresponding to the supports of their argument trees.
-}
 
-Note that an argumentation path in an undercut tree is uniquely defined by its last two elements, because two siblings $p, p'$ (nodes at a given level $k$) in such a tree have different last elements ($p_k ≠ p'_k$), as is easily seen by induction on the depth of the tree (it follows from that observation that if two paths have the same last elements, they are not siblings, thus, have a different parent).
+As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. We neglect claims and focus on supports in the nodes of our trees in order to reflect formally the fact that claims bring no information (apart from the one at the root).
+
+Our definition corresponds to theirs for the following reason.
+An argumentation path in an undercut tree is uniquely defined by its last two elements, because two siblings $p, p'$ (nodes at a given level $k$) in such a tree have different last elements ($p_k ≠ p'_k$), as is easily seen by induction on the depth of the tree (it follows from that observation that if two paths have the same last elements, they are not siblings, thus, have a different parent).
 We can thus also view any undercut tree $u$ rooted at $\Phi$ arguing for $\alpha$ as a tree defined over arguments, having the same topology as $u$, having $(\Phi, \alpha)$ as root, and having in place of each argumentation path $p$ of length $k ≥ 2$ in $u$ the argument $(p_k, ¬p_{k - 1})$.
+}
 
 \begin{figure}
 	\caption{The undercut tree arguing for $x$}
@@ -153,11 +152,12 @@ We can thus also view any undercut tree $u$ rooted at $\Phi$ arguing for $\alpha
 \end{figure}
 \begin{example}[Continuing \cref{ex:abstract}]
 	\label{ex:abstUnder}
-	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $u_{\set{x}}$, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton constituted by the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
-	To compute the children of this node, $u_{\set{x}}(\Phi_2)$, observe that out of the two canonical undercuts for $\Phi_2$, only one uses some new formulas (that is, formulas that are not in $\Phi_1 \cup \Phi_2$). Thus, the unique child of $\Phi_2$ is $\Phi_3 = \set{z, z → ¬y}$. 
-	Finally, $u_{\set{x}}(\Phi_3) = \emptyset$ as no new formulas exist at this stage: $u_{\set{x}}^{-1}[\Phi_3] = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
+	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, \cref{fig:utx} shows the tree $u_{\set{x}}$, with root formally defined as the argumentation path $p^{(1)} = (\Phi_1)$ of length $1$ but displayed simply as the element $\Phi_1$. 
+	The set of children $u_{\set{x}}(p^{(1)})$ of the root is the singleton constituted by the argumentation path extending $p^{(1)}$ using the only canonical undercut of $\set{x}$, that is, the argumentation path $p^{(2)} = (\Phi_1, \Phi_2)$, with $\Phi_2 = \set{y, y → ¬x}$, of which we display only the last element.
+	To compute the children of this node, $u_{\set{x}}(p^{(2)})$, observe that out of the two canonical undercuts for $\Phi_2$, only one uses some new formulas (that is, formulas that are not in $\Phi_1 \cup \Phi_2$). Thus, the unique permissible element for extending the path $p^{(2)}$ is $\Phi_3 = \set{z, z → ¬y}$, yielding $u_{\set{x}}(p^{(2)}) = \set{p^{(3)}}$ with $p^{(3)} = (\Phi_1, \Phi_2, \Phi_3)$. 
+	Finally, $u_{\set{x}}(p^{(3)}) = \emptyset$ as no new formulas exist at this stage: $\cup_{l ≤ 3} p^{(3)}_l = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
 	
-	The unique undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $u_{\Phi_2}$ with $u_{\Phi_2}(\Phi_2) = \set{\Phi_1, \Phi_3}$ and $u_{\Phi_2}(\Phi_1) = u_{\Phi_2}(\Phi_3) = \emptyset$.
+	The unique undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $u_{\Phi_2}$ with $u_{\Phi_2}((\Phi_2)) = \set{(\Phi_2, \Phi_1), (\Phi_2, \Phi_3)}$ and $u_{\Phi_2}((\Phi_2, \Phi_1)) = u_{\Phi_2}((\Phi_2, \Phi_3)) = \emptyset$.
 \end{example}
 \begin{figure}
 	\caption{The undercut tree arguing for $¬x$}
@@ -172,14 +172,12 @@ We can thus also view any undercut tree $u$ rooted at $\Phi$ arguing for $\alpha
 	\end{tikzpicture}
 \end{figure}
 
-Given a tree $u_\Phi$, define the set $R$ of defeated nodes as the subset of nodes such that $\Psi \in R$ iff $u_\Phi(\Psi) \nsubseteq R$, thus, if some successor of $\Psi$ in $u_\Phi$ is not in $R$.
+Given a tree $u_\Phi$, define the set $R$ of defeated nodes as the subset of nodes such that $p \in R$ iff $u_\Phi(p) \nsubseteq R$, thus, if some successor of $p$ in $u_\Phi$ is not in $R$.
 One can see that this defines a unique set by observing that the definition determines the status of each node starting from the leaves up to the root: the leaves are undefeated, the predecessors of some leaf are defeated, and so on.
 We say that a formula $\phi \in \allformulas$ is \emph{warranted} iff some undercut tree arguing for $\phi$ has an undefeated root.
 \begin{example}[Continuing \cref{ex:abstUnder}]
-	The formula $x$ is warranted: the leaf $\Phi_3$ of the tree $u_{\set{x}}$ is undefeated, thus its parent $\Phi_2$ is defeated, hence, the root $\Phi_1$ is undefeated. The formula $¬x$ is not warranted, as the root of the unique tree $u_{\Phi_2}$ arguing for $¬x$ is defeated.
+	The formula $x$ is warranted: the leaf $\Phi_3$ of the tree $u_{\set{x}}$ is undefeated, thus its parent $\Phi_2$ is defeated, hence, the root $\Phi_1$ is undefeated (we designate nodes by their last elements only as this creates no ambiguity here). The formula $¬x$ is not warranted, as the root of the unique tree $u_{\Phi_2}$ arguing for $¬x$ is defeated.
 \end{example}
-
-\commentOC{TODO specify the roots of the trees: $u_{(\Phi, \alpha)}$ instead of $u_\Phi$; or proceed otherwise.}
 
 \subsection{PAFs}
 \label{sec:pafs}
