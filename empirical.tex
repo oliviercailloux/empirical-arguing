@@ -126,7 +126,7 @@ We define this concept as a relation over the sets of formulas rather than on ar
 
 The authors propose to use the status of the root nodes of argument trees as one way of discriminating arguments. Let us define undercut trees with this goal in mind.
 
-Given some set $N$, we represent a tree using its successor relation $u \subseteq N × N$, with $u$ defining a tree, thus, $u$ connected and defining at most one path from the root to any $n \in N$. 
+Given some set $N$, we represent a tree using its successor relation $u \subseteq N × N$, with $u$ connected, $u$ defining a single element that has no predecessor (thus an element $n \in N \suchthat u^{-1}(n) = \emptyset$), called the root of the tree, and $u$ associating at most one predecessor to each element (thus $\forall n \in N: \card{u^{-1}(n)} ≤ 1$). 
 
 Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $u_\Phi$, where nodes are sets of formulas, rooted at $\Phi$, with $u_\Phi$ defined recursively as follows. 
 Given a node $\Psi$ in the tree, let $u_\Phi^{-1}[\Psi] \subseteq \Delta$ denote the union of its ancestors, including itself (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
