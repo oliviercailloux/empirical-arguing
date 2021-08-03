@@ -108,12 +108,10 @@ We consider defined a complete ordering over $\Delta$, called the canonical orde
 Given $\Phi = \set{\phi_1, …, \phi_n}$, with $(\phi_i)$ numbered following the canonical ordering, we define $¬\Phi \in \allformulas$ as the formula $¬\phi_1 \lor … \lor ¬\phi_n$, that negates the canonical formula associated to $\Phi$.
 
 An argument is a pair $(\Phi, \alpha)$ with $\Phi \subseteq \Delta$, called the support, and $\alpha \in \allformulas$, called the claim, such that $\Phi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi ⊢ \alpha$ (thus $\Phi ⊬ ⊥$, $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
+Let $\allargs$ denote the set of all arguments.
 
-Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut for $\Phi$ iff $\Psi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Psi ⊬ ⊥, \Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
-\footnote{The authors define an undercut for an argument $(Φ, α)$ as an argument $(Ψ , ¬(φ_1 ∧\ldots ∧ φ_n))$ where $\set{φ_1, \ldots, φ_n} ⊆ Φ$, and define that an argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ iff it is an undercut for $(Φ, α)$ and $(φ_1, \ldots, φ_n)$ is the canonical enumeration of $Φ$ (a canonical enumeration of every $\Phi \subseteq \Delta$ is supposedly given).
-We define this concept as a relation over the sets of formulas rather than on arguments to make it clear that canonical undercuts depend only on the supports of the arguments.
-%It follows that $\Psi \subseteq \Delta$ is a canonical undercut for $\Phi \subseteq \Delta$ in our sense iff, writing $¬(φ_1 ∧ \ldots ∧ φ_n)$ for the canonical enumeration of $Φ$, the argument $(Ψ , ¬(φ_1 ∧ \ldots ∧ φ_n))$ is a canonical undercut for $(Φ, α)$ in their sense, for any $\alpha$ entailed by $\Phi$.
-}
+Given two sets of formulas $\Phi, \Psi \subseteq \Delta$, say that $\Psi$ is a canonical undercut formula for $\Phi$ iff $\Psi$ is a consistent minimal subset of $\Delta$ satisfying $\Phi \cup \Psi ⊢ ⊥$ (thus $\Psi ⊬ ⊥, \Phi \cup \Psi ⊢ ⊥$ and $\forall \Psi' \subset \Psi: \Phi \cup \Psi' ⊬ ⊥$).
+Given an argument $(\Phi, \alpha) \in \allargs$, define the set of its canonical undercutters as the set $\set{(\Psi, ¬\Phi) \suchthat \Psi \text{ is a canonical undercut formula for } \Phi}$. Note that a canonical undercutter is an argument.
 
 \begin{example}
 	\label{ex:abstract}
@@ -129,21 +127,20 @@ The authors propose to use the status of the root nodes of argument trees as one
 Given some set $N$, we represent a tree using its successor relation $u \subseteq N × N$. 
 As usual, we refer to the union of the domain and codomain of $u$, $N' = u^{-1}(N) \cup u(N)$, as the set of nodes, and require $u$ connected, $u$ associating at most one predecessor to each node (thus $\forall n \in N': \card{u^{-1}(n)} ≤ 1$) and no predecessor to exactly one node, called the root of the tree. 
 
-Canonical undercuts permit to associate to any consistent $\Phi \subseteq \Delta$ its \emph{undercut tree} $u_\Phi$, where nodes are sets of formulas, rooted at $\Phi$, with $u_\Phi$ defined recursively as follows. 
-Given a node $\Psi$ in the tree, let $u_\Phi^{-1}[\Psi] \subseteq \Delta$ denote the union of its ancestors, including itself (the brackets denote the reflexive and transitive closure); and define the successors of $\Psi$, $u_\Phi(\Psi)$, as the canonical undercutters $\Psi'$ for $\Psi$ that satisfy $\Psi' \nsubseteq u_\Phi^{-1}[\Psi]$.
-(Note that an undercut tree is finite, as $\Delta$ is finite.)
+Canonical undercuts permit to associate to any argument $(\Phi, \alpha)$ its \emph{argument tree} $u_{(\Phi, \alpha)}$, where nodes are arguments, rooted at $(\Phi, \alpha)$, with $u_{(\Phi, \alpha)}$ defined recursively as follows. 
+Given a node $(\Psi, \beta)$ in the tree, let $u_{(\Phi, \alpha)}^{-1}[(\Psi, \beta)] \subseteq \allargs$ denote the set of its ancestors, including itself (the brackets denote the reflexive and transitive closure); define $S = \bigcup_{\set{(\Psi', \beta') \in u_{(\Phi, \alpha)}^{-1}[(\Psi, \beta)]}} \Psi' \subseteq \Delta$ as the union of the supports used at or above the node $(\Psi, \beta)$; and define the successors of $(\Psi, \beta)$, $u_{(\Phi, \alpha)}((\Psi, \beta))$, as the canonical undercutters $(\Omega, ¬\Psi)$ for $(\Psi, \beta)$ that satisfy $\Omega \nsubseteq S$.
+Note that an argument tree has a finite set of nodes, as $\Delta$ and thus $\allargs$ are finite.
 
-We say that an undercut tree rooted at $\Phi$ argues for $\alpha$ whenever $(\Phi, \alpha)$ is an argument (thus $\Phi ⊢ \alpha$ and $\forall \Phi' \subset \Phi: \Phi' ⊬ \alpha$).
-\footnote{The authors define an argument tree for $\alpha$ as a tree of arguments, rooted at an argument $a_1 = (\Phi_1, \alpha)$, such that the children of a node $a = (\Phi, \beta)$ consist of all canonical undercuts $(\Psi, \gamma)$ for $a$ such that $\Psi$ is not a subset of $\Phi \cup \Phi_1 \cup \Phi_2 \cup … \cup \Phi_n$, where $(Φ_1, \beta_1), …, (Φ_n, \beta_n)$ denote the ancestors of $(\Phi, \beta)$.
-As the authors observe, it follows that an argument tree arguing for $\alpha$ has all of its arguments (except for the root) claiming the negation of the support of its parent. As a result, we consider only the sets of formulas as nodes of our trees, corresponding to the supports of their argument trees.
-}
+We define the trees arguing for $\alpha \in \allformulas$ as the set of argument trees whose root argument claim $\alpha$.
+
+We display argument trees using only the supports of the arguments, except for the root, as the claim of each node but the root is determined by its parent. (It is however required to define formally nodes as arguments and not merely as sets of formulas considering the supports of the arguments only, in order to obtain trees.)
 
 \begin{figure}
-	\caption{The undercut tree arguing for $x$}
+	\caption{The argument tree arguing for $x$}
 	\label{fig:utx}
 	\begin{tikzpicture}
 		\tikzset{every node/.style={draw, ellipse, execute at begin node=$,execute at end node=$}}
-		\path node (Phi1) {\Phi_1 = \set{x}};
+		\path node (Phi1) {(\Phi_1 = \set{x}, x)};
 		\path (Phi1) ++(0, -2cm) node (Phi2) {\Phi_2 = \set{y, y → ¬x}};
 		\path (Phi2) ++(0, -2cm) node (Phi3) {\Phi_3 = \set{z, z → ¬y}};
 		\path[draw, <-] (Phi1) -- (Phi2);
@@ -152,18 +149,18 @@ As the authors observe, it follows that an argument tree arguing for $\alpha$ ha
 \end{figure}
 \begin{example}[Continuing \cref{ex:abstract}]
 	\label{ex:abstUnder}
-	\Cref{fig:utx} shows the sole undercut tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, it is the tree $u_{\set{x}}$, with root $\Phi_1 = \set{x}$. The set of children $u_{\set{x}}(\set{x})$ of the root is the singleton constituted by the only canonical undercut of $\set{x}$, that is, $\Phi_2 = \set{y, y → ¬x}$. 
-	To compute the children of this node, $u_{\set{x}}(\Phi_2)$, observe that out of the two canonical undercuts for $\Phi_2$, only one uses some new formulas (that is, formulas that are not in $\Phi_1 \cup \Phi_2$). Thus, the unique child of $\Phi_2$ is $\Phi_3 = \set{z, z → ¬y}$. 
-	Finally, $u_{\set{x}}(\Phi_3) = \emptyset$ as no new formulas exist at this stage: $u_{\set{x}}^{-1}[\Phi_3] = \Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
+	\Cref{fig:utx} shows the sole tree arguing for $x$ in our running example. There is only one such tree as the only argument that can be built for $x$ from $\Delta$ is $(\set{x}, x)$. Accordingly, \cref{fig:utx} shows the tree $u_{(\set{x}, x)}$, with root having support $\Phi_1 = \set{x}$. The set of children $u_{(\set{x}, x)}((\set{x}, x))$ of the root is the singleton constituted by the only canonical undercut of $(\set{x}, x)$, that is, the argument having support $\Phi_2 = \set{y, y → ¬x}$ and claim $¬\Phi_1 = ¬x$. 
+	To compute the children of this node, $u_{(\set{x}, x)}((\Phi_2, ¬x))$, observe that out of the two canonical undercut formulas for $\Phi_2$, only one uses some new formulas (that is, formulas that are not already used in $\Phi_1 \cup \Phi_2$). Thus, the unique child of $(\Phi_2, ¬x)$ is $(\Phi_3 = \set{z, z → ¬y}, ¬\Phi_2)$. 
+	Finally, $u_{(\set{x}, x)}((\Phi_3, ¬\Phi_2)) = \emptyset$ as no new formulas can be used at this stage: the union of the supports of $u_{(\set{x}, x)}^{-1}[(\Phi_3, ¬\Phi_2)]$ is $\Phi_1 \cup \Phi_2 \cup \Phi_3 = \Delta$.
 	
-	The unique undercut tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $u_{\Phi_2}$ with $u_{\Phi_2}(\Phi_2) = \set{\Phi_1, \Phi_3}$ and $u_{\Phi_2}(\Phi_1) = u_{\Phi_2}(\Phi_3) = \emptyset$.
+	The unique tree arguing for $¬x$, displayed in \cref{fig:utnx}, is $u_{(\Phi_2, ¬x)}$ with $u_{\Phi_2}((\Phi_2, ¬x)) = \set{(\Phi_1, ¬\Phi_2), (\Phi_3, ¬\Phi_2)}$ and $u_{\Phi_2}((\Phi_1, ¬\Phi_2)) = u_{\Phi_2}((\Phi_3, ¬\Phi_2)) = \emptyset$.
 \end{example}
 \begin{figure}
-	\caption{The undercut tree arguing for $¬x$}
+	\caption{The argument tree arguing for $¬x$}
 	\label{fig:utnx}
 	\begin{tikzpicture}
 		\tikzset{every node/.style={draw, ellipse, execute at begin node=$,execute at end node=$}}
-		\path node (Phi2) {\Phi_2 = \set{y, y → ¬x}};
+		\path node (Phi2) {(\Phi_2 = \set{y, y → ¬x}, ¬x)};
 		\path (Phi2) ++(-2cm, -2cm) node (Phi1) {\Phi_1 = \set{x}};
 		\path (Phi2) ++(2cm, -2cm) node (Phi3) {\Phi_3 = \set{z, z → ¬y}};
 		\path[draw, <-] (Phi2) -- (Phi1);
@@ -178,7 +175,7 @@ We say that a formula $\phi \in \allformulas$ is \emph{warranted} iff some under
 	The formula $x$ is warranted: the leaf $\Phi_3$ of the tree $u_{\set{x}}$ is undefeated, thus its parent $\Phi_2$ is defeated, hence, the root $\Phi_1$ is undefeated. The formula $¬x$ is not warranted, as the root of the unique tree $u_{\Phi_2}$ arguing for $¬x$ is defeated.
 \end{example}
 
-\commentOC{TODO define undercuts with the claims. Mandatory for the following to be an argumentation tree. $\Delta = \set{a, ¬a, ¬¬a, ¬¬¬a}$. Consider the tree rooted at $a$, with undercuts $¬a$ and $¬¬¬a$, both having $¬¬a$ as undercut.}
+\commentOC{TODO specify the roots of the trees: $u_{(\Phi, \alpha)}$ instead of $u_\Phi$; or proceed otherwise.}
 
 \subsection{PAFs}
 \label{sec:pafs}
