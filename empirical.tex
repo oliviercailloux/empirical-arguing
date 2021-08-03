@@ -124,16 +124,16 @@ Given an argument $(\Phi, \alpha) \in \allargs$, define the set of its canonical
 
 The authors propose to use the status of the root nodes of argument trees as one way of discriminating arguments. Let us define undercut trees with this goal in mind.
 
-Define a DAG over a set $N$ as a pair $(N, s)$, with $s \subseteq N × N$ a connected and acyclic binary relation over $N$. Given a DAG $(N, s)$, $N$ is called its set of nodes and $s$ is called its successor relation. The inverse of the successor relation, $s^{-1}$, is called its predecessor relation. The set $\set{n \in N \suchthat s^{-1}(n) = \emptyset}$ of nodes without predecessors is called the initial nodes. The ancestors of a node $n \in N$ are defined as $s^{-1}[n]$, where the brackets denote the reflexive and transitive closure, thus, containing $n$ itself and all its predecessors, predecessors of predecessors, …
+Define an argumentation path of length $k$ as a finite sequence $p \in \powerset{\Delta}^k$ of subsets of $\Delta$ such that every subset of formulas undercuts the previous one (thus $\forall 1 ≤ i ≤ k - 1$: $p_{i + 1}$ undercuts $p_i$) and every subset of formulas contain some new formulas compared to the ones used before (thus $\forall 1 ≤ i ≤ k - 1$: $p_{i + 1} \nsubseteq \cup_{l ≤ i} p_l$).
 
-Canonical undercuts permit to associate to any set of formulas $\Phi \subseteq \Delta$ a DAG $(A, u_\Phi)$ over a subset $A \subseteq \allargs$ of arguments, whose nodes and successor relation $u_\Phi$ are defined recursively as follows. 
-The initial nodes $\set{(\Phi, \alpha) \in \allargs}$ are all the arguments with support $\Phi$. 
-Given a node $(\Psi, \beta)$, define $S = \bigcup_{\set{(\Psi', \beta') \in u_\Phi^{-1}[(\Psi, \beta)]}} \Psi' \subseteq \Delta$ as the union of the supports used at or above the node $(\Psi, \beta)$; and define the successors of $(\Psi, \beta)$, $u_\Phi((\Psi, \beta))$, as the canonical undercutters $(\Omega, ¬\Psi)$ for $(\Psi, \beta)$ that satisfy $\Omega \nsubseteq S$.
-Note that an argument tree has a finite set of nodes, as $\Delta$ and thus $\allargs$ are finite.
+Canonical undercuts permit to associate to any set of formulas $\Phi \subseteq \Delta$ the undercut tree $u_\Phi$, defined as a tree of argumentation paths, whose root is the path $(\Phi)$ of length $1$, and whose children are defined recursively as follows. Given a node $p$ of length $k$ in the tree, the children of $p$ are all the argumentation paths of length $k + 1$ that extend $p$ (thus, the paths $p'$ such that $\forall i ≤ k: p'_i = p_i$, such that $p'_{k + 1}$ undercuts $p_k$ and such that $p'_{k + 1}$ has some formula not used in $p$).
 
-We define the trees arguing for $\alpha \in \allformulas$ as the set of argument trees whose root argument claim $\alpha$.
+We display the nodes in undercut trees using only their last element, thus, using a single set of formulas. (It is however required to define formally nodes as more complex objects and not merely as sets of formulas, in order to guarantee that the resulting structures are trees, thus, that a node has only one parent.)
 
-We display argument trees using only the supports of the arguments, except for the root, as the claim of each node but the root is determined by its parent. (It is however required to define formally nodes as arguments and not merely as sets of formulas considering the supports of the arguments only, in order to obtain trees.)
+Say that an undercut tree rooted at $\Phi$ argues for $\alpha \in \allformulas$ iff $(\Phi, \alpha)$ is an argument.
+
+Note that an argumentation path in an undercut tree is uniquely defined by its last two elements, because two siblings $p, p'$ (nodes at a given level $k$) in such a tree have different last elements ($p_k ≠ p'_k$), as is easily seen by induction on the depth of the tree (it follows from that observation that if two paths have the same last elements, they are not siblings, thus, have a different parent).
+We can thus also view any undercut tree $u$ rooted at $\Phi$ arguing for $\alpha$ as a tree defined over arguments, having the same topology as $u$, having $(\Phi, \alpha)$ as root, and having in place of each argumentation path $p$ of length $k ≥ 2$ in $u$ the argument $(p_k, ¬p_{k - 1})$.
 
 \begin{figure}
 	\caption{The argument tree arguing for $x$}
